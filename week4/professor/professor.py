@@ -58,4 +58,5 @@ def main():
 
 
 if __name__ == "__main__":
+    random.seed(0)
     main()
