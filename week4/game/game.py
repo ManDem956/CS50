@@ -12,7 +12,7 @@ def validate_input_int(value: str) -> bool:
 
 
 def main() -> NoReturn:
-    while validate_input_int(user_input := get_user_input(CONST_USER_PROMT)) == Trueertygr:
+    while not validate_input_int(user_input := get_user_input(CONST_USER_PROMT)):
         pass
 
     print(f"{user_input}")
