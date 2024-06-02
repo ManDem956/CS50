@@ -31,10 +31,10 @@ def get_us_date_numerical(value: str) -> tuple[str, str, str]:
 
 def get_us_date_human(value: str) -> tuple[str, str, str]:
     month, day, year = (element.strip().strip(',')
-                        for element in value.split("/"))
+                        for element in value.split(" "))
 
-    month = CONST_MONTHS.index(month.title())
-    if month < 0:
+    month = CONST_MONTHS.index(month.title())+1
+    if month < 1:
         raise ValueError("Invalid month value.")
 
     return f"{year:>04}", f"{month:>02}", f"{day:>02}"
