@@ -28,7 +28,7 @@ def main() -> NoReturn:
         except EOFError:
             break
 
-    print(f"Total: ${total:.2f}")
+    print(f"\nTotal: ${total:.2f}")
 
 
 if __name__ == "__main__":
