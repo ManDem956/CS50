@@ -28,7 +28,6 @@ def main() -> NoReturn:
             divident, divisor = parse_fraction(input)
             result = (divident / divisor)
         except (ValueError, ZeroDivisionError) as e:
-            print(e._)
             continue
 
     message: str = ""
