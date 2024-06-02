@@ -19,6 +19,7 @@ def get_emoji(input: str) -> str:
 
 
 def main() -> NoReturn:
+    print(emoji.LANGUAGES)
     input = get_user_input(CONST_USER_PROMT)
     result = get_emoji(input)
     print(result)
