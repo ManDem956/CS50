@@ -33,14 +33,10 @@ def get_first_digit_index(s:str)->int:
     return -1
 
 def is_valid_digit(s:str) -> bool:
-    if any(char.isdigit() for char in s):
-        return False
-    return True
+    return all(char.isdigit() for char in s):
 
 def is_valid_alpha(s:str) -> bool:
-    if any(char.isdigit() for char in s):
-        return False
-    return True
+    return all(char.isalpha() for char in s):
 
 
 if __name__ == "__main__":
