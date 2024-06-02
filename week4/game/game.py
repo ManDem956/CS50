@@ -32,7 +32,6 @@ def guess_game(target: int) -> NoReturn:
 def main() -> NoReturn:
     level = get_user_input_int(CONST_USER_PROMT_LEVEL)
 
-    print(f"{level}")
     target = random.randint(1, level)
     guess_game(target)
 
