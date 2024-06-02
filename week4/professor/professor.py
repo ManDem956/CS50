@@ -32,9 +32,9 @@ def generate_integer(level: int) -> int:
 
 def do_game(level) -> int:
     tries = 3
+    left, right = generate_integer(level), generate_integer(level)
     while tries > 0:
         try:
-            left, right = generate_integer(level), generate_integer(level)
             answer = int(get_user_input(f"{left} + {right} ="))
             if answer == left + right:
                 return 1
