@@ -41,7 +41,6 @@ def do_game(level) -> int:
             print(CONST_ERROR)
         finally:
             tries -= 1
-            print(CONST_ERROR)
 
     return 0
 
