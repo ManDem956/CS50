@@ -1,6 +1,5 @@
 from typing import NoReturn
 
-CONST_VOWELS = "AEIOU"
 CONST_USER_PROMT = "Plate"
 
 
@@ -18,8 +17,8 @@ def main() -> NoReturn:
 
 
 def is_valid(s:str) -> bool:
-    if s.lemgth() > 6:
-        return false
+    if not 2 <= len(s) <= 6:
+        return False
 
 
 if __name__ == "__main__":
