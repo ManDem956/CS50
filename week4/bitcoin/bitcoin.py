@@ -26,9 +26,11 @@ def main(amount: float):
         res = requests.get()
         res.raise_for_status()
 
-        json - res.json()
+        json = res.json()
     except requests.RequestException as e:
         print("An HTTP error occured: {e}")
+    else:
+        print(json["bpi"]["USD"]["rate"]
 
 
 if __name__ == "__main__":
