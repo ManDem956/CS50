@@ -36,6 +36,7 @@ def do_game(level) -> int:
             if answer == left + right:
                 return 1
         except ValueError as e:
+            print(CONST_ERROR)
             continue
         else:
             print(CONST_ERROR)
