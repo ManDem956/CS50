@@ -9,13 +9,8 @@ def get_user_input(str) -> str:
 
 
 def parse_fraction(input: str) -> tuple[int, int]:
-    values = input.split('/')
-    if len(values) != 2:
-        raise ValueError(
-            f"A fraction requires divident and divisor. Expected 2 values, got {len(values)}")
-
     # Will raise ValueError if int() conversion fails
-    divident, divisor = int(values[0]), int(values[1])
+    divident, divisor = (int(value) for value in input.split('/'))
 
     if divident > divisor:
         raise ValueError(
@@ -32,6 +27,7 @@ def main() -> NoReturn:
             divident, divisor = parse_fraction(input)
             result = (divident / divisor)
         except (ValueError, ZeroDivisionError) as e:
+            print(e.message)
             continue
 
     message: str = ""
