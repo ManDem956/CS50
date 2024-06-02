@@ -44,6 +44,7 @@ def do_game(level) -> int:
         finally:
             tries -= 1
 
+    print(f"{left} + {right} = {left+right}")
     return 0
 
 
