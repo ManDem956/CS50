@@ -58,6 +58,10 @@ def get_date_value(value: str) -> tuple[str, str, str]:
             result = method(value)
         except ValueError as e:
             continue
+
+    if result is None:
+        raise ValueError("the date format is not valid")
+
     return result
 
 
@@ -66,10 +70,8 @@ def main() -> NoReturn:
     while result is None:
         try:
             input = get_user_input(CONST_USER_PROMT)
-            date = get_date_value(input)
-            if date:
-                result = format_iso_date(*date)
-                print(result)
+            result = format_iso_date(*get_date_value(input))
+            print(result)
         except ValueError as e:
             continue
 
