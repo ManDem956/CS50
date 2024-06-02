@@ -60,13 +60,13 @@ def get_date_value(value: str) -> tuple[str, str, str]:
 
 def main() -> NoReturn:
     input = get_user_input(CONST_USER_PROMT)
-    result = get_date_value(input)
-
-    if result:
+    result = None
+    while result is None:
         try:
+            result = get_date_value(input)
             print(format_iso_date(*result))
         except ValueError as e:
-            print(e)
+            break
 
 if __name__ == "__main__":
     main()
