@@ -17,9 +17,9 @@ def main() -> NoReturn:
             groceries[input] += 1
         except EOFError:
             print()
-            break
+            exit(0)
 
-    for key, value in sorted(groceries.items())orange:
+    for key, value in sorted(groceries.items()):
         print(f"{value}. {key}")
 
 
