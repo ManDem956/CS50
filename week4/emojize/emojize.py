@@ -10,6 +10,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 
 
 def get_emoji(input: str) -> str:
+    emoji.
     return emoji.emojize(input, language= "alias")
 
 def main() -> NoReturn:
