@@ -23,12 +23,12 @@ def main() -> NoReturn:
     result = None
     while result is None:
         input = get_user_input(CONST_USER_PROMT).lower()
-        try:
-            divident, divisor = parse_fraction(input)
-            result = (divident / divisor)
-        except (ValueError, ZeroDivisionError) as e:
-            print(e)
-            continue
+        # try:
+        divident, divisor = parse_fraction(input)
+        result = (divident / divisor)
+        # except (ZeroDivisionError) as e:
+        #     print(e)
+        #     continue
 
     message: str = ""
     if 0.01 < result < 0.99:
