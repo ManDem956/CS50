@@ -12,9 +12,9 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return input(f"{message}{sep}").strip()
 
 
-def get_user_input_int(message: str = CONST_USER_PROMT_LEVEL, bounds: tuple[int, int]) -> int:
+def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
     result = 0
-    while not result in range(bounds):
+    while not result in range(1, 4):
         try:
             result = int(get_user_input(message))
         except ValueError as e:
@@ -23,25 +23,31 @@ def get_user_input_int(message: str = CONST_USER_PROMT_LEVEL, bounds: tuple[int,
     return result
 
 
-def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
-    return get_user_input_int(message, (1, 4))
-
-
 def generate_integer(level: int) -> int:
     if level not in range(1, 4):
         raise ValueError("Level must in range [1..3] inclusive")
 
     return random.randrange(10**(level-1), 10**level)
 
+def do_game(level) -> int:
+    result = 0
+    tries = 3
+    while tries > 0:
+        try:
+            left, right = generate_integer(level), generate_integer(level)
+            answer = int(get_user_input(f"{left} + {right} ="))
+        except ValueError as e:
+            continue
+
 
 def main() -> NoReturn:
     level = get_level(CONST_USER_PROMT_LEVEL)
-    problems = []
+    score = 0
     for _ in range(10):
-        left, right = generate_integer(level), generate_integer(level)
-        answer = get_user_input_int(f"{left} + {right} = ", )
+        score += do_game(level)
 
-    print(problems)
+
+    print(score)
 
 
 if __name__ == "__main__":
