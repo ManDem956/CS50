@@ -42,8 +42,8 @@ def get_us_date_human(value: str) -> tuple[str, str, str]:
 
 def format_iso_date(year: str, month: str, day: str) -> str:
     if int(day) > 31:
-        raise ValueError("Day can not be larger han 31")
-    
+        raise ValueError("Day can not be larger than 31")
+
     return "-".join((year, month, day))
 
 
@@ -60,11 +60,13 @@ def get_date_value(value: str) -> tuple[str, str, str]:
 
 def main() -> NoReturn:
     input = get_user_input(CONST_USER_PROMT)
-    result = get_date_value(inpur)
+    result = get_date_value(input)
 
     if result:
-        print(format_iso_date(*result))
-
+        try:
+            print(format_iso_date(*result))
+        except ValueError as e:
+            print(e)
 
 if __name__ == "__main__":
     main()
