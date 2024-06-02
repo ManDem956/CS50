@@ -1,7 +1,7 @@
 from typing import NoReturn
 import random
 
-CONST_USER_PROMT = "Name"
+CONST_USER_PROMT = "Level"
 
 
 def get_user_input(message: str, sep: str = ": ") -> str:
@@ -12,10 +12,11 @@ def validate_input_int(value: str) -> bool:
 
 
 def main() -> NoReturn:
-    while not validate_input_int(user_input := get_user_input(CONST_USER_PROMT)):
+    while not validate_input_int(level := get_user_input(CONST_USER_PROMT)):
         pass
 
-    print(f"{user_input}")
+    print(f"{level}")
+    target = random.
 
 
 if __name__ == "__main__":
