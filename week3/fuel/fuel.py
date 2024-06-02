@@ -22,11 +22,16 @@ def parse_fraction(input: str) -> tuple[int, int]:
 
 
 def main() -> NoReturn:
-    input = get_user_input(CONST_USER_PROMT).lower()
+    result = None
+    while not result:
+        input = get_user_input(CONST_USER_PROMT).lower()
+        try:
+            divident, divisor = parse_fraction(input)
+            result = (divident / divisor) * 100
+        except ValueError as e:
+            continue
 
-    divident, divisor = parse_fraction(input)
-
-    print((divident / divisor) * 100)
+    print(result)
 
 
 if __name__ == "__main__":
