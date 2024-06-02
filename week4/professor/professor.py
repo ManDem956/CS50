@@ -14,7 +14,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 
 def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
     result = 0
-    while not result in range(1,4):
+    while not result in range(1, 4):
         try:
             result = int(get_user_input(message))
         except ValueError as e:
@@ -24,7 +24,7 @@ def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
 
 
 def generate_integer(level: int) -> int:
-    if level not in range(1,4):
+    if level not in range(1, 4):
         raise ValueError("Level must in range [1..3] inclusive")
 
     return random.randrange(10**(level-1), 10**level)
@@ -32,9 +32,11 @@ def generate_integer(level: int) -> int:
 
 def main() -> NoReturn:
     level = get_level(CONST_USER_PROMT_LEVEL)
+    problems = []
+    for _ in range(10):
+        problems.append((generate_integer(level), generate_integer(level)))
 
-    print(level)
-    print(generate_integer(level))
+    print(problems)
 
 
 if __name__ == "__main__":
