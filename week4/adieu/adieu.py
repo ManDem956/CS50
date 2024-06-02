@@ -17,7 +17,7 @@ def main(p: inflect.engine) -> NoReturn:
         except EOFError:
             break
 
-    print(f"Adieu, adieu, to {p.join(user_input)}")
+    print(f"\nAdieu, adieu, to {p.join(user_input)}")
 
 if __name__ == "__main__":
     p = inflect.engine()
