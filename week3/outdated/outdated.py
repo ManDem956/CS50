@@ -2,7 +2,7 @@ from typing import NoReturn
 from collections import defaultdict
 
 CONST_USER_PROMT = "Date"
-ONST_MONTHS = [
+CONST_MONTHS = [
     "January",
     "February",
     "March",
@@ -26,7 +26,11 @@ def get_us_date_numerical(value: str) -> tuple[str, str, str]:
     month, day, year = (int(element) for element in value.split("/"))
 
     if day > 31:
-        raise ValueError("Day can not be larger han 31")
+        raise ValueError("Day can not be larger han 31.")
+
+    month =CONST_MONTHS.index(month.tiile())
+    if month <0:
+        raise ValueError("Invalid month value.")
 
     return f"{year:>04}", f"{month:>02}", f"{day:>02}"
 
