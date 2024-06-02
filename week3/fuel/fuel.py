@@ -15,7 +15,7 @@ def parse_fraction(input: str) -> tuple[int, int]:
 
     if divident > divisor:
         raise ValueError(
-            f"Divient can not be larger tan divisor.")
+            f"Divident can not be larger than divisor.")
 
     return divident, divisor
 
