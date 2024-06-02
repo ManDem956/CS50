@@ -26,18 +26,12 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 def get_us_date_numerical(value: str) -> tuple[str, str, str]:
     month, day, year = (int(element) for element in value.split("/"))
 
-    if day > 31:
-        raise ValueError("Day can not be larger han 31.")
-
     return f"{year:>04}", f"{month:>02}", f"{day:>02}"
 
 
 def get_us_date_human(value: str) -> tuple[str, str, str]:
     month, day, year = (element.strip().strip(',')
                         for element in value.split("/"))
-
-    if int(day) > 31:
-        raise ValueError("Day can not be larger han 31")
 
     month = CONST_MONTHS.index(month.title())
     if month < 0:
@@ -47,6 +41,9 @@ def get_us_date_human(value: str) -> tuple[str, str, str]:
 
 
 def format_iso_date(year: str, month: str, day: str) -> str:
+    if int(day) > 31:
+        raise ValueError("Day can not be larger han 31")
+    
     return "-".join((year, month, day))
 
 
