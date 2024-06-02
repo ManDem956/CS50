@@ -9,7 +9,7 @@ def main() -> NoReturn:
             result += "_"
         result += character
 
-    print(f"{result.lower()}")
+    print(f"snake_case: {result.lower()}")
 
 
 
