@@ -7,7 +7,7 @@ def convert(time: str) -> float:
 
 
 def main() -> NoReturn:
-    user_input: str = input("What time is it?").strip().lower()
+    user_input: str = input("What time is it? ").strip().lower()
     result = ""
     match convert(user_input):
         case num if 7.0 < num <= 8.0:
