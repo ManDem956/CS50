@@ -1,7 +1,9 @@
 from typing import NoReturn
 import argparse
+import requests
 
 CONST_USER_PROMT_LEVEL = "Level"
+CONST_BITCOIN_ENDPOINT = "https://api.coindesk.com/v1/bpi/currentprice.json"
 
 
 def get_user_input(message: str, sep: str = ": ") -> str:
@@ -20,7 +22,7 @@ def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
 
 
 def main(amount: float):
-    pass
+    res = requests.get()
 
 
 if __name__ == "__main__":
