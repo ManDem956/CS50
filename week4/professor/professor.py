@@ -12,7 +12,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return input(f"{message}{sep}").strip()
 
 
-def get_user_input_int(message: str) -> int:
+def get_level(message: str) -> int:
     result = 0
     while not result in range(1,4):
         try:
