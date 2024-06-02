@@ -30,7 +30,7 @@ def get_us_date_numerical(value: str) -> tuple[str, str, str]:
 
 
 def get_us_date_human(value: str) -> tuple[str, str, str]:
-    monthday, year = value.split(",")
+    monthday, year = (element.strip() for element in value.split(","))
     month, day = (element.strip() for element in monthday.split())
 
     month = CONST_MONTHS.index(month.title())+1
