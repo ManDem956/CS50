@@ -38,9 +38,8 @@ def do_game(level) -> int:
         except ValueError as e:
             print(CONST_ERROR)
             continue
-        else:
-            print(CONST_ERROR)
         finally:
+            print(CONST_ERROR)
             tries -= 1
 
     return 0
