@@ -12,15 +12,19 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return input(f"{message}{sep}").strip()
 
 
-def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
+def get_user_input_int(message: str = CONST_USER_PROMT_LEVEL, bounds: tuple[int, int]) -> int:
     result = 0
-    while not result in range(1, 4):
+    while not result in range(bounds):
         try:
             result = int(get_user_input(message))
         except ValueError as e:
             continue
 
     return result
+
+
+def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
+    return get_user_input_int(message, (1, 4))
 
 
 def generate_integer(level: int) -> int:
@@ -34,7 +38,8 @@ def main() -> NoReturn:
     level = get_level(CONST_USER_PROMT_LEVEL)
     problems = []
     for _ in range(10):
-        problems.append((generate_integer(level), generate_integer(level)))
+        left, right = generate_integer(level), generate_integer(level)
+        answer = get_user_input_int(f"{left} + {right} = ", )
 
     print(problems)
 
