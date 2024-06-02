@@ -27,11 +27,12 @@ def main() -> NoReturn:
         input = get_user_input(CONST_USER_PROMT).lower()
         try:
             divident, divisor = parse_fraction(input)
-            result = (divident / divisor) * 100
+            result = (divident / divisor)
         except (ValueError, ZeroDivisionError)  as e:
             continue
 
-    print(result)
+    print(f"{result:%.0f1/2
+             }")
 
 
 if __name__ == "__main__":
