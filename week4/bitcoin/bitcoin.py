@@ -22,7 +22,13 @@ def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
 
 
 def main(amount: float):
-    res = requests.get()
+    try:
+        res = requests.get()
+        res.raise_for_status()
+
+        json - res.json()
+    except requests.RequestException as e:
+        print("An HTTP error occured: {e}")
 
 
 if __name__ == "__main__":
