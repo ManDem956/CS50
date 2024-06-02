@@ -29,15 +29,21 @@ def generate_integer(level: int) -> int:
 
     return random.randrange(10**(level-1), 10**level)
 
+
 def do_game(level) -> int:
-    result = 0
     tries = 3
     while tries > 0:
         try:
             left, right = generate_integer(level), generate_integer(level)
             answer = int(get_user_input(f"{left} + {right} ="))
+            if answer == left + right:
+                return 1
+            else:
+                tries -= 1
         except ValueError as e:
             continue
+
+    return 0
 
 
 def main() -> NoReturn:
@@ -45,7 +51,6 @@ def main() -> NoReturn:
     score = 0
     for _ in range(10):
         score += do_game(level)
-
 
     print(score)
 
