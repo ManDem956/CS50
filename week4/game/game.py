@@ -13,7 +13,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 
 
 def get_user_input_int(message: str) -> int:
-    while not (result := get_user_input(message)).isdigit() or int(result) < 0:
+    while not (result := get_user_input(message)).isdigit() and int(result) < 0:
         pass
 
     return int(result)
