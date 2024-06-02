@@ -48,6 +48,7 @@ def do_game(level) -> int:
 
 def main() -> NoReturn:
     level = get_level(CONST_USER_PROMT_LEVEL)
+    print()
     score = 0
     for _ in range(10):
         score += do_game(level)
