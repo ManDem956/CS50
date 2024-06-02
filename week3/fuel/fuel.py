@@ -10,6 +10,7 @@ def get_user_input(str) -> str:
 
 def parse_fraction(input: str) -> tuple[int, int]:
     # Will raise ValueError if int() conversion fails
+    # Will raise ValueError if too many values to unpack
     divident, divisor = (int(value) for value in input.split('/'))
 
     if divident > divisor:
@@ -23,12 +24,11 @@ def main() -> NoReturn:
     result = None
     while result is None:
         input = get_user_input(CONST_USER_PROMT).lower()
-        # try:
-        divident, divisor = parse_fraction(input)
-        result = (divident / divisor)
-        # except (ZeroDivisionError) as e:
-        #     print(e)
-        #     continue
+        try:
+            divident, divisor = parse_fraction(input)
+            result = (divident / divisor)
+        except (ValueError, ZeroDivisionError) as e:
+            continue
 
     message: str = ""
     if 0.01 < result < 0.99:
