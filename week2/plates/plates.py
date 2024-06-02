@@ -20,7 +20,7 @@ def is_valid(s:str) -> bool:
     if not 2 <= len(s) <= 6:
         return False
 
-   return is_valid_alpha(s[0:2]) and is_valid_digit(s)
+    return is_valid_alpha(s[0:2]) and is_valid_digit(s)
 
 
 def get_first_digit_index(s:str)->int:
