@@ -26,13 +26,15 @@ def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
 def generate_integer(level: int) -> int:
     if level not in range(1,4):
         raise ValueError("Level must in range [1..3] inclusive")
-    
+
+    return random.randrange(10**(level-1), 10**level)
 
 
 def main() -> NoReturn:
-    level = get_user_input_int(CONST_USER_PROMT_LEVEL)
+    level = get_level(CONST_USER_PROMT_LEVEL)
 
     print(level)
+    print(generate_integer(level))
 
 
 if __name__ == "__main__":
