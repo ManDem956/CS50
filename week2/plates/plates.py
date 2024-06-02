@@ -30,7 +30,7 @@ def get_first_digit_index(s:str)->int:
     return -1
 
 def is_valid_digit(s:str) -> bool:
-    if digit_index:=get_first_digit_index(s) > 0:
+    if (digit_index:=get_first_digit_index(s)) > 0:
         return all(char.isdigit() for char in s[digit_index:])
     return True
 
