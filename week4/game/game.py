@@ -23,16 +23,18 @@ def guess_game(target: int) -> NoReturn:
     user_guess = get_user_input_int(CONST_USER_PROMT_GESS)
     while user_guess != target:
         if user_guess < target:
-            print("")
-
+            print(CONST_GUESS_TOO_SMALL)
+        else:
+            print(CONST_GUESS_TOO_LARGE)
+    print(CONST_GUESS_RIGHT)
 
 
 def main() -> NoReturn:
     level = get_user_input_int(CONST_USER_PROMT_LEVEL)
 
     print(f"{level}")
-    target=random.randint(1, level)
-
+    target = random.randint(1, level)
+    guess_game(target)
 
 
 if __name__ == "__main__":
