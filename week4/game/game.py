@@ -20,7 +20,7 @@ def get_user_input_int(message: str) -> int:
         except ValueError as e:
             continue
 
-    return int(result)
+    return result
 
 
 def guess_game(target: int) -> NoReturn:
