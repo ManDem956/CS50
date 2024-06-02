@@ -28,7 +28,7 @@ def main() -> NoReturn:
         try:
             divident, divisor = parse_fraction(input)
             result = (divident / divisor) * 100
-        except ValueError as e:
+        except (ValueError, ZeroDivisionError)  as e:
             continue
 
     print(result)
