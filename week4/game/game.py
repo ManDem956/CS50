@@ -12,7 +12,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return input(f"{message}{sep}").strip()
 
 
-def get_user_input_int(message: str) -> int:-1
+def get_user_input_int(message: str) -> int:
     while not (result := get_user_input(message)).isdigit():
         pass
 
