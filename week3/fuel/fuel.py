@@ -28,7 +28,14 @@ def main() -> NoReturn:
         except (ValueError, ZeroDivisionError) as e:
             continue
 
-    print(f"{result:.0%}") if result > 0.01 else print("E")
+    message: str = ""
+    if 0.01 < result < 0.99:
+        message = f"{result:.0%}"
+    elif result <= 0.01:
+        message = "E"
+    else:
+        message = "F"
+    print(message)
 
 
 if __name__ == "__main__":
