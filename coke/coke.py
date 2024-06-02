@@ -15,9 +15,9 @@ def get_user_input(str) -> int:
 def main() -> NoReturn:
     amount_due = CONST_START_AMOUNT_DUE
     while amount_due > 0:
-        print(f"Amount due: {amount_due}")
+        print(f"Amount Due: {amount_due}")
         amount_due -= get_user_input(CONST_USER_PROMT)
-    print(f"Change Owed : {abs(amount_due)}")
+    print(f"Change Owed: {abs(amount_due)}")
 
 
 if __name__ == "__main__":
