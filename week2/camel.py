@@ -7,9 +7,9 @@ def main() -> NoReturn:
     for character in user_input:
         if character in caps:
             result += "_"
-        result += character
+        result += character.lower()
 
-    print(f"snake_case: {result.lower()}")
+    print(f"snake_case: {result}")
 
 
 
