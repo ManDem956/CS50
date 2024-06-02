@@ -20,17 +20,19 @@ def get_emoji(input: str) -> str:
 
 
 def main() -> NoReturn:
-    figlet = Figlet()
+    pass
     # input = get_user_input(CONST_USER_PROMT)
     # result = get_emoji(input)
     # print(result)
 
 
 if __name__ == "__main__":
+    figlet = Figlet()
     parser = argparse.ArgumentParser(
                     prog='Figlet',
                     description='Rengers user\'s input in ASCII font')
     parser.add_argument('-f', '--font')
     args = parser.parse_args()
+    print(figlet.getFonts())
     print(args.font)
     main()
