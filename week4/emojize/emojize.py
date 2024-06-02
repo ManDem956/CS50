@@ -9,15 +9,12 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return res
 
 
+def get_emoji(input: str) -> str
+
 def main() -> NoReturn:
-    result = None
-    while result is None:
-        try:
-            input = get_user_input(CONST_USER_PROMT)
-            result = format_iso_date(*get_date_value(input))
-            print(result)
-        except ValueError as e:
-            continue
+    input = get_user_input(CONST_USER_PROMT)
+    result = get_emoji(input)
+    print(result)
 
 
 if __name__ == "__main__":
