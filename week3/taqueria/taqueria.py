@@ -25,7 +25,7 @@ def main() -> NoReturn:
         try:
             input = get_user_input(CONST_USER_PROMT)
             total += CONST_MENU.get(input.title(), 0)
-            print(f"\nTotal: ${total:.2f}")
+            print(f"Total: ${total:.2f}")
         except EOFError:
             print("\n")
             break
