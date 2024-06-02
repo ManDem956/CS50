@@ -20,7 +20,7 @@ def parse_fraction(input: str) -> tuple[int, int]:
 
 def main() -> NoReturn:
     result = None
-    while not result:
+    while not result is None:
         input = get_user_input(CONST_USER_PROMT).lower()
         try:
             divident, divisor = parse_fraction(input)
