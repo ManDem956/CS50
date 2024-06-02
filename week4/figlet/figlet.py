@@ -26,4 +26,4 @@ if __name__ == "__main__":
         '-f', '--font', default=random.choice(figlet.getFonts()))
     args = parser.parse_args()
     figlet.setFont(font=args.font)
-    main(figlet)
+    main(figlet)cd 
