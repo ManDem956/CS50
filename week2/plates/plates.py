@@ -23,13 +23,24 @@ def is_valid(s:str) -> bool:
     if not is_valid_alpha(s[0:2]):
         return False
 
-    for 
+    for
 
 
+def get_first_digit_index(s:str)->int:
+    for idx, char in enumerate(s):
+        if char.isdigit():
+            return idx
+    return -1
+
+def is_valid_digit(s:str) -> bool:
+    if any(char.isdigit() for char in s):
+        return False
+    return True
 
 def is_valid_alpha(s:str) -> bool:
     if any(char.isdigit() for char in s):
         return False
+    return True
 
 
 if __name__ == "__main__":
