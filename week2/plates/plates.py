@@ -23,7 +23,9 @@ def is_valid(s:str) -> bool:
     if not is_valid_alpha(s[0:2]):
         return False
 
-    
+    for 
+
+
 
 def is_valid_alpha(s:str) -> bool:
     if any(char.isdigit() for char in s):
