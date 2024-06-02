@@ -13,6 +13,7 @@ CONST_MENU = {
     "Tortilla Salad": 8.00
 }
 
+
 def get_user_input(str) -> str:
     res: str = input(f"{str}: ").strip()
     return res
@@ -23,12 +24,11 @@ def main() -> NoReturn:
     while True:
         try:
             input = get_user_input(CONST_USER_PROMT)
-            total += CONST_MENU.get(input.title())
+            total += CONST_MENU.get(input.title(), 0)
         except EOFError:
             break
 
-    print(f"{Total:.2f}")
-
+    print(f"Total: ${total:.2f}")
 
 
 if __name__ == "__main__":
