@@ -3,24 +3,35 @@ import random
 
 CONST_USER_PROMT_LEVEL = "Level"
 CONST_USER_PROMT_GESS = "Your Guess"
+CONST_GUESS_TOO_SMALL = "Too small!"
+CONST_GUESS_TOO_LARGE = "Too large!"
+CONST_GUESS_RIGHT = "Just right!"
+
 
 def get_user_input(message: str, sep: str = ": ") -> str:
     return input(f"{message}{sep}").strip()
 
-def validate_input_int(value: str) -> bool:
-    return value.isdigit()
+
+def get_user_input_int(message: str) -> int:
+    while not (result := get_user_input(message)).isdigit():
+        pass
+
+    return int(result)
+
 
 def guess_game(target: int) -> NoReturn:
-    while not validate_input_int(user_guess := get_user_input(CONST_USER_PROMT_LEVEL)):
-        pass
+    user_guess = get_user_input_int(CONST_USER_PROMT_GESS)
+    while user_guess != target:
+        if user_guess < target:
+            print("")
+
 
 
 def main() -> NoReturn:
-    while not validate_input_int(level := get_user_input(CONST_USER_PROMT_LEVEL)):
-        pass
+    level = get_user_input_int(CONST_USER_PROMT_LEVEL)
 
     print(f"{level}")
-    target = random.randint(1, level)
+    target=random.randint(1, level)
 
 
 
