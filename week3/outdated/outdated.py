@@ -28,9 +28,6 @@ def get_us_date_numerical(value: str) -> tuple[str, str, str]:
     if day > 31:
         raise ValueError("Day can not be larger han 31.")
 
-    month =CONST_MONTHS.index(month.title())
-    if month <0:
-        raise ValueError("Invalid month value.")
 
     return f"{year:>04}", f"{month:>02}", f"{day:>02}"
 
@@ -42,6 +39,10 @@ def get_us_date_human(value: str) -> tuple[str, str, str]:
     if int(day) > 31:
         raise ValueError("Day can not be larger han 31")
 
+    month =CONST_MONTHS.index(month.title())
+    if month <0:
+        raise ValueError("Invalid month value.")
+    
     return f"{year:>04}", f"{month:>02}", f"{day:>02}"
 
 
