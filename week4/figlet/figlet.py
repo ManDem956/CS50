@@ -26,4 +26,9 @@ def main() -> NoReturn:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+                    prog='Figlet',
+                    description='Rengers user\'s input in ASCII font')
+    parser.add_argument('-f', '--font')
+    
     main()
