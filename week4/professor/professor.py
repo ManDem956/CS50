@@ -32,7 +32,7 @@ def do_game(level) -> int:
     while tries > 0:
         try:
             answer = int(get_user_input(f"{left} + {right} =", sep=" "))
-            if answer == left + right:
+            if answer != left + right:
                 raise ValueError("Anwer is incorrect")
         except ValueError as e:
             print(CONST_ERROR)
