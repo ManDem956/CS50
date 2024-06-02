@@ -13,8 +13,8 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 
 
 def get_user_input_int(message: str) -> int:
-    result =0
-    while result <= 0:
+    result = 0
+    while not result in range(1,4):
         try:
             result = int(get_user_input(message))
         except ValueError as e:
@@ -23,21 +23,13 @@ def get_user_input_int(message: str) -> int:
     return result
 
 
-def guess_game(target: int) -> NoReturn:
-    while (user_guess := get_user_input_int(CONST_USER_PROMT_GESS)) != target:
-        if user_guess < target:
-            print(CONST_GUESS_TOO_SMALL)
-        else:
-            print(CONST_GUESS_TOO_LARGE)
 
-    print(CONST_GUESS_RIGHT)
 
 
 def main() -> NoReturn:
     level = get_user_input_int(CONST_USER_PROMT_LEVEL)
 
-    target = random.randint(1, level)
-    guess_game(target)
+    print(level)
 
 
 if __name__ == "__main__":
