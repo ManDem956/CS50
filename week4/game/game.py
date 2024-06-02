@@ -13,8 +13,12 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 
 
 def get_user_input_int(message: str) -> int:
+    result =0
     while result > 0:
-        pass
+        try:
+            result = int(get_user_input(CONST_USER_PROMT_LEVEL))
+        except ValueError as e:
+            continue
 
     return int(result)
 
