@@ -27,7 +27,6 @@ def main() -> NoReturn:
             total += CONST_MENU.get(input.title(), 0)
             print(f"Total: ${total:.2f}")
         except EOFError:
-            print("\n")
             break
 
 
