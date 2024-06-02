@@ -14,8 +14,14 @@ def parse_fraction(input: str) -> tuple[int, int]:
         raise ValueError(
             f"A fraction requires divident and divisor. Expected 2 values, got {len(values)}")
 
-    # Will raise ValueError is int() conversion fails
-    return int(values[0]), int(values[1])
+    # Will raise ValueError if int() conversion fails
+    divident, divisor = int(values[0]), int(values[1])
+
+    if divident > divisor:
+        raise ValueError(
+            f"Divient can not be larger tan divisor.")
+
+    return divident, divisor
 
 
 def main() -> NoReturn:
