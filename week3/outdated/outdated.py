@@ -67,8 +67,9 @@ def main() -> NoReturn:
         try:
             input = get_user_input(CONST_USER_PROMT)
             date = get_date_value(input)
-            result = format_iso_date(*date)
-            print(result)
+            if date:
+                result = format_iso_date(*date)
+                print(result)
         except ValueError as e:
             continue
 
