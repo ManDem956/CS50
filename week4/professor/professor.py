@@ -24,7 +24,7 @@ def generate_integer(level: int) -> int:
     if level not in range(1, 4):
         raise ValueError("Level must in range [1..3] inclusive")
 
-    return random.randrange(10**(level-1), 10**level)
+    return random.randrange(10**(level) - (10**(level) -), 10**level)
 
 
 def do_game(level) -> int:
