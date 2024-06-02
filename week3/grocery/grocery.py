@@ -5,7 +5,7 @@ CONST_USER_PROMT = ""
 
 
 def get_user_input(str) -> str:
-    res: str = input(f"{str}: ").strip()
+    res: str = input().strip()
     return res
 
 
