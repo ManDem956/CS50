@@ -1,6 +1,7 @@
 from typing import NoReturn
 from pyfiglet import Figlet
 import argparse
+import random
 
 CONST_USER_PROMT = "Input"
 # CONST_LANGUAGES = ["en", "alias"]
@@ -10,20 +11,11 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return res
 
 
-def get_emoji(input: str) -> str:
-    for language in ['alias'] + emoji.LANGUAGES:
-        result = emoji.emojize(input, language=language)
-        if result != input:
-            break
 
-    return result
+def main(f: Figlet) -> NoReturn:
+    input = get_user_input(CONST_USER_PROMT)
+    print(f.renderText(input))
 
-
-def main() -> NoReturn:
-    pass
-    # input = get_user_input(CONST_USER_PROMT)
-    # result = get_emoji(input)
-    # print(result)
 
 
 if __name__ == "__main__":
@@ -31,8 +23,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
                     prog='Figlet',
                     description='Rengers user\'s input in ASCII font')
-    parser.add_argument('-f', '--font')
+    parser.add_argument('-f', '--font', default = random.choice(figlet.getFonts()))
     args = parser.parse_args()
-    print(figlet.getFonts())
-    print(args.font)
-    main()
+    figlet.setFont(font=args.font)
+    main(figlet)
