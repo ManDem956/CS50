@@ -1,7 +1,7 @@
 from typing import NoReturn
 
 CONST_VOWELS = "AEIOU"
-CONST_USER_PROMT = "Insert coin"
+CONST_USER_PROMT = "Input"
 
 
 def get_user_input(str) -> str:
@@ -10,7 +10,7 @@ def get_user_input(str) -> str:
 
 
 def main() -> NoReturn:
-    input = get_user_input("Input")
+    input = get_user_input(CONST_USER_PROMT)
     result = ""
     for character in input:
         if character.upper() not in CONST_VOWELS:
