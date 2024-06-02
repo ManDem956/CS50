@@ -17,6 +17,14 @@ def get_us_date_numerical(value: str) -> tuple[str, str, str]:
 
     return f"{year:>04}", f"{month:>02}", f"{day:>02}"
 
+def get_us_date_human(value: str) -> tuple[str, str, str]:
+    month, day, year = (element.strip() for element in value.split("/"))
+
+    if day > 31:
+        raise ValueError("Day can not be larger han 31")
+
+    return f"{year:>04}", f"{month:>02}", f"{day:>02}"
+
 
 def get_iso_date(year: str, month: str, day: str) -> str:
     return "-".join((year, month, day))
