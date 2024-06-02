@@ -16,9 +16,12 @@ def main() -> NoReturn:
             input = get_user_input(CONST_USER_PROMT).upper()
             groceries[input] += 1
         except EOFError:
+            print()
             break
 
-    print(groceries)
+    for key, value in groceries.items():
+        print(f"{value}. {key}")
+
 
 
 if __name__ == "__main__":
