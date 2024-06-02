@@ -19,14 +19,14 @@ def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
     return result
 
 
-def main():
+def main(amount: float):
     pass
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="Bitcoun", description="Calculate the cost for users bitcoin amount")
-    parser.add_argument("amount", required=True)
+    parser.add_argument("amount", type=float)
     args = parser.parse_args()
 
     main(args.amount)
