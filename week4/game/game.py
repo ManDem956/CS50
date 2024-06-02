@@ -2,7 +2,7 @@ from typing import NoReturn
 import random
 
 CONST_USER_PROMT_LEVEL = "Level"
-CONST_USER_PROMT_GESS = "Your Guess"
+CONST_USER_PROMT_GESS = "Guess"
 CONST_GUESS_TOO_SMALL = "Too small!"
 CONST_GUESS_TOO_LARGE = "Too large!"
 CONST_GUESS_RIGHT = "Just right!"
