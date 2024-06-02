@@ -3,11 +3,13 @@ from string import ascii_uppercase as caps
 
 def main() -> NoReturn:
     user_input: str = input("Please provide a camelCase variable: ").strip()
-    indices = []
-    for idx, character in enumerate(user_input):
+    result=""
+    for character in user_input:
         if character in caps:
-            indices.append(idx)
-    print(f"{indices=}")
+            result += "_"
+        result += character
+
+    print(f"{result.lower()}")
 
 
 
