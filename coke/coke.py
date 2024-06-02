@@ -2,7 +2,7 @@ from typing import NoReturn
 
 CONST_START_AMOUNT_DUE = 50
 CONST_ACCEPTED_COINS = [25, 10, 5]
-CONST_USER_PROMT = "Please provide a camelCase variable"
+CONST_USER_PROMT = "Insert coin"
 
 
 def get_user_input(str) -> int:
