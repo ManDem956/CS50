@@ -1,13 +1,13 @@
-from typing import NoReturn
+from typing import NoReturn, Callable, Any
 import random
 
 CONST_USER_PROMT = "Name"
 
 
-def get_user_input(message: str, sep: str = ": ", validator:Callable) -> Any:
+def get_user_input(message: str, sep: str = ": ", validator:Callable=int) -> Any:
     while True:
         try:
-            res: int = validator(input(f"{message}{sep}").strip())
+            res = validator(input(f"{message}{sep}").strip())
         except ValueError as e:
             continue
         else:
