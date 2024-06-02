@@ -2,7 +2,7 @@ from typing import NoReturn
 import emoji
 
 CONST_USER_PROMT = "Input"
-CONST_LANGUAGES = ["en", "alias"]
+# CONST_LANGUAGES = ["en", "alias"]
 
 def get_user_input(message: str, sep: str = ": ") -> str:
     res: str = input(f"{message}{sep}").strip()
