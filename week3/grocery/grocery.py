@@ -19,7 +19,7 @@ def main() -> NoReturn:
             print()
             break
 
-    for key, value in groceries.items():
+    for key, value in sorted(groceries.items())orange:
         print(f"{value}. {key}")
 
 
