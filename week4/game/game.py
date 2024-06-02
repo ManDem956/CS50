@@ -10,8 +10,9 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 def validate_input_int(value: str) -> bool:
     return value.isdigit()
 
-def gusess_game(target: int) -> NoReturn:
-
+def guess_game(target: int) -> NoReturn:
+    while not validate_input_int(user_guess := get_user_input(CONST_USER_PROMT_LEVEL)):
+        pass
 
 
 def main() -> NoReturn:
