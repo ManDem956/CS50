@@ -12,7 +12,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return input(f"{message}{sep}").strip()
 
 
-def get_level(message: str) -> int:
+def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
     result = 0
     while not result in range(1,4):
         try:
@@ -23,7 +23,10 @@ def get_level(message: str) -> int:
     return result
 
 
-
+def generate_integer(level: int) -> int:
+    if level not in range(1,4):
+        raise ValueError("Level must in range [1..3] inclusive")
+    
 
 
 def main() -> NoReturn:
