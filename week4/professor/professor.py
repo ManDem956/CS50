@@ -59,5 +59,4 @@ def main():
     print(counter)
 
 if __name__ == "__main__":
-    random.seed(1)
     main()
