@@ -1,7 +1,7 @@
 from typing import NoReturn
 from collections import defaultdict
 
-CONST_USER_PROMT = "Item"
+CONST_USER_PROMT = ""
 
 
 def get_user_input(str) -> str:
