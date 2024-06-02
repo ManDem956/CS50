@@ -1,7 +1,7 @@
 from typing import NoReturn
-from collections import defaultdict
+import emoji
 
-CONST_USER_PROMT = "Date"
+CONST_USER_PROMT = "Input"
 
 
 def get_user_input(message: str, sep: str = ": ") -> str:
@@ -9,7 +9,8 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return res
 
 
-def get_emoji(input: str) -> str
+def get_emoji(input: str) -> str:
+    return emoji.emojize(input)
 
 def main() -> NoReturn:
     input = get_user_input(CONST_USER_PROMT)
