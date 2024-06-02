@@ -31,8 +31,7 @@ def main() -> NoReturn:
         except (ValueError, ZeroDivisionError)  as e:
             continue
 
-    print(f"{result:%.0f1/2
-             }")
+    print(f"{result:.0%}")
 
 
 if __name__ == "__main__":
