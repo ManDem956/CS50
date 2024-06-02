@@ -20,10 +20,7 @@ def is_valid(s:str) -> bool:
     if not 2 <= len(s) <= 6:
         return False
 
-    if not is_valid_alpha(s[0:2]):
-        return False
-
-    for
+   return is_valid_alpha(s[0:2]) and is_valid_digit(s)
 
 
 def get_first_digit_index(s:str)->int:
@@ -33,7 +30,9 @@ def get_first_digit_index(s:str)->int:
     return -1
 
 def is_valid_digit(s:str) -> bool:
-    return all(char.isdigit() for char in s):
+    if digit_index:=get_first_digit_index(s) > 0:
+        return all(char.isdigit() for char in s[digit_index:]):
+    return True
 
 def is_valid_alpha(s:str) -> bool:
     return all(char.isalpha() for char in s):
