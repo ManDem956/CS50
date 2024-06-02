@@ -16,7 +16,7 @@ def main() -> NoReturn:
         if character.upper() not in CONST_VOWELS:
             result += character
 
-    print(f"Output: {result}")
+    print(f"Output: {result.strip()}")
 
 
 if __name__ == "__main__":
