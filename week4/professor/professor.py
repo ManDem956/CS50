@@ -38,10 +38,10 @@ def do_game(level) -> int:
             answer = int(get_user_input(f"{left} + {right} ="))
             if answer == left + right:
                 return 1
-            else:
-                tries -= 1
         except ValueError as e:
             continue
+        finally:
+            tries -= 1
 
     return 0
 
