@@ -10,16 +10,15 @@ def get_user_input(str) -> str:
 
 
 def main() -> NoReturn:
-    groceries = defaultdict()
+    groceries = defaultdict(int)
     while True:
         try:
-            input = get_user_input(CONST_USER_PROMT)
-            total += CONST_MENU.get(input.title(), 0)
-            print(f"Total: ${total:.2f}")
+            input = get_user_input(CONST_USER_PROMT).upper()
+            groceries[input] += 1
         except EOFError:
             break
 
-
+    print(groceries)
 
 
 if __name__ == "__main__":
