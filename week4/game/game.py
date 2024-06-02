@@ -20,12 +20,12 @@ def get_user_input_int(message: str) -> int:
 
 
 def guess_game(target: int) -> NoReturn:
-    user_guess = get_user_input_int(CONST_USER_PROMT_GESS)
-    while user_guess != target:
+    while (user_guess := get_user_input_int(CONST_USER_PROMT_GESS)) != target:
         if user_guess < target:
             print(CONST_GUESS_TOO_SMALL)
         else:
             print(CONST_GUESS_TOO_LARGE)
+
     print(CONST_GUESS_RIGHT)
 
 
