@@ -32,7 +32,7 @@ def get_user_input(str) -> str:
 
 def main() -> NoReturn:
     input = get_user_input(CONST_USER_PROMT)
-    print(f"Calories: {CONST_FRUIT_MAPPING[input.lower()]}")
+    print(f"Calories: {CONST_FRUIT_MAPPING.get(input.lower(),"")}")
 
 
 if __name__ == "__main__":
