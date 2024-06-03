@@ -18,11 +18,10 @@ def main() -> NoReturn:
     try:
         res = requests.get(CONST_BITCOIN_ENDPOINT)
         res.raise_for_status()
-
-        json = res.json()
     except requests.RequestException as e:
         print("An HTTP error occured: {e}")
     else:
+        json = res.json()
         print(f"${float(json["bpi"]["USD"]["rate_float"]) * args.amount:,.4f}")
 
 
