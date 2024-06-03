@@ -21,7 +21,11 @@ def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
     return result
 
 
-def main(amount: float):
+def main():
+    parser = argparse.ArgumentParser(
+    prog="Bitcoun", description="Calculate the cost for users bitcoin amount")
+    parser.add_argument("amount", type=float)
+    args = parser.parse_args()
     try:
         res = requests.get(CONST_BITCOIN_ENDPOINT)
         res.raise_for_status()
@@ -30,13 +34,10 @@ def main(amount: float):
     except requests.RequestException as e:
         print("An HTTP error occured: {e}")
     else:
-        print(f"{float(json["bpi"]["USD"]["rate_float"]) * amount:,.4f}")
+        print(f"{float(json["bpi"]["USD"]["rate_float"]) * args.amount:,.4f}")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        prog="Bitcoun", description="Calculate the cost for users bitcoin amount")
-    parser.add_argument("amount", type=float)
-    args = parser.parse_args()
+    main()
 
-    main(args.amount)
+
