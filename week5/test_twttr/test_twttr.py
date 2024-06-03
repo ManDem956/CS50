@@ -7,5 +7,5 @@ from twttr import shorten
                           ("What's your name?", "Wht's yr nm?"),
                           ("CS50", "CS50"),
                           ("I am Groot", " m Grt")])
-def test_capital_case(input, expected):
+def test_shorten(input, expected):
     assert shorten(input) == expected
