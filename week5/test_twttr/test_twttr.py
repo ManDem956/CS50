@@ -1,9 +1,15 @@
 from typing import NoReturn
 
-WOVELS = "AEIOU"
+WOVELS = "aeiou"
 
-def shorten(word:str) -> str:
 
+def shorten(word: str) -> str:
+    res = ""
+    for char in word:
+        if char not in WOVELS:
+            res += char
+
+    return res
 
 
 def main() -> NoReturn:
