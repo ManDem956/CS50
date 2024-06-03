@@ -25,7 +25,12 @@ def main():
     parser = argparse.ArgumentParser(
     prog="Bitcoin", description="Calculate the cost for users bitcoin amount")
     parser.add_argument("amount", type=float)
-    args = parser.parse_args()
+    try:
+        args = parser.parse_args()
+    except SystemExit:
+        sys.exit(1)
+
+        
     try:
         res = requests.get(CONST_BITCOIN_ENDPOINT)
         res.raise_for_status()
