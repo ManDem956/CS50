@@ -1,3 +1,4 @@
+from contextlib import nullcontext as does_not_raise
 import pytest
 from fuel import convert, gauge
 
