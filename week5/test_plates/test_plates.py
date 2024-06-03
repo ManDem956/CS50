@@ -3,7 +3,7 @@ from plates import is_valid
 
 
 @pytest.mark.parametrize("input,expected",
-                         [("Hello", 0),
+                         [("CS50", 0),
                           ("Hello, Newman", 0),
                           ("How you doing?", 20),
                           ("What's happening?", 100)])
