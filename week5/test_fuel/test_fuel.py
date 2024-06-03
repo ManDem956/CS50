@@ -1,16 +1,16 @@
 import pytest
-from plates import is_valid
+from fuel import convert, gauge
 
 
 @pytest.mark.parametrize("input,expected",
-                         [("3/4", "75%"),
-                          ("CS05", False),
-                          ("ECTO88", True),
-                          ("50", False),
-                          ("CS50P2", False),
-                          ("PI3.14", False),
-                          ("H", False),
+                         [("3/4", 75"),
+                          ("1/3", 33),
+                          ("2/3", 67),
+                          ("0/100", 0),
+                          ("1/100", 1),
+                          ("100/100", 100),
+                          ("99/100", 99),
                           ("OUTATIME", False),
                           ("NRVOUS", True)])
-def test_is_valid(input, expected):
-    assert is_valid(input) == expected
+def test_convert(input, expected):
+    assert convert(input) == expected
