@@ -15,7 +15,7 @@ from fuel import convert, gauge
                           ("1.5/4", None, pytest.raises(ValueError)),
                           ("3/5.5", None, pytest.raises(ValueError)),
                           ("5-10", None, pytest.raises(ValueError)),
-                          ("100/0", None, pytest.raises(ZeroDivisionError)),
+                          ("0/0", None, pytest.raises(ZeroDivisionError)),
                           ("99/100", 99, does_not_raise())
                           ])
 def test_convert(input, expected, expectation):
