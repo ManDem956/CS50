@@ -34,7 +34,7 @@ def main():
     except requests.RequestException as e:
         print("An HTTP error occured: {e}")
     else:
-        print(f"{float(json["bpi"]["USD"]["rate_float"]) * args.amount:,.4f}")
+        print(f"${float(json["bpi"]["USD"]["rate_float"]) * args.amount:,.4f}")
 
 
 if __name__ == "__main__":
