@@ -33,7 +33,7 @@ def gauge(percentage: int) -> str:
 def main() -> NoReturn:
     while True:
         try:
-            result = convert(get_user_input(CONST_USER_PROMT).lower())
+            result = convert(get_user_input(CONST_USER_PROMT))
         except (ValueError, ZeroDivisionError) as e:
             continue
         else:
