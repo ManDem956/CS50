@@ -13,15 +13,17 @@ def convert(input: str) -> int:
     # Will raise ValueError if too many values to unpack
     divident, divisor = (int(value) for value in input.split('/'))
 
-    if divident > divisor:
+    res = round((divident / divisor) * 100)
+
+    if res > 100:
         raise ValueError(
             f"Divident can not be larger than divisor.")
 
-    return round((divident / divisor) * 100)
+    return res
 
 
 def gauge(percentage: int) -> str:
-    if percentage in range(1, 99):
+    if percentage in range(2, 99):
         return f"{percentage}%"
     elif percentage <= 1:
         return "E"
