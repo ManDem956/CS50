@@ -8,7 +8,7 @@ def get_user_input(str) -> str:
     return res
 
 
-def parse_fraction(input: str) -> tuple[int, int]:
+def convert(input: str) -> tuple[int, int]:
     # Will raise ValueError if int() conversion fails
     # Will raise ValueError if too many values to unpack
     divident, divisor = (int(value) for value in input.split('/'))
@@ -17,7 +17,9 @@ def parse_fraction(input: str) -> tuple[int, int]:
         raise ValueError(
             f"Divident can not be larger than divisor.")
 
-    return divident, divisor
+    return round(divident / divisor, 2)
+
+
 
 
 def main() -> NoReturn:
@@ -25,8 +27,7 @@ def main() -> NoReturn:
     while result is None:
         input = get_user_input(CONST_USER_PROMT).lower()
         try:
-            divident, divisor = parse_fraction(input)
-            result = (divident / divisor)
+            result = convert(input)
         except (ValueError, ZeroDivisionError) as e:
             continue
 
