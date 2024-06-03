@@ -23,14 +23,14 @@ def get_level(message: str = CONST_USER_PROMT_LEVEL) -> int:
 
 def main(amount: float):
     try:
-        res = requests.get()
+        res = requests.get(CONST_BITCOIN_ENDPOINT)
         res.raise_for_status()
 
         json = res.json()
     except requests.RequestException as e:
         print("An HTTP error occured: {e}")
     else:
-        print(json["bpi"]["USD"]["rate"]
+        print(float(json["bpi"]["USD"]["rate"]) * amount)
 
 
 if __name__ == "__main__":
