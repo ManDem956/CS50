@@ -7,7 +7,7 @@ WOVELS = "aeiou"
 def shorten(word: str) -> str:
     res = ""
     for char in word:
-        if char not in WOVELS:
+        if char.lower() not in WOVELS:
             res += char
 
     return res
@@ -21,7 +21,7 @@ def get_user_input(str) -> str:
 def main() -> NoReturn:
     input = get_user_input(CONST_USER_PROMT)
     result = shorten(input)
-    print(f"Output: {result.strip()}")
+    print(f"Output: {result}")
 
 
 if __name__ == "__main__":
