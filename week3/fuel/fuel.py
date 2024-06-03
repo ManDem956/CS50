@@ -8,36 +8,37 @@ def get_user_input(str) -> str:
     return res
 
 
-def parse_fraction(input: str) -> tuple[int, int]:
+def convert(input: str) -> int:
     # Will raise ValueError if int() conversion fails
     # Will raise ValueError if too many values to unpack
     divident, divisor = (int(value) for value in input.split('/'))
+
 
     if divident > divisor:
         raise ValueError(
             f"Divident can not be larger than divisor.")
 
-    return divident, divisor
+    return round((divident / divisor) * 100)
+
+
+def gauge(percentage: int) -> str:
+    if percentage in range(2, 99):
+        return f"{percentage}%"
+    elif percentage <= 1:
+        return "E"
+    else:
+        return "F"
 
 
 def main() -> NoReturn:
-    result = None
-    while result is None:
-        input = get_user_input(CONST_USER_PROMT).lower()
+    while True:
         try:
-            divident, divisor = parse_fraction(input)
-            result = (divident / divisor)
+            result = convert(get_user_input(CONST_USER_PROMT).lower())
         except (ValueError, ZeroDivisionError) as e:
             continue
-
-    message: str = ""
-    if 0.01 < result < 0.99:
-        message = f"{result:.0%}"
-    elif result <= 0.01:
-        message = "E"
-    else:
-        message = "F"
-    print(message)
+        else:
+            print(gauge(result))
+            break
 
 
 if __name__ == "__main__":
