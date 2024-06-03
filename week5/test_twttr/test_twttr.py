@@ -1,7 +1,9 @@
 from typing import NoReturn
 
+WOVELS = "AEIOU"
 
-CONST_BITCOIN_ENDPOINT = "https://api.coindesk.com/v1/bpi/currentprice.json"
+def shorten(word:str) -> str:
+
 
 
 def main() -> NoReturn:
