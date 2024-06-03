@@ -30,7 +30,7 @@ def main(amount: float):
     except requests.RequestException as e:
         print("An HTTP error occured: {e}")
     else:
-        print(float(json["bpi"]["USD"]["rate"]) * amount)
+        print(float(json["bpi"]["USD"]["rate_float"]) * amount)
 
 
 if __name__ == "__main__":
