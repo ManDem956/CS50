@@ -13,7 +13,6 @@ def convert(input: str) -> int:
     # Will raise ValueError if too many values to unpack
     divident, divisor = (int(value) for value in input.split('/'))
 
-
     if divident > divisor:
         raise ValueError(
             f"Divident can not be larger than divisor.")
