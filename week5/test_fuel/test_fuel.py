@@ -3,7 +3,7 @@ from plates import is_valid
 
 
 @pytest.mark.parametrize("input,expected",
-                         [("CS50", True),
+                         [("3/4", "75%"),
                           ("CS05", False),
                           ("ECTO88", True),
                           ("50", False),
