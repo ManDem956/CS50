@@ -1,4 +1,3 @@
-    # shfhgsiudghtoihu
 import sys
 from typing import NoReturn
 import argparse
