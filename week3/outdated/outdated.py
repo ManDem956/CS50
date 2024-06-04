@@ -59,8 +59,8 @@ def get_date_value(value: str) -> tuple[str, str, str]:
         except ValueError as e:
             continue
 
-    # if result is None:
-    #     raise ValueError("the date format is not valid")
+    if result is None:
+        raise ValueError("the date format is not valid")
 
     return result
 
