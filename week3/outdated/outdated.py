@@ -51,7 +51,16 @@ def format_iso_date(year: str, month: str, day: str) -> str:
 
 
 def get_date_value(value: str) -> tuple[str, str, str]:
-    result = get_us_date_human(value) or get_us_date_numerical(value)
+    methods = [get_us_date_human, get_us_date_numerical]
+    result = None
+    for method in methods:
+        try:
+            result = method(value)
+        except ValueError as e:
+            continue
+
+    # if result is None:
+    #     raise ValueError("the date format is not valid")
 
     return result
 
