@@ -41,5 +41,5 @@ def main() -> NoReturn:
 
 
 if __name__ == "__main__":
-    val = int(None)
+    
     main()
