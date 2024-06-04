@@ -66,14 +66,15 @@ def get_date_value(value: str) -> tuple[str, str, str]:
 
 
 def main() -> NoReturn:
-    result = None
-    while result is None:
+    while True:
         try:
             input = get_user_input(CONST_USER_PROMT)
             result = format_iso_date(*get_date_value(input))
-            print(result)
         except ValueError as e:
             continue
+        else:
+            print(result)
+            break
 
 
 if __name__ == "__main__":
