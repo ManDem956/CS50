@@ -37,7 +37,7 @@ def validate(in_file_name: str, out_file_name: str) -> NoReturn:
         raise ValueError(f"{in_file_name} is empty")
 
 
-def main() -> NoReturn:
+def main() -> None:
     # initialise an argparser object with one positional argument to receive a file name from user
     parser = argparse.ArgumentParser(prog="Lines", description="Count lines in a file")
     parser.add_argument("infile")

@@ -6,7 +6,7 @@ import requests
 CONST_BITCOIN_ENDPOINT = "https://api.coindesk.com/v1/bpi/currentprice.json"
 
 
-def main() -> NoReturn:
+def main() -> None:
     parser = argparse.ArgumentParser(
         prog="Bitcoin", description="Calculate the cost for user's bitcoin amount")
     parser.add_argument("amount", type=float)

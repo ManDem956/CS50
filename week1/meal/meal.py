@@ -6,7 +6,7 @@ def convert(time: str) -> float:
     return (float(hours) * 60 + float(minutes)) / 60
 
 
-def main() -> NoReturn:
+def main() -> None:
     user_input: str = input("What time is it? ").strip().lower()
     result = ""
     match convert(user_input):

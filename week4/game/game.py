@@ -13,7 +13,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 
 
 def get_user_input_int(message: str) -> int:
-    result =0
+    result = 0
     while result <= 0:
         try:
             result = int(get_user_input(message))
@@ -33,7 +33,7 @@ def guess_game(target: int) -> NoReturn:
     print(CONST_GUESS_RIGHT)
 
 
-def main() -> NoReturn:
+def main() -> None:
     level = get_user_input_int(CONST_USER_PROMT_LEVEL)
 
     target = random.randint(1, level)

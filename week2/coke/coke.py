@@ -12,7 +12,7 @@ def get_user_input(str) -> int:
     return res
 
 
-def main() -> NoReturn:
+def main() -> None:
     amount_due = CONST_START_AMOUNT_DUE
     while amount_due > 0:
         print(f"Amount Due: {amount_due}")

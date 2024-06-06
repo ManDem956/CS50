@@ -10,7 +10,7 @@ CONST_MENU = {
     "Super Burrito": 8.50,
     "Super Quesadilla": 9.50,
     "Taco": 3.00,
-    "Tortilla Salad": 8.00
+    "Tortilla Salad": 8.00,
 }
 
 
@@ -19,7 +19,7 @@ def get_user_input(str) -> str:
     return res
 
 
-def main() -> NoReturn:
+def main() -> None:
     total = 0
     while True:
         try:
@@ -28,8 +28,6 @@ def main() -> NoReturn:
             print(f"Total: ${total:.2f}")
         except EOFError:
             break
-
-
 
 
 if __name__ == "__main__":

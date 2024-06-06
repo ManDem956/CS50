@@ -25,7 +25,7 @@ def get_user_input(str) -> str:
     return res
 
 
-def main() -> NoReturn:
+def main() -> None:
     p = inflect.engine()
     try:
         calc = TimeCalculator(get_user_input("Birthday 🍪"))

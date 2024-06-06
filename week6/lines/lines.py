@@ -27,7 +27,7 @@ def validate(filename: str) -> NoReturn:
         raise ValueError(f"{filename} is empty")
 
 
-def main() -> NoReturn:
+def main() -> None:
     # initialise an argparser object with one positional argument to receive a file name from user
     parser = argparse.ArgumentParser(prog="Lines", description="Count lines in a file")
     parser.add_argument("filename")

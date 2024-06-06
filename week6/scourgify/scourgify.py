@@ -18,7 +18,6 @@ def convert(in_file_name: str, out_file_name: str) -> NoReturn:
             writer.writerow((first_name, last_name, house))
 
 
-
 def validate(filename: str) -> NoReturn:
     file = Path(filename)
     if not file.is_file():
@@ -31,7 +30,7 @@ def validate(filename: str) -> NoReturn:
         raise ValueError(f"{filename} is empty")
 
 
-def main() -> NoReturn:
+def main() -> None:
     # initialise an argparser object with one positional argument to receive a file name from user
     parser = argparse.ArgumentParser(prog="Lines", description="Count lines in a file")
     parser.add_argument("infile")

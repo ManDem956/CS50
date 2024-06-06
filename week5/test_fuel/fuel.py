@@ -11,12 +11,10 @@ def get_user_input(str) -> str:
 def convert(input: str) -> int:
     # Will raise ValueError if int() conversion fails
     # Will raise ValueError if too many values to unpack
-    dividend, divisor = (int(value) for value in input.split('/'))
-
+    dividend, divisor = (int(value) for value in input.split("/"))
 
     if dividend > divisor:
-        raise ValueError(
-            f"Dividend can not be larger than divisor.")
+        raise ValueError(f"Dividend can not be larger than divisor.")
 
     return round((dividend / divisor) * 100)
 
@@ -30,7 +28,7 @@ def gauge(percentage: int) -> str:
         return "F"
 
 
-def main() -> NoReturn:
+def main() -> None:
     while True:
         try:
             result = convert(get_user_input(CONST_USER_PROMT).lower())

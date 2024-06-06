@@ -33,7 +33,7 @@ def convert(time_delta: str) -> str:
     return res
 
 
-def main():
+def main() -> None:
     print(convert(input("Time delta: ")))
 
 

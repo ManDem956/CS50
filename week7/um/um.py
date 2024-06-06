@@ -8,7 +8,7 @@ def count(time_delta: str) -> str:
     return len(tuple(re.finditer(pattern, time_delta)))
 
 
-def main():
+def main() -> None:
     print(count(input("Text: ")))
 
 

@@ -10,7 +10,7 @@ def validate(ip):
     return re.fullmatch(REGEXP, ip) is not None
 
 
-def main():
+def main() -> None:
     print(validate(input("IPv4 Address: ")))
 
 

@@ -4,13 +4,12 @@ from collections import defaultdict
 CONST_USER_PROMT = ""
 
 
-
-def get_user_input(message:str, sep:str=": ") -> str:
+def get_user_input(message: str, sep: str = ": ") -> str:
     res: str = input(f"{message}{sep}").strip()
     return res
 
 
-def main() -> NoReturn:
+def main() -> None:
     groceries = defaultdict(int)
     while True:
         try:

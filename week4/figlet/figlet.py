@@ -12,7 +12,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return res
 
 
-def main(f: Figlet) -> NoReturn:
+def main(f: Figlet) -> None:
     input = get_user_input(CONST_USER_PROMT)
     print(f.renderText(input))
 
@@ -26,4 +26,4 @@ if __name__ == "__main__":
         '-f', '--font', default=random.choice(figlet.getFonts()))
     args = parser.parse_args()
     figlet.setFont(font=args.font)
-    main(figlet)cd 
+    main(figlet) 

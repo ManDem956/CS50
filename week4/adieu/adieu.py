@@ -9,7 +9,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return res
 
 
-def main(p: inflect.engine) -> NoReturn:
+def main(p: inflect.engine) -> None:
     user_input = []
     while True:
         try:

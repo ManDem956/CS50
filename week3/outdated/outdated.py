@@ -14,7 +14,7 @@ CONST_MONTHS = [
     "September",
     "October",
     "November",
-    "December"
+    "December",
 ]
 
 
@@ -33,7 +33,7 @@ def get_us_date_human(value: str) -> tuple[str, str, str]:
     monthday, year = (element.strip() for element in value.split(","))
     month, day = (element.strip() for element in monthday.split())
 
-    month = CONST_MONTHS.index(month.title())+1
+    month = CONST_MONTHS.index(month.title()) + 1
     if month < 1:
         raise ValueError("Invalid month value.")
 
@@ -65,7 +65,7 @@ def get_date_value(value: str) -> tuple[str, str, str]:
     return result
 
 
-def main() -> NoReturn:
+def main() -> None:
     while True:
         try:
             input = get_user_input(CONST_USER_PROMT)
