@@ -1,8 +1,6 @@
-from typing import NoReturn
-
 CONST_START_AMOUNT_DUE = 50
 CONST_ACCEPTED_COINS = [25, 10, 5]
-CONST_USER_PROMT = "Insert coin"
+CONST_USER_PROMPT = "Insert coin"
 
 
 def get_user_input(str) -> int:
@@ -16,7 +14,7 @@ def main() -> None:
     amount_due = CONST_START_AMOUNT_DUE
     while amount_due > 0:
         print(f"Amount Due: {amount_due}")
-        amount_due -= get_user_input(CONST_USER_PROMT)
+        amount_due -= get_user_input(CONST_USER_PROMPT)
     print(f"Change Owed: {abs(amount_due)}")
 
 

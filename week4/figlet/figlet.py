@@ -1,10 +1,8 @@
-from typing import NoReturn
 from pyfiglet import Figlet
 import argparse
 import random
 
-CONST_USER_PROMT = "Input"
-# CONST_LANGUAGES = ["en", "alias"]
+CONST_USER_PROMPT = "Input"
 
 
 def get_user_input(message: str, sep: str = ": ") -> str:
@@ -12,18 +10,25 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return res
 
 
-def main(f: Figlet) -> None:
-    input = get_user_input(CONST_USER_PROMT)
-    print(f.renderText(input))
+def render(f: Figlet, input: str) -> str:
+    return f.renderText(input)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        prog="Figlet", description="Renders user's input in ASCII font"
+    )
+    parser.add_argument("-f", "--font",
+                        default=random.choice(Figlet().getFonts()))
+    args = parser.parse_args()
+
+    figlet = Figlet()
+    figlet.setFont(font=args.font)
+
+    input = get_user_input(CONST_USER_PROMPT)
+
+    print(render(figlet, input))
 
 
 if __name__ == "__main__":
-    figlet = Figlet()
-    parser = argparse.ArgumentParser(
-        prog='Figlet',
-        description='Rengers user\'s input in ASCII font')
-    parser.add_argument(
-        '-f', '--font', default=random.choice(figlet.getFonts()))
-    args = parser.parse_args()
-    figlet.setFont(font=args.font)
-    main(figlet) 
+    main()

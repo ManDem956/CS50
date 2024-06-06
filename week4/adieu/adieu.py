@@ -1,7 +1,6 @@
-from typing import NoReturn
 import inflect
 
-CONST_USER_PROMT = "Name"
+CONST_USER_PROMPT = "Name"
 
 
 def get_user_input(message: str, sep: str = ": ") -> str:
@@ -13,11 +12,12 @@ def main(p: inflect.engine) -> None:
     user_input = []
     while True:
         try:
-            user_input.append(get_user_input(CONST_USER_PROMT))
+            user_input.append(get_user_input(CONST_USER_PROMPT))
         except EOFError:
             break
 
     print(f"\nAdieu, adieu, to {p.join(user_input)}")
+
 
 if __name__ == "__main__":
     p = inflect.engine()

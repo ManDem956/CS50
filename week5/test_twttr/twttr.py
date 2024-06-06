@@ -1,6 +1,4 @@
-from typing import NoReturn
-
-CONST_USER_PROMT = "Input"
+CONST_USER_PROMPT = "Input"
 WOVELS = "aeiou"
 
 
@@ -19,7 +17,7 @@ def get_user_input(str) -> str:
 
 
 def main() -> None:
-    input = get_user_input(CONST_USER_PROMT)
+    input = get_user_input(CONST_USER_PROMPT)
     result = shorten(input)
     print(f"Output: {result}")
 

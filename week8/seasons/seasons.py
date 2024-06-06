@@ -1,6 +1,6 @@
 import datetime
 import sys
-from typing import NoReturn
+
 import inflect
 
 
@@ -11,8 +11,8 @@ class TimeCalculator:
 
     def humanize(self) -> str:
         p = inflect.engine()
-        return f"{p.number_to_words(self._calculate(), andword="")} minutes".capitalize()
-        
+        return f"{p.number_to_words(self._calculate(),
+                                    andword="")} minutes".capitalize()
 
     def _calculate(self) -> int:
         delta: datetime.timedelta = datetime.date.today() - self.birthdate
@@ -26,7 +26,6 @@ def get_user_input(str) -> str:
 
 
 def main() -> None:
-    p = inflect.engine()
     try:
         calc = TimeCalculator(get_user_input("Birthday 🍪"))
         minutes = calc.humanize()

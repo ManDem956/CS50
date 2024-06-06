@@ -1,7 +1,5 @@
-from typing import NoReturn
-
 CONST_VOWELS = "AEIOU"
-CONST_USER_PROMT = "Input"
+CONST_USER_PROMPT = "Input"
 
 
 def get_user_input(str) -> str:
@@ -10,7 +8,7 @@ def get_user_input(str) -> str:
 
 
 def main() -> None:
-    input = get_user_input(CONST_USER_PROMT)
+    input = get_user_input(CONST_USER_PROMPT)
     result = ""
     for character in input:
         if character.upper() not in CONST_VOWELS:

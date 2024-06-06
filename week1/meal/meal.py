@@ -1,6 +1,3 @@
-from typing import NoReturn
-
-
 def convert(time: str) -> float:
     hours, minutes = time.split(":")
     return (float(hours) * 60 + float(minutes)) / 60

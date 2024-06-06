@@ -1,7 +1,6 @@
-from typing import NoReturn
 import emoji
 
-CONST_USER_PROMT = "Input"
+CONST_USER_PROMPT = "Input"
 # CONST_LANGUAGES = ["en", "alias"]
 
 
@@ -20,7 +19,7 @@ def get_emoji(input: str) -> str:
 
 
 def main() -> None:
-    input = get_user_input(CONST_USER_PROMT)
+    input = get_user_input(CONST_USER_PROMPT)
     result = get_emoji(input)
     print(result)
 

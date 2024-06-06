@@ -1,8 +1,7 @@
-from typing import NoReturn
 import random
 
-CONST_USER_PROMT_LEVEL = "Level"
-CONST_USER_PROMT_GESS = "Guess"
+CONST_USER_PROMPT_LEVEL = "Level"
+CONST_USER_PROMPT_GESS = "Guess"
 CONST_GUESS_TOO_SMALL = "Too small!"
 CONST_GUESS_TOO_LARGE = "Too large!"
 CONST_GUESS_RIGHT = "Just right!"
@@ -24,7 +23,7 @@ def get_user_input_int(message: str) -> int:
 
 
 def guess_game(target: int) -> NoReturn:
-    while (user_guess := get_user_input_int(CONST_USER_PROMT_GESS)) != target:
+    while (user_guess := get_user_input_int(CONST_USER_PROMPT_GESS)) != target:
         if user_guess < target:
             print(CONST_GUESS_TOO_SMALL)
         else:
@@ -34,7 +33,7 @@ def guess_game(target: int) -> NoReturn:
 
 
 def main() -> None:
-    level = get_user_input_int(CONST_USER_PROMT_LEVEL)
+    level = get_user_input_int(CONST_USER_PROMPT_LEVEL)
 
     target = random.randint(1, level)
     guess_game(target)

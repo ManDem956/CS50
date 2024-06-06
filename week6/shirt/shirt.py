@@ -1,5 +1,5 @@
 import sys
-from typing import NoReturn
+
 import argparse
 from pathlib import Path, PurePath
 import csv

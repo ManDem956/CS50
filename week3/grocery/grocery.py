@@ -1,7 +1,6 @@
-from typing import NoReturn
 from collections import defaultdict
 
-CONST_USER_PROMT = ""
+CONST_USER_PROMPT = ""
 
 
 def get_user_input(message: str, sep: str = ": ") -> str:
@@ -13,7 +12,7 @@ def main() -> None:
     groceries = defaultdict(int)
     while True:
         try:
-            input = get_user_input(CONST_USER_PROMT, "").upper()
+            input = get_user_input(CONST_USER_PROMPT, "").upper()
             groceries[input] += 1
         except EOFError:
             print()

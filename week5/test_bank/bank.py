@@ -1,6 +1,4 @@
-from typing import NoReturn
-
-CONST_USER_PROMT = "Input"
+CONST_USER_PROMPT = "Input"
 
 
 def get_user_input(str) -> str:
@@ -18,7 +16,7 @@ def value(greeting: str) -> int:
 
 
 def main() -> None:
-    user_input: str = get_user_input(CONST_USER_PROMT)
+    user_input: str = get_user_input(CONST_USER_PROMPT)
     print(f"${value(user_input)}")
 
 

@@ -1,4 +1,3 @@
-from typing import NoReturn
 from string import ascii_uppercase as caps
 
 

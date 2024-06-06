@@ -1,6 +1,4 @@
-from typing import NoReturn
-
-CONST_USER_PROMT = "Fraction"
+CONST_USER_PROMPT = "Fraction"
 
 
 def get_user_input(str) -> str:
@@ -31,7 +29,7 @@ def gauge(percentage: int) -> str:
 def main() -> None:
     while True:
         try:
-            result = convert(get_user_input(CONST_USER_PROMT))
+            result = convert(get_user_input(CONST_USER_PROMPT))
         except (ValueError, ZeroDivisionError) as e:
             continue
         else:

@@ -10,10 +10,12 @@ pillow = "*"
 validator-collection = "*"
 fpdf = "*"
 argparse = "*"
+pyfiglet = "*"
 
 [dev-packages]
 ipykernel = "*"
 pytest = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.12"

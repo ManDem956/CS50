@@ -1,6 +1,4 @@
-from typing import NoReturn
-
-CONST_USER_PROMT = "Item"
+CONST_USER_PROMPT = "Item"
 CONST_MENU = {
     "Baja Taco": 4.25,
     "Burrito": 7.50,
@@ -23,7 +21,7 @@ def main() -> None:
     total = 0
     while True:
         try:
-            input = get_user_input(CONST_USER_PROMT)
+            input = get_user_input(CONST_USER_PROMPT)
             total += CONST_MENU.get(input.title(), 0)
             print(f"Total: ${total:.2f}")
         except EOFError:

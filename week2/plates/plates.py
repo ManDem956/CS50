@@ -1,6 +1,4 @@
-from typing import NoReturn
-
-CONST_USER_PROMT = "Plate"
+CONST_USER_PROMPT = "Plate"
 
 
 def get_user_input(str) -> str:
@@ -9,7 +7,7 @@ def get_user_input(str) -> str:
 
 
 def main() -> None:
-    input = get_user_input(CONST_USER_PROMT)
+    input = get_user_input(CONST_USER_PROMPT)
     if is_valid(input):
         print("Valid")
     else:

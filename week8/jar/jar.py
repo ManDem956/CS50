@@ -1,6 +1,3 @@
-from typing import NoReturn
-
-
 class Jar:
     def __init__(self, capacity: int = 12) -> None:
         if capacity < 0:

@@ -1,4 +1,4 @@
-from typing import NoReturn
+
 import sys
 import argparse
 import requests

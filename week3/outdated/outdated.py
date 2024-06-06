@@ -1,7 +1,4 @@
-from typing import NoReturn
-from collections import defaultdict
-
-CONST_USER_PROMT = "Date"
+CONST_USER_PROMPT = "Date"
 CONST_MONTHS = [
     "January",
     "February",
@@ -68,7 +65,7 @@ def get_date_value(value: str) -> tuple[str, str, str]:
 def main() -> None:
     while True:
         try:
-            input = get_user_input(CONST_USER_PROMT)
+            input = get_user_input(CONST_USER_PROMPT)
             result = format_iso_date(*get_date_value(input))
         except ValueError as e:
             continue
