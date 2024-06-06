@@ -4,18 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pytest = "*"
-tabulate = "*"
-pillow = "*"
-validator-collection = "*"
-fpdf = "*"
-argparse = "*"
-pyfiglet = "*"
+fpdf2 = "*"
 
 [dev-packages]
-ipykernel = "*"
-pytest = "*"
-pylint = "*"
 
 [requires]
 python_version = "3.12"
