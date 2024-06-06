@@ -1,8 +1,9 @@
 {
     "gitdoc.enabled": true,
     "python.testing.pytestArgs": [
-        "week5"
+        "week8"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "python.REPL.enableREPLSmartSend": false
 }
