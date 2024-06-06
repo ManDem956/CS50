@@ -29,7 +29,8 @@ def test_convert(input, expected, expectation):
 
 @pytest.mark.parametrize(
     "input,expected",
-    [(75, "75%"), (33, "33%"), (67, "67%"), (0, "E"), (1, "E"), (100, "F"), (99, "F")],
+    [(75, "75%"), (33, "33%"), (67, "67%"),
+     (0, "E"), (1, "E"), (100, "F"), (99, "F")],
 )
 def test_gauge(input, expected):
     assert gauge(input) == expected
