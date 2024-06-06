@@ -5,9 +5,15 @@ name = "pypi"
 
 [packages]
 pytest = "*"
+tabulate = "*"
+pillow = "*"
+validator-collection = "*"
+fpdf = "*"
+argparse = "*"
 
 [dev-packages]
 ipykernel = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.12"
