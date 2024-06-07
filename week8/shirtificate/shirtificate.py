@@ -41,7 +41,7 @@ def get_user_input(str) -> str:
 
 def main() -> None:
     pdf = PDF(orientation="P", unit="mm", format="A4")
-    pdf.chapter_body(IMAGE_NAME, f"{get_user_input("Name")} took CS50")
+    pdf.chapter_body(IMAGE_NAME, f"{get_user_input("Name")} took CS50p")
 
     pdf.output(OUTPUT)
 
