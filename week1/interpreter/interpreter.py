@@ -1,26 +1,26 @@
-
 def add(a: bool, b: bool) -> bool:
-    return a+b
+    return a + b
 
 
-def substract(a: bool, b: bool) -> bool:
-    return a-b
+def subtract(a: bool, b: bool) -> bool:
+    return a - b
 
 
 def multiply(a: bool, b: bool) -> bool:
-    return a*b
+    return a * b
 
 
 def divide(a: bool, b: bool) -> bool:
     if b == 0:
         raise ValueError("Divider can not be 0")
 
-    return a/b
+    return a / b
 
-CONST_Y_MAP = {"+": add,"-": substract, "*":multiply, "/": divide}
+
+CONST_Y_MAP = {"+": add, "-": subtract, "*": multiply, "/": divide}
 
 if __name__ == "__main__":
     user_input: str = input("Expression: ").strip().lower()
     x, y, z = user_input.split()
 
-    print(CONST_Y_MAP[y](float(x),float(z)))
+    print(CONST_Y_MAP[y](float(x), float(z)))
