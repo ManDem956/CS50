@@ -50,7 +50,7 @@ int main(void)
 
     if (max_score[0] > 0)
     {
-        printf("Player %i wins!\n", max_score[0], max_score[1]);
+        printf("Player %i wins!\n", max_score[0]);
     }
     else
     {
