@@ -33,7 +33,7 @@ def get_user_input(str) -> str:
 def main() -> None:
     input = get_user_input(CONST_USER_PROMPT).lower()
     if input in CONST_FRUIT_MAPPING:
-        print(f"Calories: {CONST_FRUIT_MAPPING.get(input.lower(),"")}")
+        print(f"Calories: {CONST_FRUIT_MAPPING.get(input.lower(), "")}")
 
 
 if __name__ == "__main__":

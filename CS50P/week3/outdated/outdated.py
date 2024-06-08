@@ -27,8 +27,8 @@ def get_us_date_numerical(value: str) -> tuple[str, str, str]:
 
 
 def get_us_date_human(value: str) -> tuple[str, str, str]:
-    monthday, year = (element.strip() for element in value.split(","))
-    month, day = (element.strip() for element in monthday.split())
+    month_day, year = (element.strip() for element in value.split(","))
+    month, day = (element.strip() for element in month_day.split())
 
     month = CONST_MONTHS.index(month.title()) + 1
     if month < 1:
@@ -53,7 +53,7 @@ def get_date_value(value: str) -> tuple[str, str, str]:
     for method in methods:
         try:
             result = method(value)
-        except ValueError as e:
+        except ValueError:
             continue
 
     if result is None:
@@ -67,7 +67,7 @@ def main() -> None:
         try:
             input = get_user_input(CONST_USER_PROMPT)
             result = format_iso_date(*get_date_value(input))
-        except ValueError as e:
+        except ValueError:
             continue
         else:
             print(result)

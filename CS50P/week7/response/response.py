@@ -1,7 +1,4 @@
-from cmath import e
 from validator_collection import validators
-
-REGEX_TIME_12 = r"(\bum\b)"
 
 
 def validate(email: str) -> str:
