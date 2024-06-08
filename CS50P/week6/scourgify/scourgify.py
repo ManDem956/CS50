@@ -3,11 +3,12 @@ import sys
 import argparse
 from pathlib import Path
 import csv
+from typing import NoReturn
 
 OUT_HEADERS = ("first", "last", "house")
 
 
-def convert(in_file_name: str, out_file_name: str) -> NoReturn:
+def convert(in_file_name: str, out_file_name: str) -> None:
     with open(in_file_name) as in_file, open(out_file_name, "w") as out_file:
         reader = csv.reader(in_file)
         next(reader, None)
@@ -31,18 +32,20 @@ def validate(filename: str) -> NoReturn:
 
 
 def main() -> None:
-    # initialise an argparser object with one positional argument to receive a file name from user
-    parser = argparse.ArgumentParser(prog="Lines", description="Count lines in a file")
-    parser.add_argument("infile")
-    parser.add_argument("outfile")
+    # initialise an argparser object with one positional argument to receive
+    # a file name from user
+    parser = argparse.ArgumentParser(prog="Lines",
+                                     description="Count lines in a file")
+    parser.add_argument("in_file")
+    parser.add_argument("out_file")
 
     try:
         args = parser.parse_args()
-        validate(args.infile)
+        validate(args.in_file)
     except SystemExit:
         sys.exit(1)
     else:
-        convert(args.infile, args.outfile)
+        convert(args.in_file, args.out_file)
 
 
 if __name__ == "__main__":

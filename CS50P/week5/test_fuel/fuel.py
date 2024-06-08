@@ -12,7 +12,7 @@ def convert(input: str) -> int:
     dividend, divisor = (int(value) for value in input.split("/"))
 
     if dividend > divisor:
-        raise ValueError(f"Dividend can not be larger than divisor.")
+        raise ValueError("Dividend can not be larger than divisor.")
 
     return round((dividend / divisor) * 100)
 
@@ -30,7 +30,7 @@ def main() -> None:
     while True:
         try:
             result = convert(get_user_input(CONST_USER_PROMPT).lower())
-        except (ValueError, ZeroDivisionError) as e:
+        except (ValueError, ZeroDivisionError):
             continue
         else:
             print(gauge(result))

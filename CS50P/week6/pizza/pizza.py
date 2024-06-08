@@ -2,6 +2,7 @@ import sys
 
 import argparse
 from pathlib import Path
+from typing import NoReturn
 from tabulate import tabulate
 
 
@@ -26,8 +27,10 @@ def validate(filename: str) -> NoReturn:
 
 
 def main() -> None:
-    # initialise an argparser object with one positional argument to receive a file name from user
-    parser = argparse.ArgumentParser(prog="Lines", description="Count lines in a file")
+    # initialise an argparser object with one positional
+    # argument to receive a file name from user
+    parser = argparse.ArgumentParser(prog="Lines",
+                                     description="Count lines in a file")
     parser.add_argument("filename")
     try:
         args = parser.parse_args()

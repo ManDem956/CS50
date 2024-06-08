@@ -7,6 +7,9 @@ name = "pypi"
 fpdf2 = "*"
 inflect = "*"
 requests = "*"
+pyfiglet = "*"
+emoji = "*"
+pytest = "*"
 
 [dev-packages]
 pytest = "*"

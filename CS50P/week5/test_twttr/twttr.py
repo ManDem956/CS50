@@ -1,11 +1,11 @@
 CONST_USER_PROMPT = "Input"
-WOVELS = "aeiou"
+VOWELS = "aeiou"
 
 
 def shorten(word: str) -> str:
     res = ""
     for char in word:
-        if char.lower() not in WOVELS:
+        if char.lower() not in VOWELS:
             res += char
 
     return res
