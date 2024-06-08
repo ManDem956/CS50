@@ -7,7 +7,9 @@
 const string invalid = "INVALID";
 
 string cards[3][2] = {
-    {"^(3[47][0-9]{13})$", "AMEX"}, {"^(5[12345][0-9]{14})$", "MASTERCARD"}, {"^(4[0-9]{12}|4[0-9]{15})$", "VISA"}};
+    {"^(3[47][0-9]{13})$", "AMEX"}, 
+    {"^(5[12345][0-9]{14})$", "MASTERCARD"}, 
+    {"^(4[0-9]{12}|4[0-9]{15})$", "VISA"}};
 
 bool validate_card(string number)
 {
