@@ -6,9 +6,8 @@
 
 const string invalid = "INVALID";
 
-string cards[3][2] = {{"^(3[47][0-9]{13})$", "AMEX"},
-                      {"^(5[12345][0-9]{14})$", "MASTERCARD"},
-                      {"^(4[0-9]{12}|4[0-9]{15})$", "VISA"}};
+string cards[3][2] = {
+    {"^(3[47][0-9]{13})$", "AMEX"}, {"^(5[12345][0-9]{14})$", "MASTERCARD"}, {"^(4[0-9]{12}|4[0-9]{15})$", "VISA"}};
 
 bool validate_card(string number)
 {
@@ -16,7 +15,7 @@ bool validate_card(string number)
     int idx = 1;
     for (int i = strlen(number) - 1; i >= 0; i--)
     {
-        // A cool way to convert char to nymber.
+        // A cool way to convert char to number.
         //  ASCII values of digits are sequential, starting from '0' (48) to '9' (57).
         // So, subtracting the ASCII value of a digit character from '0'
         // will give us its numeric value.
@@ -86,7 +85,7 @@ int main(void)
     do
     {
         number = get_string("Number: ");
-    } 
+    }
     while (!validate_input(regex, number));
 
     printf("%s\n", detect_carrier(number));
