@@ -1,5 +1,4 @@
 import re
-import sys
 
 # REGEXP = r'"(.*)"'
 REGEX_URL = r'src="((.*//)(.*youtube.com)(/embed.*?))"'
