@@ -41,9 +41,7 @@ char *decode(string s, int key)
 
 void do_run(int key)
 {
-    string text = get_string("Text: ");
-
-    printf("plaintext: %s\n", text);
+    string text = get_string("plaintext: ");
     printf("ciphertext: %s\n", encode(text, key));
     printf("decoded: %s\n", decode(encode(text, key), key));
 }
