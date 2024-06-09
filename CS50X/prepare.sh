@@ -21,10 +21,26 @@ MAIN_TEST="
 #include <string.h>
 
 #include \"../src/"$project".h\"
+#include "../unity/src/unity.h"
+
+void test_dummy(void)
+{
+    TEST_ASSERT_EQUAL_STRING("FOLLE", "FOLLE"));
+}
+
+void setUp(void)
+{
+}
+
+void tearDown(void)
+{
+}
 
 int main(int argc, char **argv)
 {
-    return 0;
+    UNITY_BEGIN();
+    RUN_TEST(test_dummy);
+    UNITY_END();
 }
 "
 
@@ -83,8 +99,7 @@ echo "$HEADER" >>src/"$project".h
 
 if [[ "${TESTS}" -eq 1 ]]; then
     mkdir test
-    echo "$MAIN_TEST" >>test/test_"$project".c
+    echo "$MAIN_TEST" >>test/Test_"$project".c
 fi
-
 
 ln -s ~/mine/Unity unity

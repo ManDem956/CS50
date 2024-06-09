@@ -13,6 +13,10 @@ else
 	TARGET_EXTENSION=out
 endif
 
+CD = cd
+
+CHECK50 = check50 cs50/problems/2024/x/
+
 .PHONY: clean
 .PHONY: test
 
@@ -47,6 +51,9 @@ IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 
 %: $(PATHO)%.o #$(PATHD)Test%.d
 	$(LINK)  -o  $@  $^ $(LDLIBS)
+
+validate/%:
+	$(CD) $(PATHS) ; pwd ; $(CHECK50)$(*F)
 
 test: $(BUILD_PATHS) $(RESULTS)
 	@echo "-----------------------\nIGNORES:\n-----------------------"
