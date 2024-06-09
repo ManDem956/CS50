@@ -6,10 +6,9 @@
 
 const string invalid = "INVALID";
 
-string cards[3][2] = {
-    {"^(3[47][0-9]{13})$", "AMEX"}, 
-    {"^(5[12345][0-9]{14})$", "MASTERCARD"}, 
-    {"^(4[0-9]{12}|4[0-9]{15})$", "VISA"}};
+string cards[3][2] = {{"^(3[47][0-9]{13})$", "AMEX"},
+                      {"^(5[12345][0-9]{14})$", "MASTERCARD"},
+                      {"^(4[0-9]{12}|4[0-9]{15})$", "VISA"}};
 
 bool validate_card(string number)
 {
@@ -18,8 +17,8 @@ bool validate_card(string number)
     for (int i = strlen(number) - 1; i >= 0; i--)
     {
         // A cool way to convert char to number.
-        // ASCII values of digits are sequential, starting from '0' (48) to '9' (57).
-        // So, subtracting the ASCII value of a digit character from '0'
+        // ASCII values of digits are sequential, starting from '0' (48) to '9'
+        // (57). So, subtracting the ASCII value of a digit character from '0'
         // will give us its numeric value.
         int digit = number[i] - '0';
         // printf("%d, %d\n", i, idx);
