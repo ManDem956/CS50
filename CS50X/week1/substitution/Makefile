@@ -16,6 +16,7 @@ endif
 CD = cd
 
 CHECK50 = check50 cs50/problems/2024/x/
+CTYLE50 = style50 -o split
 
 .PHONY: clean
 .PHONY: test
@@ -54,7 +55,7 @@ IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 
 validate/%:
 	$(CD) $(PATHS) ; pwd ; $(CHECK50)$(*F)
-
+	$(CD) $(PATHS) ; pwd ; $(CTYLE50) $(*F).c
 test: $(BUILD_PATHS) $(RESULTS)
 	@echo "-----------------------\nIGNORES:\n-----------------------"
 	@echo "$(IGNORE)"
