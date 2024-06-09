@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// const string REG_WORDS = "[[a-zA-Z0-9]'-]*[\\,.!?:;\\)]?";
 const string REG_WORDS = "[a-z0-9-]+[^ \n\r]*[a-z0-9-]*";
 const string REG_LETTERS = "[a-z0-9]+";
 const string REG_SENTENCES = "[.!?]";
@@ -52,6 +51,14 @@ void stats(string pattern, string text, int cflags, int *buff)
     match(regex, text, buff);
 }
 
+int getAStat(string regex_expr, string text, int idx)
+{
+    int match_stats[] = {0, 0};
+
+    stats(regex_expr, text, REG_EXTENDED | REG_ICASE, match_stats);
+    return match_stats[idx];
+}
+
 int calculate(int wordCount, int letterCount, int sentenceCount)
 {
     float letterPerWords = ((float) letterCount / (float) wordCount) * 100;
@@ -69,18 +76,9 @@ int main(void)
 {
     string text = get_string("Text: ");
 
-    int match_stats[] = {0, 0};
-
-    stats(REG_WORDS, text, REG_EXTENDED | REG_ICASE, match_stats);
-    int wordCount = match_stats[0];
-
-    match_stats[0] = match_stats[1] = 0;
-    stats(REG_LETTERS, text, REG_EXTENDED | REG_ICASE, match_stats);
-    int letterCount = match_stats[1];
-
-    match_stats[0] = match_stats[1] = 0;
-    stats(REG_SENTENCES, text, REG_EXTENDED | REG_ICASE, match_stats);
-    int sentenceCount = match_stats[0];
+    int wordCount = getAStat(REG_WORDS, text, 0);
+    int letterCount = getAStat(REG_LETTERS, text, 1);
+    int sentenceCount = getAStat(REG_SENTENCES, text, 0);
 
     int CLI = calculate(wordCount, letterCount, sentenceCount);
 
