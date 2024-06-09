@@ -8,6 +8,7 @@
 !*/
 !Makefile
 
+build
 
 !*.c
 # Prerequisites
@@ -62,7 +63,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-
 
 .vscode/*
 # !.vscode/settings.json
