@@ -67,13 +67,13 @@ $(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)%.o $(PATHO)unity.o #
 	$(LINK)  -o  $@  $^ $(LDLIBS)
 
 $(PATHO)%.o:: $(PATHT)%.c
-	$(COMPILE) $(CFLAGS) $< -o $@ 
+	$(COMPILE) $(CFLAGS) $< -o $@ $(LDLIBS)
 
 $(PATHO)%.o:: $(PATHS)%.c 
 	$(COMPILE) $(CFLAGS) $< -o $@ $(LDLIBS)
 
 $(PATHO)%.o:: $(PATHU)%.c $(PATHU)%.h
-	$(COMPILE) $(CFLAGS) $< -o $@ 
+	$(COMPILE) $(CFLAGS) $< -o $@ $(LDLIBS)
 
 $(PATHD)%.d:: $(PATHT)%.c
 	$(DEPEND) $@ $<
