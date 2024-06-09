@@ -3,17 +3,44 @@
 OPTIND=3
 project=$2
 path=$1/$project
-MAIN="""
+h_header="${project^^}_H"
+
+MAIN="
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+
 int main(int argc, char **argv)
 {
     return 0;
 }
+"
+MAIN_TEST="
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
 
-"""
+#include \"../src/"$project".h\"
 
-show_help()
+int main(int argc, char **argv)
 {
-echo "
+    return 0;
+}
+"
+
+HEADER="
+#ifndef ${h_header}
+#define ${h_header}
+
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+
+#endif //${h_header}
+"
+
+show_help() {
+    echo "
         Usage: <project_name> [-t]
 
         -t  Create tests
@@ -23,35 +50,41 @@ echo "
 
 while getopts "trh" FLAG; do
     case "$FLAG" in
-        t) TESTS=1;;
-        r) CLEANUP=1 ;;
-        h) show_help; exit 1;;
-        *) show_help; exit 1;;
+    t) TESTS=1 ;;
+    r) CLEANUP=1 ;;
+    h)
+        show_help
+        exit 1
+        ;;
+    *)
+        show_help
+        exit 1
+        ;;
     esac
 done
 
-
 pwd
 
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 if [[ "${CLEANUP}" -eq 1 ]]; then
     rm -rf $path
 fi
 
-mkdir $path && cp Makefile.template "$_"/Makefile 
+mkdir $path && cp Makefile "$_"/Makefile
 
-cd "$path" || { echo "Error xyz"; exit 1; }
+cd "$path" || {
+    echo "Error xyz"
+    exit 1
+}
+mkdir src
 
-echo "$MAIN" >>  "$project".c
+echo "$MAIN" >>src/"$project".c
+echo "$HEADER" >>src/"$project".h
 
 if [[ "${TESTS}" -eq 1 ]]; then
-    echo "$MAIN" >> test_"$project".c
+    mkdir test
+    echo "$MAIN_TEST" >>test/test_"$project".c
 fi
 
-IFS=,
 
-files=(*.c)
-
-echo "${files[@]}"
-
-sed -i 's/@PROJECT@/'"${project}"'/g' Makefile 
+ln -s ~/mine/Unity unity
