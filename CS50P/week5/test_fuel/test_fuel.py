@@ -34,3 +34,7 @@ def test_convert(input, expected, expectation):
 )
 def test_gauge(input, expected):
     assert gauge(input) == expected
+
+
+if __name__ == "__main__":
+    pytest.main(["."])

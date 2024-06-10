@@ -9,6 +9,8 @@ from plates import is_valid
                           ("50", False),
                           ("CS50P2", False),
                           ("PI3.14", False),
+                          ("@#$!%^", False),
+                          ("BGH2!", False),
                           ("H", False),
                           ("OUTATIME", False),
                           ("NRVOUS", True)])
