@@ -5,7 +5,6 @@ datapath=$1
 path='times'
 outfile="$path/out.csv"
 
-
 show_help() {
     echo "
         Usage: <executable name> <file name> [-r]        
@@ -38,23 +37,30 @@ if [[ "${CLEANUP}" -eq 1 ]]; then
     mkdir $path
 fi
 
-echo "$RUNS"
-
+# echo "$RUNS"
+# HEADER=0
 for exec in ./sort*; do
-    echo "Algoritm|Distribution|Size|Elapsed real (s)|CPU%|Mem(KB)|Exit code">> $outfile
     for filename in "$datapath"/*.txt; do
-        COMMAND=("$exec" "$filename")
 
-        echo "Runnig '${COMMAND[*]}' $RUNS times..."
         outfilename=${filename##*/}
         outfilename=${outfilename%.txt}
         outfile="$path/out_${exec##*/}.csv"
-        
+        if [[ -z "${HEADER}" ]]; then
+            HEADER=1
+            echo "Writing header"
+            echo "Algoritm|Distribution|Size|Elapsed real (s)|CPU%|Mem(KB)|Exit code" >>"$outfile"
+        fi
+        shopt -s extglob
+        COMMAND=("$exec" "$filename")
+        echo "Runnig '${COMMAND[*]}' $RUNS times..."
+        # echo ${outfilename##+([a-z])}
 
-        for ((i = 1; i <= RUNS; i++)); do          
-            echo "Run ${i}/$RUNS"
-            /usr/bin/time -o "$outfile" -a -f "${exec##*/}|${outfilename/-/|}|%e|%P|%k|%x" "${COMMAND[@]}" >/dev/null 2>&1
+        for ((i = 1; i <= RUNS; i++)); do
+            echo -ne "Run ${i}/$RUNS"\\r
+            /usr/bin/time -o "$outfile" -a -f "${exec##*/}|${outfilename%%+([0-9])}|${outfilename##+([a-z])}|%e|%P|%k|%x" "${COMMAND[@]}" >/dev/null 2>&1
             # sleep 10
         done
+
+        shopt -u extglob
     done
 done
