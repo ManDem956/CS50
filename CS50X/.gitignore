@@ -11,6 +11,7 @@
 build
 data*
 *.zip
+out.csv
 
 !*.c
 # Prerequisites
