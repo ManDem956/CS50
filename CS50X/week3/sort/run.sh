@@ -12,10 +12,11 @@ show_help() {
 "
 }
 
-while getopts "rhR:" FLAG; do
+while getopts "rnhR:" FLAG; do
     case "$FLAG" in
     R) RUNS="$OPTARG" ;;
     r) CLEANUP=1 ;;
+    n) DEVNULL=1 ;;
     h)
         show_help
         exit 1
@@ -31,14 +32,20 @@ RUNS="${RUNS:-20}"
 
 shift $((OPTIND - 1))
 
+redirect_cmd() {
+    if [ -n "$DEVNULL" ]; then
+        "$@" >/dev/null
+    else
+        "$@"
+    fi
+}
+
 if [[ "${CLEANUP}" -eq 1 ]]; then
     echo "Cleaning up"
     rm -rf $path
     mkdir $path
 fi
 
-# echo "$RUNS"
-# HEADER=0
 for exec in ./sort*; do
     for filename in "$datapath"/*.txt; do
 
@@ -50,15 +57,18 @@ for exec in ./sort*; do
             echo "Writing header"
             echo "Algoritm|Distribution|Size|Elapsed real (s)|CPU%|Mem(KB)|Exit code" >>"$outfile"
         fi
-        shopt -s extglob
+
         COMMAND=("$exec" "$filename")
+
         echo "Runnig '${COMMAND[*]}' $RUNS times..."
-        # echo ${outfilename##+([a-z])}
 
         for ((i = 1; i <= RUNS; i++)); do
             echo -ne "Run ${i}/$RUNS"\\r
-            /usr/bin/time -o "$outfile" -a -f "${exec##*/}|${outfilename%%+([0-9])}|${outfilename##+([a-z])}|%e|%P|%k|%x" "${COMMAND[@]}" >/dev/null 2>&1
-            # sleep 10
+            # set -x
+            shopt -s extglob
+            redirect_cmd /usr/bin/time -o "$outfile" -a -f "${exec##*/}|${outfilename%%+([0-9])}|${outfilename##+([a-z])}|%e|%P|%k|%x" "${COMMAND[@]}"
+            shopt -u extglob
+            # set +x
         done
 
         shopt -u extglob
