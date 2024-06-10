@@ -7,7 +7,7 @@ outfile="$path/out.csv"
 
 show_help() {
     echo "
-        Usage: <executable name> <file name> [-r]        
+        Usage: <executable name> <file name> [-r]
         -r  Clenup
 "
 }
