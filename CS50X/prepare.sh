@@ -20,12 +20,12 @@ MAIN_TEST="
 #include <stdio.h>
 #include <string.h>
 
-#include \"../src/"$project".h\"
-#include "../unity/src/unity.h"
+#include \"../src/$project.h\"
+#include \"../unity/src/unity.h\"
 
 void test_dummy(void)
 {
-    TEST_ASSERT_EQUAL_STRING("FOLLE", "FOLLE"));
+    TEST_ASSERT_EQUAL_STRING(\"FOLLE\", \"FOLLE\"));
 }
 
 void setUp(void)
@@ -83,10 +83,10 @@ pwd
 
 shift $((OPTIND - 1))
 if [[ "${CLEANUP}" -eq 1 ]]; then
-    rm -rf $path
+    rm -rf "$path"
 fi
 
-mkdir $path && cp Makefile "$_"/Makefile
+mkdir "$path" && cp Makefile "$_"/Makefile
 
 cd "$path" || {
     echo "Error xyz"
