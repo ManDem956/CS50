@@ -31,7 +31,7 @@ def write_file(size: int, the_list: Iterable, name) -> None:
 
 def main() -> None:
 
-    for i in range(6):
+    for i in range(7):
         gen_data((2 ** i) * BASE, 1234)
 
 
