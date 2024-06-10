@@ -9,6 +9,7 @@
 !Makefile
 
 build
+data*
 
 !*.c
 # Prerequisites
