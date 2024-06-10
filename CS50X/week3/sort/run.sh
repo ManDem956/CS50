@@ -40,15 +40,21 @@ fi
 
 echo "$RUNS"
 
-echo "command|Elapsed real (s)|CPU%">> $outfile
 for exec in ./sort*; do
+    echo "Algoritm|Distribution|Size|Elapsed real (s)|CPU%|Mem(KB)|Exit code">> $outfile
     for filename in "$datapath"/*.txt; do
         COMMAND=("$exec" "$filename")
 
         echo "Runnig '${COMMAND[*]}' $RUNS times..."
+        outfilename=${filename##*/}
+        outfilename=${outfilename%.txt}
+        outfile="$path/out_${exec##*/}.csv"
+        
 
-        for ((i = 1; i <= RUNS; i++)); do
-            /usr/bin/time -o $outfile -a -f "'%C'|%e|%P" "${COMMAND[@]}" >/dev/null 2>&1
+        for ((i = 1; i <= RUNS; i++)); do          
+            echo "Run ${i}/$RUNS"
+            /usr/bin/time -o "$outfile" -a -f "${exec##*/}|${outfilename/-/|}|%e|%P|%k|%x" "${COMMAND[@]}" >/dev/null 2>&1
+            # sleep 10
         done
     done
 done

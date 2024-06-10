@@ -1,0 +1,30 @@
+sort1 uses: Bubble sort
+
+How do you know?:   The huge difference between O(n^2) and Omega (N), 
+                    or in perfromance between rendom and sorted lists suggests 
+                    this is the bubble sort. 
+                    Run time increases on lager data sets also support this assumption:
+
+                    Size	random	    reversed	sorted
+                    4000	0.01	    0.02	0
+                    8000	0.06	    0.08	0
+                    16000	0.3	0.35	0
+                    32000	1.455	    1.45	    0
+                    64000	6.99	    5.815	    0.01
+
+sort2 uses: Merge Sort
+
+How do you know?:   Difference wetween random, reversed and sorted lists is negligable. 
+                    So is the time increase with data set increase. 
+                    This correspods well with O(NlogN) and Omega NlogN time complexities of the Merge sort algorithm.
+                    random	    0	0	0.01
+                    reversed	0	0	0.01
+                    sorted	    0	0	0.0102
+
+sort3 uses: Selection Sort
+
+How do you know?:   The simirities in runtimes between random, srevertsed and sorted suggest that the O(N^2) as well 
+                    as big omega (N^2) time complexities. This seems to be the Selectin sort algorithm.
+                    random	    0.0108	0.0504	1.2458
+                    reversed	0.01	0.0592	1.5196
+                    sorted	    0.0104	0.056	1.3542
