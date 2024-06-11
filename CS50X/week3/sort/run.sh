@@ -2,7 +2,6 @@
 
 OPTIND=2
 datapath=$1
-path='times'
 outfile="$path/out.csv"
 
 show_help() {
@@ -12,11 +11,12 @@ show_help() {
 "
 }
 
-while getopts "rnhR:" FLAG; do
+while getopts "rnhR:o:" FLAG; do
     case "$FLAG" in
     R) RUNS="$OPTARG" ;;
     r) CLEANUP=1 ;;
     n) DEVNULL=1 ;;
+    o) path="$OPTARG" ;;
     h)
         show_help
         exit 1
@@ -29,6 +29,7 @@ while getopts "rnhR:" FLAG; do
 done
 
 RUNS="${RUNS:-20}"
+path=${path:-times}
 
 shift $((OPTIND - 1))
 
