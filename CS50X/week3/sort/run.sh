@@ -55,13 +55,13 @@ for exec in ./sort*; do
         outfile="$path/out_${exec##*/}.csv"
         if [[ -z "${HEADER}" ]]; then
             HEADER=1
-            echo "Writing header"
+            echo "Writing header to $outfile"
             echo "Algoritm|Distribution|Size|Elapsed real (s)|CPU%|Mem(KB)|Exit code" >>"$outfile"
         fi
 
         COMMAND=("$exec" "$filename")
 
-        echo "Runnig '${COMMAND[*]}' $RUNS times..."
+        echo "Timing '${COMMAND[*]}' $RUNS times..."
 
         for ((i = 1; i <= RUNS; i++)); do
             echo -ne "Run ${i}/$RUNS"\\r
@@ -74,4 +74,5 @@ for exec in ./sort*; do
 
         shopt -u extglob
     done
+    unset HEADER
 done
