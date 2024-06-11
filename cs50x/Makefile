@@ -35,7 +35,7 @@ SRCT = $(wildcard $(PATHT)*.c)
 COMPILE=gcc -c
 LINK=gcc
 DEPEND=gcc -MM -MG -MF 
-CFLAGS=-I. -I$(PATHU) -I$(PATHS) -DTEST
+CFLAGS=-I. -I$(PATHU) -I$(PATHS)
 
 # from CS50
 LDLIBS = -lcrypt -lcs50 -lm
@@ -55,6 +55,7 @@ IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 validate/%:
 	$(CD) $(PATHS) ; pwd ; $(CHECK50)$(*F)
 
+test: CFLAGS += -DTEST
 test: $(BUILD_PATHS) $(RESULTS)
 	@echo "-----------------------\nIGNORES:\n-----------------------"
 	@echo "$(IGNORE)"
