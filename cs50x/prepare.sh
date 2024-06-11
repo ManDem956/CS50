@@ -57,6 +57,10 @@ HEADER="
 #endif //${h_header}
 "
 
+GITIGNORE="
+Makefile
+"
+
 show_help() {
     echo "
         Usage: <project_name> [-t]
@@ -98,6 +102,7 @@ mkdir src
 
 echo "$MAIN" >>src/"$project".c
 echo "$HEADER" >>src/"$project".h
+echo "$GITIGNORE" >>.gitignore
 
 if [[ "${TESTS}" -eq 1 ]]; then
     mkdir test
