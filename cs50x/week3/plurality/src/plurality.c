@@ -22,6 +22,7 @@ int candidate_count;
 bool vote(string name);
 void print_winner(void);
 
+#ifndef TEST
 int main(int argc, string argv[])
 {
     // Check for invalid usage
@@ -61,6 +62,7 @@ int main(int argc, string argv[])
     // Display winner of election
     print_winner();
 }
+#endif
 
 // Update vote totals given a new vote
 bool vote(string name)
