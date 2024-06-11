@@ -135,8 +135,11 @@ bool vote(int voter, int rank, string name)
             // prevent from voting for the same candidate twice in one
             // ballot
             for (int idx_rank = 0; idx_rank < rank; idx_rank++)
-                if (strcmp(candidates[preferences[voter][idx_rank]].name, name) == 0)
+            {
+                int idx_candidate = preferences[voter][idx_rank];
+                if (strcmp(candidates[idx_candidate].name, name) == 0)
                     return false;
+            }
             preferences[voter][rank] = idx_candidate;
             return true;
         }
@@ -187,7 +190,7 @@ int find_min(void)
     int result = INT_MAX;
     for (int idx_candidate = 0; idx_candidate < candidate_count; idx_candidate++)
     {
-        if (candidates[idx_candidate].eliminated == false)
+        if (!candidates[idx_candidate].eliminated)
         {
             if (result > candidates[idx_candidate].votes)
                 result = candidates[idx_candidate].votes;
