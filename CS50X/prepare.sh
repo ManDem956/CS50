@@ -99,7 +99,7 @@ echo "$HEADER" >>src/"$project".h
 
 if [[ "${TESTS}" -eq 1 ]]; then
     mkdir test
-    echo "$MAIN_TEST" >>test/Test_"$project".c
+    echo "$MAIN_TEST" >>test/Test"$project".c
 fi
 
 ln -s ~/mine/Unity unity
