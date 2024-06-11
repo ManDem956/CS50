@@ -56,7 +56,7 @@ for exec in ./sort*; do
         if [[ -z "${HEADER}" ]]; then
             HEADER=1
             echo "Writing header to $outfile"
-            echo "Algorithm|Distribution|Size|Elapsed real (s)|CPU%|Mem(KB)|Exit code" >>"$outfile"
+            echo "Algorithm|Distribution|Size|Time (s)|CPU%" >>"$outfile"
         fi
 
         COMMAND=("$exec" "$filename")
@@ -67,7 +67,7 @@ for exec in ./sort*; do
             echo -ne "Run ${i}/$RUNS"\\r
             # set -x
             shopt -s extglob
-            redirect_cmd /usr/bin/time -o "$outfile" -a -f "${exec##*/}|${outfilename%%+([0-9])}|${outfilename##+([a-z])}|%e|%P|%k|%x" "${COMMAND[@]}"
+            redirect_cmd /usr/bin/time -o "$outfile" -a -f "${exec##*/}|${outfilename%%+([0-9])}|${outfilename##+([a-z])}|%e|%P" "${COMMAND[@]}"
             shopt -u extglob
             # set +x
         done
