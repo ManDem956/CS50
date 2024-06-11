@@ -19,7 +19,7 @@ def gen_data(size: int, seed: int) -> None:
 
 
 def write_file(size: int, the_list: Iterable, name) -> None:
-    filename =f"{path}/{name}-{size:>06}.txt" 
+    filename = f"{path}/{name}-{size:>06}.txt"
     print(f"Writing {filename}")
     with open(filename, "w") as csvfile:
         sortwriter = csv.writer(
@@ -32,7 +32,7 @@ def write_file(size: int, the_list: Iterable, name) -> None:
 def main() -> None:
 
     for i in range(7):
-        gen_data((2 ** i) * BASE, 1234)
+        gen_data((2**i) * BASE, 1234)
 
 
 if __name__ == "__main__":
