@@ -39,7 +39,7 @@ DEPEND=gcc -MM -MG -MF
 CFLAGS=-I. -I$(PATHU) -I$(PATHS)
 
 # from CS50
-LDLIBS = -lcrypt -lcs50 -lm
+CS50LIBS = -lcrypt -lcs50 -lm
 
 RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT) )
 
@@ -51,7 +51,7 @@ IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 
 
 %: $(PATHO)%.o #$(PATHD)Test%.d
-	$(LINK)  -o  $@  $^ $(LDLIBS)
+	$(LINK)  -o  $@  $^ $(CS50LIBS)
 
 validate/%:
 	$(CD) $(PATHS) ; pwd ; $(CHECK50)$(*F); $(STYLE50) $(*F).c
@@ -70,19 +70,19 @@ $(PATHR)%.txt: $(PATHB)%.$(TARGET_EXTENSION)
 	-./$< > $@ 2>&1
 
 $(PATHB)%.$(TARGET_EXTENSION): $(PATHO)%.o #$(PATHD)Test%.d
-	$(LINK)  -o  $@  $^ $(LDLIBS)
+	$(LINK)  -o  $@  $^ $(CS50LIBS)
 
 $(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)%.o $(PATHO)unity.o #$(PATHD)Test%.d
-	$(LINK)  -o  $@  $^ $(LDLIBS)
+	$(LINK)  -o  $@  $^ $(CS50LIBS)
 
 $(PATHO)%.o:: $(PATHT)%.c
-	$(COMPILE) $(CFLAGS) $< -o $@ $(LDLIBS)
+	$(COMPILE) $(CFLAGS) $< -o $@ $(CS50LIBS)
 
 $(PATHO)%.o:: $(PATHS)%.c 
-	$(COMPILE) $(CFLAGS) $< -o $@ $(LDLIBS)
+	$(COMPILE) $(CFLAGS) $< -o $@ $(CS50LIBS)
 
 $(PATHO)%.o:: $(PATHU)%.c $(PATHU)%.h	
-	$(COMPILE) $(CFLAGS) $< -o $@ $(LDLIBS)
+	$(COMPILE) $(CFLAGS) $< -o $@ $(CS50LIBS)
 
 $(PATHD)%.d:: $(PATHT)%.c
 	$(DEPEND) $@ $<
