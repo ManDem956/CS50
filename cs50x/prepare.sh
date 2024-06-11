@@ -2,64 +2,6 @@
 
 OPTIND=3
 project=$2
-path=$1/$project
-h_header="${project^^}_H"
-
-MAIN="
-#include <cs50.h>
-#include <stdio.h>
-#include <string.h>
-
-#ifndef TEST
-int main(int argc, char **argv)
-{
-    return 0;
-}
-#endif
-"
-MAIN_TEST="
-#include <cs50.h>
-#include <stdio.h>
-#include <string.h>
-
-#include \"../src/$project.h\"
-#include \"../unity/src/unity.h\"
-
-void test_dummy(void)
-{
-    TEST_ASSERT_EQUAL_STRING(\"FOLLE\", \"FOLLE\"));
-}
-
-void setUp(void)
-{
-}
-
-void tearDown(void)
-{
-}
-
-int main(int argc, char **argv)
-{
-    UNITY_BEGIN();
-    RUN_TEST(test_dummy);
-    UNITY_END();
-}
-"
-
-HEADER="
-#ifndef ${h_header}
-#define ${h_header}
-
-#include <cs50.h>
-#include <stdio.h>
-#include <string.h>
-
-#endif //${h_header}
-"
-
-GITIGNORE="
-Makefile
-"
 
 show_help() {
     echo "
@@ -70,10 +12,12 @@ show_help() {
 "
 }
 
-while getopts "trh" FLAG; do
+
+while getopts "trhd:" FLAG; do
     case "$FLAG" in
     t) TESTS=1 ;;
     r) CLEANUP=1 ;;
+    d) project_dir=$OPTARG ;;
     h)
         show_help
         exit 1
@@ -86,27 +30,24 @@ while getopts "trh" FLAG; do
 done
 
 pwd
+project_dir=${project_dir:-$project}
+path=$1/$project_dir
 
 shift $((OPTIND - 1))
 if [[ "${CLEANUP}" -eq 1 ]]; then
     rm -rf "$path"
 fi
 
-mkdir "$path" && cp Makefile "$_"/Makefile
+mkdir "$path" && cp Makefile.template "$_"/Makefile
 
-cd "$path" || {
-    echo "Error xyz"
-    exit 1
-}
-mkdir src
+cp -rf .template/src "$path"/src
+for f in "$path"/src/*; do mv "$f" "${f/template/$project}"; done
 
-echo "$MAIN" >>src/"$project".c
-echo "$HEADER" >>src/"$project".h
-echo "$GITIGNORE" >>.gitignore
 
 if [[ "${TESTS}" -eq 1 ]]; then
-    mkdir test
-    echo "$MAIN_TEST" >>test/Test"$project".c
+    cp -r .template/test "$path"/test
+    for f in "$path"/test/*; do mv "$f" "${f/template/$project}"; done
+    sed -i -e "s/template/$project/g" "$path"/test/*
 fi
 
-ln -s ~/mine/Unity unity
+ln -s ~/mine/Unity "$path"/unity
