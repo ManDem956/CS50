@@ -71,8 +71,6 @@ for exec in ./sort*; do
             shopt -u extglob
             # set +x
         done
-
-        shopt -u extglob
     done
     unset HEADER
 done
