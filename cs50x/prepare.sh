@@ -10,10 +10,12 @@ MAIN="
 #include <stdio.h>
 #include <string.h>
 
+#ifndef TEST
 int main(int argc, char **argv)
 {
     return 0;
 }
+#endif
 "
 MAIN_TEST="
 #include <cs50.h>
