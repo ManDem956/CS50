@@ -56,7 +56,7 @@ for exec in ./sort*; do
         if [[ -z "${HEADER}" ]]; then
             HEADER=1
             echo "Writing header to $outfile"
-            echo "Algoritm|Distribution|Size|Elapsed real (s)|CPU%|Mem(KB)|Exit code" >>"$outfile"
+            echo "Algorithm|Distribution|Size|Elapsed real (s)|CPU%|Mem(KB)|Exit code" >>"$outfile"
         fi
 
         COMMAND=("$exec" "$filename")
