@@ -16,6 +16,7 @@ endif
 CD = cd
 
 CHECK50 = check50 cs50/problems/2024/x/
+STYLE50 = style50
 
 .PHONY: clean
 .PHONY: test
@@ -53,7 +54,7 @@ IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 	$(LINK)  -o  $@  $^ $(LDLIBS)
 
 validate/%:
-	$(CD) $(PATHS) ; pwd ; $(CHECK50)$(*F)
+	$(CD) $(PATHS) ; pwd ; $(CHECK50)$(*F); $(STYLE50) $(*F).c
 
 test: CFLAGS += -DTEST
 test: $(BUILD_PATHS) $(RESULTS)
@@ -80,7 +81,7 @@ $(PATHO)%.o:: $(PATHT)%.c
 $(PATHO)%.o:: $(PATHS)%.c 
 	$(COMPILE) $(CFLAGS) $< -o $@ $(LDLIBS)
 
-$(PATHO)%.o:: $(PATHU)%.c $(PATHU)%.h
+$(PATHO)%.o:: $(PATHU)%.c $(PATHU)%.h	
 	$(COMPILE) $(CFLAGS) $< -o $@ $(LDLIBS)
 
 $(PATHD)%.d:: $(PATHT)%.c
