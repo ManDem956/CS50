@@ -42,12 +42,14 @@ mkdir "$path" && cp Makefile.template "$_"/Makefile
 
 cp -rf .template/src "$path"/src
 for f in "$path"/src/*; do mv "$f" "${f/template/$project}"; done
-
+sed -i -e "s/template/$project/g" "$path"/src/*
+sed -i -e "s/TEMPLATE/${project^^}/g" "${path}"/src/*
 
 if [[ "${TESTS}" -eq 1 ]]; then
     cp -r .template/test "$path"/test
     for f in "$path"/test/*; do mv "$f" "${f/template/$project}"; done
     sed -i -e "s/template/$project/g" "$path"/test/*
+    sed -i -e "s/TEMPLATE/${project^^}/g" "${path}"/test/*
 fi
 
-ln -s ~/mine/Unity "$path"/unity
+ln -s ~/mine/unity "$path"/unity

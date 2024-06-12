@@ -1,10 +1,10 @@
 
-#ifndef RUNOFF_H
-#define RUNOFF_H
+#ifndef TEMPLATE_H
+#define TEMPLATE_H
 
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
 
-#endif //RUNOFF_H
+#endif //TEMPLATE_H
 
