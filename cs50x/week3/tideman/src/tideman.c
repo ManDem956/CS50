@@ -2,12 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifdef TEST
-
-#include "tideman.h"
-
-#endif
-
 // Max number of candidates
 #define MAX 9
 
@@ -31,7 +25,6 @@ pair pairs[MAX * (MAX - 1) / 2];
 int pair_count;
 int candidate_count;
 
-#ifndef TEST
 // Function prototypes
 bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
@@ -39,9 +32,7 @@ void add_pairs(void);
 void sort_pairs(void);
 void lock_pairs(void);
 void print_winner(void);
-#endif
 
-#ifndef TEST
 int main(int argc, string argv[])
 {
     // Check for invalid usage
@@ -104,7 +95,6 @@ int main(int argc, string argv[])
     print_winner();
     return 0;
 }
-#endif
 
 // Update ranks given a new vote
 bool vote(int rank, string name, int ranks[])
@@ -125,7 +115,7 @@ void record_preferences(int ranks[])
 {
     for (int idx_winner = 0; idx_winner < (candidate_count - 1); idx_winner++)
     {
-        for (int idx_loser = idx_winner+1; idx_loser < candidate_count; idx_loser++)
+        for (int idx_loser = idx_winner + 1; idx_loser < candidate_count; idx_loser++)
         {
             int winner = ranks[idx_winner];
             int loser = ranks[idx_loser];
@@ -152,10 +142,10 @@ void add_pairs(void)
                 }
                 else
                 {
-                    pairs[pair_count].winner = idx_left;
-                    pairs[pair_count].loser = idx_right;
+                    pairs[pair_count].winner = idx_right;
+                    pairs[pair_count].loser = idx_left;
                 }
-                pair_count+=1;
+                pair_count += 1;
             }
         }
     }
@@ -164,20 +154,80 @@ void add_pairs(void)
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    // TODO
-    return;
+    bool swapped;
+    do
+    {
+        int idx = pair_count - 1;
+        swapped = false;
+        while (idx > 0)
+        {
+            if (preferences[pairs[idx - 1].winner][pairs[idx - 1].loser] <
+                preferences[pairs[idx].winner][pairs[idx].loser])
+            {
+                pair temp = pairs[idx - 1];
+                pairs[idx - 1] = pairs[idx];
+                pairs[idx] = temp;
+                swapped = true;
+            }
+            idx -= 1;
+        }
+    }
+    while (swapped);
+}
+
+int is_a_path(int winner, int loser)
+{
+    if (locked[winner][loser])
+    {
+        return true;
+    }
+
+    for (int idx_cnd = 0; idx_cnd < candidate_count; idx_cnd++)
+    {
+        if ((locked[winner][idx_cnd]) && is_a_path(idx_cnd, loser))
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
-    // TODO
-    return;
+    for (int idx_pair = 0; idx_pair < pair_count; idx_pair++)
+    {
+        int winner = pairs[idx_pair].winner;
+        int loser = pairs[idx_pair].loser;
+        locked[winner][loser] = !is_a_path(loser, winner);
+    }
+}
+
+string get_winner()
+{
+    for (int idx_win_cndt = 0; idx_win_cndt < candidate_count; idx_win_cndt++)
+    {
+        // check if the second loop uncovers a winner over current candidate
+        // if it is not than this is the root node
+        bool winner = true;
+        for (int idx_winner = 0; idx_winner < candidate_count; idx_winner++)
+        {
+            if (locked[idx_winner][idx_win_cndt])
+            {
+                winner = false;
+            }
+        }
+        if (winner)
+        {
+            return candidates[idx_win_cndt];
+        }
+    }
+    return NULL;
 }
 
 // Print the winner of the election
 void print_winner(void)
 {
-    // TODO
-    return;
+    printf("%s\n", get_winner());
 }

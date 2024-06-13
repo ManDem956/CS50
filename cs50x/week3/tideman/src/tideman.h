@@ -8,12 +8,11 @@
 
 #define MAX 9
 
-
 // preferences[i][j] is number of voters who prefer i over j
 extern int preferences[MAX][MAX];
 
 // locked[i][j] means i is locked in over j
-// extern bool locked[][];
+extern bool locked[MAX][MAX];
 
 // Array of candidates
 extern string candidates[MAX];
@@ -28,6 +27,6 @@ void add_pairs(void);
 void sort_pairs(void);
 void lock_pairs(void);
 void print_winner(void);
+string get_winner();
 
-#endif //TIDEMAN_H
-
+#endif // TIDEMAN_H
