@@ -6,13 +6,13 @@
 
 # Unignore all dirs
 !*/
-!Makefile
+!Makefile*.*
+!*.template
 
 build
 data*
 *.zip
 *.csv
-
 
 !*.c
 # Prerequisites
