@@ -23,7 +23,7 @@ STYLE50 = style50
 .PHONY: clean
 .PHONY: test
 .PHONY: %
-
+.PHONY: run
 
 PATHU = unity/src/
 PATHS = src/
@@ -53,13 +53,17 @@ CFLAGS=-I. -I$(PATHU) -I$(PATHS)
 CS50LIBS = -lcrypt -lcs50 -lm
 
 RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT) )
+RUNPATHS = $(patsubst $(PATHT)Test%.c,$(PATHB)%,$(SRCT) )
 
 PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL = `grep -s FAIL $(PATHR)*.txt`
 IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 
+run: $(RUNPATHS)
+	./$< "$(ARGS[@])"
+
 %: $(PATHB)% #$(PATHD)Test%.d
-	
+	@echo
 
 validate/%:
 	$(CD) $(PATHS) ; pwd ; $(CHECK50)$(*F); $(STYLE50) $(*F).c
