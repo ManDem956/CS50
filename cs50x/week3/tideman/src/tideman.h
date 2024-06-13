@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
+// Max number of candidates
 #define MAX 9
 
 // preferences[i][j] is number of voters who prefer i over j

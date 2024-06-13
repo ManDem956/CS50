@@ -3,23 +3,27 @@ ifeq ($(OS),Windows_NT)
 	CLEANUP = del /F /Q
 	MKDIR = mkdir
   else # in a bash-like shell, like msys
-	CLEANUP = rm -f
+	CLEANUP = rm -rf
 	MKDIR = mkdir -p
   endif
 	TARGET_EXTENSION=exe
 else
-	CLEANUP = rm -f
+	CLEANUP = rm -rf
 	MKDIR = mkdir -p
 	TARGET_EXTENSION=out
 endif
 
 CD = cd
 
+.SECONDARY:
+
 CHECK50 = check50 cs50/problems/2024/x/
 STYLE50 = style50
 
 .PHONY: clean
 .PHONY: test
+.PHONY: %
+
 
 PATHU = unity/src/
 PATHS = src/
@@ -54,8 +58,8 @@ PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL = `grep -s FAIL $(PATHR)*.txt`
 IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 
-%: $(PATHO)%.o #$(PATHD)Test%.d
-	$(LINK)  -o  $@  $^ $(CS50LIBS)
+%: $(PATHB)% #$(PATHD)Test%.d
+	
 
 validate/%:
 	$(CD) $(PATHS) ; pwd ; $(CHECK50)$(*F); $(STYLE50) $(*F).c
@@ -73,7 +77,7 @@ test: $(BUILD_PATHS) $(RESULTS)
 $(PATHR)%.txt: $(PATHB)%.$(TARGET_EXTENSION)
 	-./$< > $@ 2>&1
 
-$(PATHB)%.$(TARGET_EXTENSION): $(PATHO)%.o #$(PATHD)Test%.d
+$(PATHB)%: $(PATHO)%.o #$(PATHD)Test%.d
 	$(LINK)  -o  $@  $^ $(CS50LIBS)
 
 $(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)%.o $(PATHO)unity.o #$(PATHD)Test%.d
@@ -104,9 +108,8 @@ $(PATHR):
 	$(MKDIR) $(PATHR)
 
 clean:
-	$(CLEANUP) $(PATHO)*.o
-	$(CLEANUP) $(PATHB)*.$(TARGET_EXTENSION)
-	$(CLEANUP) $(PATHR)*.txt
+	$(CLEANUP) $(PATHB)
+	$(MKDIR) $(BUILD_PATHS)
 
 .PRECIOUS: $(PATHB)Test%.$(TARGET_EXTENSION)
 .PRECIOUS: $(PATHD)%.d

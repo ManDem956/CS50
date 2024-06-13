@@ -4,10 +4,8 @@
 #include <string.h>
 
 #include "../src/tideman.h"
-
 #include "../unity/src/unity.h"
 
-#define MAX 3
 #define VOTES 5
 
 string votes[VOTES][MAX];
@@ -97,11 +95,7 @@ void test_print_winner(void)
 
     bool winners[candidate_count];
     get_winner(winners);
-    TEST_ASSERT_TRUE(winners[0]);
-    TEST_ASSERT_FALSE(winners[1]);
-    TEST_ASSERT_FALSE(winners[2]);
-    TEST_ASSERT_FALSE(winners[3]);
-    print_winner();
+    TEST_ASSERT_EQUAL_STRING("Alice", get_winner());
 }
 
 void test_print_winners(void)
@@ -120,8 +114,8 @@ void test_print_winners(void)
     locked[0][1] = true;
     locked[0][3] = true;
     locked[1][3] = true;
-    
-    TEST_ASSERT_EQUAL_STRING("Alex", get_winner());
+
+    TEST_ASSERT_EQUAL_STRING("Charlie", get_winner());
 }
 
 void setUp(void)

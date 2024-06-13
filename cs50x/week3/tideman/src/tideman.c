@@ -32,7 +32,7 @@ void add_pairs(void);
 void sort_pairs(void);
 void lock_pairs(void);
 void print_winner(void);
-
+#ifndef TEST
 int main(int argc, string argv[])
 {
     // Check for invalid usage
@@ -95,7 +95,7 @@ int main(int argc, string argv[])
     print_winner();
     return 0;
 }
-
+#endif // TEST
 // Update ranks given a new vote
 bool vote(int rank, string name, int ranks[])
 {
