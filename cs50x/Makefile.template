@@ -36,6 +36,7 @@ PATHR = build/results/
 BUILD_PATHS = $(PATHB) $(PATHD) $(PATHO) $(PATHR)
 
 SRCT = $(wildcard $(PATHT)*.c)
+SRCS = $(wildcard $(PATHS)*.c)
 
 undefine CFLAGS
 
@@ -53,14 +54,14 @@ CFLAGS=-I. -I$(PATHU) -I$(PATHS)
 CS50LIBS = -lcrypt -lcs50 -lm
 
 RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT) )
-RUNPATHS = $(patsubst $(PATHT)Test%.c,$(PATHB)%,$(SRCT) )
+RUNPATHS = $(patsubst $(PATHS)%.c,$(PATHB)%,$(SRCS) )
 
 PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL = `grep -s FAIL $(PATHR)*.txt`
 IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 
 run: $(RUNPATHS)
-	./$< "$(ARGS[@])"
+	./$< $(ARGS)
 
 %: $(PATHB)% #$(PATHD)Test%.d
 	@echo
