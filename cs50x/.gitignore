@@ -12,7 +12,7 @@
 build
 data*
 *.zip
-*.csv
+*.csv*
 
 !*.c
 # Prerequisites
