@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "cs50p"
+    },
+    {
+      "path": "cs50x"
+    },
+    {
+      "path": "cs50p/final_project"
+    }
+  ],
+  "settings": {
+    "files.autoSave": "afterDelay",
+    "workbench.editor.labelFormat": "medium"
+  }
+}
