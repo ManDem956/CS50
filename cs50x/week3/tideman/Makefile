@@ -60,7 +60,7 @@ PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL = `grep -s FAIL $(PATHR)*.txt`
 IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 
-run: $(BUILD_PATHS) $(RUNPATHS)
+run: $(RUNPATHS)
 	./$< $(ARGS)
 
 %: $(PATHB)% #$(PATHD)Test%.d
