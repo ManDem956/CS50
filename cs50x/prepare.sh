@@ -12,7 +12,6 @@ show_help() {
 "
 }
 
-
 while getopts "trhd:" FLAG; do
     case "$FLAG" in
     t) TESTS=1 ;;
@@ -39,6 +38,8 @@ if [[ "${CLEANUP}" -eq 1 ]]; then
 fi
 
 mkdir "$path" && cp Makefile.template "$_"/Makefile
+
+code --add "$path"
 
 cp -rfn .template/src "$path"/src
 for f in "$path"/src/*; do mv "$f" "${f/template/$project}"; done
