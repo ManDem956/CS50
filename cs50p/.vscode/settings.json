@@ -13,5 +13,6 @@
     "tablefmt",
     "twttr",
     "Wht's"
-  ]
+  ],
+  "python.analysis.typeCheckingMode": "off"
 }

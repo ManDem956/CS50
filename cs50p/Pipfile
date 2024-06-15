@@ -15,6 +15,7 @@ validator-collection = "*"
 [dev-packages]
 pytest = "*"
 ipykernel = "*"
+black = "*"
 
 [requires]
 python_version = "3.12"
