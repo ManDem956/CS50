@@ -5,9 +5,12 @@ name = "pypi"
 
 [packages]
 pytest = "*"
+numpy = "*"
 
 [dev-packages]
 pytest = "*"
+jupyter = "*"
+notebook = "*"
 
 [requires]
 python_version = "3.12"
