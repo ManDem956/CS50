@@ -79,17 +79,17 @@ class Game:
         return self._players
 
     def _get_diagonals(self, array: np.ndarray) -> Tuple[Tuple[int]]:
-        if len(array.shape) < 3:
-            return [np.diagonal(array).tolist()]
         result = []
-
-        perms = list(permutations(range(self._board_dimensions), 2))
-        while len(perms) > 0:
-            diags = np.diagonal(array)
-            result.extend(diags.tolist())
-            result.append(np.diagonal(diags).tolist())
-            axes = perms.pop()
-            array = np.rot90(array, axes=axes)
+        if len(array.shape) < 3:
+            result.append(np.diagonal(array).tolist())
+        else:
+            perms = list(permutations(range(self._board_dimensions), 2))
+            while len(perms) > 0:
+                diags = np.diagonal(array)
+                result.extend(diags.tolist())
+                result.append(np.diagonal(diags).tolist())
+                axes = perms.pop()
+                array = np.rot90(array, axes=axes)
 
         return result
 

@@ -20,8 +20,8 @@ def main() -> None:
     #  4242 - x wins
     #  424242 - 0 wins
     random.seed(424242)
-    size = 3
-    dimensions = 2
+    size = 4
+    dimensions = 3
 
     board = Board(size**dimensions, 0)
     player_x = RandomPlayer("X", "'x'")
@@ -37,8 +37,9 @@ def main() -> None:
         counter += 1
 
     game = Game((RandomPlayer("X", "'x'"), RandomPlayer("O", "'o'")), size, dimensions, 0)
-
-    print(*game._win_conditions, sep="\n")
+    wins = game._win_conditions
+    print(f"{len(wins)=}")
+    print(*wins, sep="\n")
 
 
 if __name__ == "__main__":
