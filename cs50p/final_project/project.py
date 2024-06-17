@@ -22,9 +22,7 @@ def main() -> None:
     counter = 1
     while not board.is_done():
         print(f"move {counter}:")
-        board.make_move(
-            random.choice(board.available_moves()), next(player_iter)
-        )
+        board.make_move(random.choice(board.available_moves()), next(player_iter))
         print(*printable_board(board), sep="\n")
         counter += 1
 
