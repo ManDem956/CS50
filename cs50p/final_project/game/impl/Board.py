@@ -28,22 +28,48 @@ class Cell:
 
 
 class Board:
+    __MIN_SIZE: int = 3
+    __MIN_DIMENSION: int = 2
+    __MIN_INCEPTION: int = 0
 
-    def __init__(
-        self, size: int = 3, dimensions: int = 2, inception: int = 0
-    ) -> None:
-        if size < 3:
-            raise ValueError("Board size must be at least 3")
-        if dimensions < 2:
-            raise ValueError("Board dimensions must be at least 2")
-        if inception < 0:
-            raise ValueError("Board inception must be at least 0")
+    def __init__(self, size: int = 3, dimensions: int = 2, inception: int = 0) -> None:
+        """
+        Initializes a new instance of the Board class.
+
+        Args:
+            size (int, optional): The size of the board. Defaults to 3.
+            dimensions (int, optional): The number of dimensions of the board. Defaults to 2.
+            inception (int, optional): The inception level of the board. Defaults to 0.
+
+        Raises:
+            ValueError: If the size is less than the minimum size, if the dimensions
+            are less than the minimum dimensions, or if the inception level
+            is less than the minimum inception level.
+
+        Returns:
+            None
+        """
+        if size < self.__MIN_SIZE:
+            raise ValueError(f"Board size must be at least {self.__MIN_SIZE}")
+        if dimensions < self.__MIN_DIMENSION:
+            raise ValueError(f"Board dimensions must be at least {self.__MIN_DIMENSION}")
+        if inception < self.__MIN_INCEPTION:
+            raise ValueError(f"Board inception must be at least {self.__MIN_INCEPTION}")
         self.__size = size
         self.__dimensions = dimensions
         self.__inception = inception
         self.__cells = self.__fill_cells(inception=self.__inception)
 
-    def __fill_cells(self, inception=int):
+    def __fill_cells(self, inception: int):
+        """
+        Fills the cells of the board based on the inception level.
+
+        Args:
+            inception (int): The inception level for filling the cells.
+
+        Returns:
+            tuple: A tuple of Cell objects representing the filled cells.
+        """
         if inception == 0:
             return tuple(Cell() for _ in range(self.__size**self.__dimensions))
         return tuple(
@@ -56,50 +82,102 @@ class Board:
         )
 
     def available_moves(self) -> Tuple[int]:
-        return tuple(
-            idx for idx, item in enumerate(self.__cells) if item.is_empty()
-        )
+        """
+        Returns a tuple of available moves represented by their indices.
+        """
+        return tuple(idx for idx, item in enumerate(self.__cells) if item.is_empty())
 
     def is_empty(self):
-        return not self.is_won()
+        """
+        Check if the board is empty when the current board is a cell.
+
+        Returns:
+            bool: True if the board is empty, False otherwise.
+        """
+        return not self.is_done()
 
     def is_won(self) -> bool:
+        """
+        Returns True if the board is won.
+
+        :return: A boolean value indicating if the board is won.
+        :rtype: bool
+        """
         return False
 
     def is_done(self) -> bool:
+        """
+        Check if the game is completed regardless of the result.
+
+        Returns:
+            bool: True if there are no more available moves, False otherwise.
+        """
         return len(self.available_moves()) == 0
 
     def get_winner(self) -> ABCPlayer:
+        """
+        Returns the winner of the board.
+
+        :return: An ABCPlayer representing the winner of the board.
+        :rtype: ABCPlayer
+        """
         return None
 
     def value(self) -> ABCPlayer:
+        """
+        Returns the value of the board is the the board itself is a cell.  
+
+        :return: An ABCPlayer representing the winner of the board.
+        :rtype: ABCPlayer
+        """
         return self.get_winner()
 
     @property
-    def size(self) -> int:
+    def board_size(self) -> int:
+        """
+        Returns the size of the board.
+
+        :return: An integer representing the size of the board.
+        :rtype: int
+        """
         return self.__size
 
     @property
     def dimensions(self) -> int:
+        """
+        Returns the number of dimensions of the board.
+
+        :return: An integer representing the number of dimensions of the board.
+        :rtype: int
+        """
         return self.__dimensions
 
     @property
     def inception(self) -> int:
+        """
+        Returns the inception level of the board.
+        """
         return self.__inception
 
     @property
     def cells(self) -> Tuple[HasValue]:
-        return (
-            (item if item.value is not None else idx)
-            for idx, item in enumerate(self.__cells)
+        """
+        Returns a tuple of cells, where each cell is either the cell itself if it
+        has a value, or its index if it doesn't.
+        """
+        return tuple(
+            cell if cell.value is not None else idx for idx, cell in enumerate(self.__cells)
         )
 
     @property
-    def cells_filler(self) -> Tuple[HasValue]:
-        return (
-            (item if item.value is not None else chr(32))
-            for item in self.__cells
-        )
+    def filled_cells(self) -> Tuple[HasValue]:
+        """
+        Returns a tuple of cells that have a value.
 
-    def make_move(self, idx: int, item: ABCPlayer) -> None:
-        self.__cells[idx].value = item
+        :return: A tuple of cells that have a value.
+        :rtype: Tuple[HasValue]
+        """
+        return tuple(cell for cell in self.__cells if cell.value is not None)
+
+    def make_move(self, cell_index: int, player: ABCPlayer) -> None:
+        self.__cells[cell_index].value = player

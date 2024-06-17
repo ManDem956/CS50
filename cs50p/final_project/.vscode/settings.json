@@ -1,4 +1,5 @@
 {
   "terminal.integrated.tabs.defaultIcon": "star-full",
-  "terminal.integrated.tabs.defaultColor": "terminal.ansiRed"
+  "terminal.integrated.tabs.defaultColor": "terminal.ansiRed",
+  "flake8.args": ["--max-line-length=100"]
 }
