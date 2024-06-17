@@ -11,6 +11,42 @@
     {
       "name": "CS50x : week4 : volume",
       "path": "cs50x/week4/volume"
+    },
+    {
+      "name": "CS50P : week4 : test_bank",
+      "path": "cs50p/week5/test_bank"
+    },
+    {
+      "name": "CS50P : week4 : test_fuel",
+      "path": "cs50p/week5/test_fuel"
+    },
+    {
+      "name": "CS50P : week4 : test_plates",
+      "path": "cs50p/week5/test_plates"
+    },
+    {
+      "name": "CS50P : week4 : test_twttr",
+      "path": "cs50p/week5/test_twttr"
+    },
+    {
+      "name": "CS50P : week1 : bank",
+      "path": "cs50p/week1/bank"
+    },
+    {
+      "name": "CS50P : week1 : deep",
+      "path": "cs50p/week1/deep"
+    },
+    {
+      "name": "CS50P : week1 : extensions",
+      "path": "cs50p/week1/extensions"
+    },
+    {
+      "name": "CS50P : week1 : interpreter",      
+      "path": "cs50p/week1/interpreter"
+    },
+    {
+      "name": "CS50P : week1 : meal",
+      "path": "cs50p/week1/meal"
     }
   ],
   "settings": {
