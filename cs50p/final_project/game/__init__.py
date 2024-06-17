@@ -1,4 +1,3 @@
-from game.impl.Board import Board
+from game import abstract, impl
 
-
-__all__ = (Board,)
+__all__ = (abstract, impl)
