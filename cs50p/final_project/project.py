@@ -20,8 +20,8 @@ def main() -> None:
     #  4242 - x wins
     #  424242 - 0 wins
     random.seed(424242)
-    size = 4
-    dimensions = 3
+    size = 3
+    dimensions = 2
 
     board = Board(size**dimensions, 0)
     player_x = RandomPlayer("X", "'x'")

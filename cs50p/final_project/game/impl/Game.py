@@ -1,5 +1,5 @@
 from itertools import permutations
-from typing import Iterable, Set, Tuple
+from typing import Iterable, List, Set, Tuple
 from game.abstract import Playable
 from game.impl.Board import Board
 from game.impl.Players import ABCPlayer
@@ -78,37 +78,41 @@ class Game:
     def players(self) -> Iterable[ABCPlayer]:
         return self._players
 
-    def _get_diagonals(self, array: np.ndarray) -> Tuple[Tuple[int]]:
+    def _calculate_diagonals(self, board: np.ndarray) -> List[List[int]]:
         result = []
-        if len(array.shape) < 3:
-            result.append(np.diagonal(array).tolist())
-        else:
-            perms = list(permutations(range(self._board_dimensions), 2))
-            while len(perms) > 0:
-                diags = np.diagonal(array)
-                result.extend(diags.tolist())
-                result.append(np.diagonal(diags).tolist())
-                axes = perms.pop()
-                array = np.rot90(array, axes=axes)
+        permutations_ = list(permutations(range(self._board_dimensions), 2))
+        while permutations_:
+            reshape = self._board_size ** (self._board_dimensions - 2)
+            diagonals = np.diagonal(board).reshape(reshape, self._board_size)
+            result.extend(diagonals.tolist())
+            if diagonals.shape[0] == self._board_size:
+                result.append(np.diagonal(diagonals).tolist())
+            board = np.rot90(board, axes=permutations_.pop())
 
         return result
 
     def _calculate_win_conditions(self) -> Set[Tuple[int]]:
-        res = tuple(
-            zip(*[iter(range(self._board_size**self._board_dimensions))] * self._board_size)
+        """
+        Calculates all possible win conditions for the game board.
+
+        Returns:
+            A set of tuples representing all possible win conditions.
+        """
+        # Generate all possible win conditions
+        result = []
+        array = np.arange(self._board_size**self._board_dimensions).reshape(
+            self._board_size, *([self._board_size] * (self._board_dimensions - 1))
         )
-        for _ in range(2, self._board_dimensions):
-            res = tuple(zip(*[iter(res)] * self._board_size))
-
-        array = np.array(res)
-        result = list()
-        perms = list(permutations(range(self._board_dimensions), 2))
-        while len(perms) > 0:
-            result.extend(self._get_diagonals(array))
-            if len(array.shape) >= self._board_dimensions:
-                array.reshape(-1, array.shape[-1])
-            result.extend(array.reshape(-1, array.shape[-1]).tolist())
-            axes = perms.pop()
-            array = np.rot90(array, axes=axes)
-
-        return set(tuple(sorted(item)) for item in result)
+        permutations_ = list(permutations(range(self._board_dimensions), 2))
+        while permutations_:
+            # add all rows in current array
+            reshape = self._board_size ** (self._board_dimensions - 1)
+            tmp = array.reshape(reshape, self._board_size)
+            result.extend(tmp.tolist())
+            # Generate all possible diagonals
+            diagonals = self._calculate_diagonals(array)
+            result.extend(diagonals)
+            # Rotate the array
+            array = np.rot90(array, axes=permutations_.pop())
+        # Flatten and sort the result
+        return {tuple(sorted(item)) for item in result}
