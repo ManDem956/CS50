@@ -101,6 +101,6 @@
   "settings": {
     "files.autoSave": "afterDelay",
     "workbench.editor.labelFormat": "medium",
-    "cSpell.words": ["ndarray"]
+    "cSpell.words": ["arange", "ndarray"]
   }
 }

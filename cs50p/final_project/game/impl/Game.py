@@ -79,15 +79,24 @@ class Game:
         return self._players
 
     def _calculate_diagonals(self, board: np.ndarray) -> List[List[int]]:
+        """
+        Calculates all possible diagonals in the given game board.
+
+        Args:
+            board (np.ndarray): The game board represented as a 2D numpy array.
+
+        Returns:
+            List[List[int]]: A list of lists representing all possible diagonals in the game board.
+        """
         result = []
-        permutations_ = list(permutations(range(self._board_dimensions), 2))
-        while permutations_:
+        axes = list(permutations(range(self._board_dimensions), 2))
+        while axes:
             reshape = self._board_size ** (self._board_dimensions - 2)
             diagonals = np.diagonal(board).reshape(reshape, self._board_size)
             result.extend(diagonals.tolist())
             if diagonals.shape[0] == self._board_size:
                 result.append(np.diagonal(diagonals).tolist())
-            board = np.rot90(board, axes=permutations_.pop())
+            board = np.rot90(board, axes=axes.pop())
 
         return result
 
@@ -103,16 +112,15 @@ class Game:
         array = np.arange(self._board_size**self._board_dimensions).reshape(
             self._board_size, *([self._board_size] * (self._board_dimensions - 1))
         )
-        permutations_ = list(permutations(range(self._board_dimensions), 2))
-        while permutations_:
+        axes = list(permutations(range(self._board_dimensions), 2))
+        while axes:
             # add all rows in current array
             reshape = self._board_size ** (self._board_dimensions - 1)
-            tmp = array.reshape(reshape, self._board_size)
-            result.extend(tmp.tolist())
+            result.extend(array.reshape(reshape, self._board_size).tolist())
             # Generate all possible diagonals
             diagonals = self._calculate_diagonals(array)
             result.extend(diagonals)
             # Rotate the array
-            array = np.rot90(array, axes=permutations_.pop())
+            array = np.rot90(array, axes=axes.pop())
         # Flatten and sort the result
         return {tuple(sorted(item)) for item in result}
