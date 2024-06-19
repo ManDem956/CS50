@@ -20,8 +20,7 @@ def convert_12_to_24(value: str) -> str:
 
 
 def do_replace(match: re.Match) -> str:
-    return f"{convert_12_to_24(match.group(1))}\
-        {match.group(2)}{convert_12_to_24(match.group(3))}"
+    return f"{convert_12_to_24(match.group(1))}{match.group(2)}{convert_12_to_24(match.group(3))}"
 
 
 def convert(time_delta: str) -> str:
