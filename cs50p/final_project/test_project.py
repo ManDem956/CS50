@@ -1,5 +1,6 @@
 from contextlib import nullcontext as does_not_raise
 from typing import Tuple
+
 import pytest
 
 from game.abstract.ABCPlayer import ABCPlayer
@@ -47,6 +48,7 @@ def test_cell(input: bool, expected: bool) -> None:
         ((5, 8, 0, 4), (1, 2, 3, 6, 7), does_not_raise()),
         ((5, 8, 0, 4, 2), (1, 3, 6, 7), does_not_raise()),
         ((5, 8, 0, 4, 2, 5), (1, 3, 6, 7), pytest.raises(ValueError)),
+        ((5, 8, 0, 4, 2, 8), (1, 3, 6, 7), pytest.raises(ValueError)),
         ((5, 8, 0, 4, 2, 1), (3, 6, 7), does_not_raise()),
         ((5, 8, 0, 4, 2, 1, 7), (3, 6), does_not_raise()),
         ((5, 8, 0, 4, 2, 1, 7, 6), (3,), does_not_raise()),
