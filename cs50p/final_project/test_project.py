@@ -15,10 +15,11 @@ def default_board() -> Board:
 def default_player(mocker) -> ABCPlayer:
     return mocker.patch.object(ABCPlayer, "get_move")
 
+
 @pytest.fixture
 def full_board(default_board: Board) -> Board:
     for i in range(9):
-    pass
+        pass
 
 
 @pytest.mark.parametrize(
