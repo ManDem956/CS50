@@ -120,8 +120,8 @@ def test_full_board(full_board: Playable) -> None:
 def test_get_winner(
     default_board: Playable,
     players: Tuple[ABCPlayer, ABCPlayer],
-    moves: Dict[int, str],
-    expected: str,
+    moves: Dict[int, int],
+    expected: int,
 ) -> None:
     if expected is not None:
         expected = players[expected]
@@ -132,10 +132,7 @@ def test_get_winner(
     assert default_board.get_winner() == expected
 
 
-@pytest.mark.parametrize(
-    "params, expected",
-    CONST_WIN_CONDITIONS,
-)
+@pytest.mark.parametrize("params, expected", CONST_WIN_CONDITIONS)
 def test_generate_win_conditions(players, params, expected):
     game = Game(players, *params)
 
