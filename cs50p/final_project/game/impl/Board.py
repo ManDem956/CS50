@@ -33,8 +33,11 @@ class Cell:
 
 
 class Board:
-    def __init__(self, cells_count: int, inception: int) -> None:
+    def __init__(
+        self, cells_count: int, win_conditions: Iterable[Iterable[int]], inception: int
+    ) -> None:
         self._cells: Tuple[HasValue, ...] = self.__fill_cells(cells_count, inception=inception)
+        self._win_conditions = win_conditions
 
     def __fill_cells(self, cells_count: int, inception: int) -> Tuple[HasValue, ...]:
         """
@@ -80,7 +83,7 @@ class Board:
         """
         return len(self.available_moves()) == 0
 
-    def get_winner(self, conditions: Iterable[Iterable[int]]) -> Value | None:
+    def get_winner(self) -> Value | None:
         """
         Check if any of the win conditions are satisfied.
 
@@ -90,7 +93,7 @@ class Board:
         Returns:
             Value | None: The value of the winner, or None if no winner.
         """
-        for condition in conditions:
+        for condition in self._win_conditions:
             values = [
                 self._cells[index].value
                 for index in condition
@@ -102,7 +105,7 @@ class Board:
 
     def value(self) -> Value:
 
-        return None
+        return self.get_winner()
 
     @property
     def cells(self) -> Tuple[Value, ...]:

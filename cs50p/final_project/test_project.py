@@ -1,30 +1,25 @@
 from contextlib import nullcontext as does_not_raise
-from typing import Dict, Iterable, Tuple
+from typing import Dict, Tuple
 
 import pytest
 
 from game.abstract.ABCPlayer import ABCPlayer
 from game.abstract.Board import Playable, Value
-from game.impl.Board import Board, Cell
+from game.impl.Board import Cell
 from game.impl.Game import Game
 
 from tests import CONST_WIN_CONDITIONS
 
 
 @pytest.fixture
-def default_board() -> Playable:
-    return Board(9, 0)
+def default_board(default_game) -> Playable:
+    return default_game.board
 
 
 @pytest.fixture
 def default_game(players) -> Game:
     game = Game(players, 3, 2, 0)
     return game
-
-
-@pytest.fixture
-def win_conditions(default_game) -> Iterable[Iterable[int]]:
-    return default_game._win_conditions
 
 
 @pytest.fixture
@@ -125,10 +120,8 @@ def test_full_board(full_board: Playable) -> None:
 def test_get_winner(
     default_board: Playable,
     players: Tuple[ABCPlayer, ABCPlayer],
-    win_conditions: Iterable[Iterable[int]],
     moves: Dict[int, str],
     expected: str,
-    request,
 ) -> None:
     if expected is not None:
         expected = players[expected]
@@ -136,7 +129,7 @@ def test_get_winner(
     for key, value in moves.items():
         default_board.make_move(key, players[value])
 
-    assert default_board.get_winner(win_conditions) == expected
+    assert default_board.get_winner() == expected
 
 
 @pytest.mark.parametrize(

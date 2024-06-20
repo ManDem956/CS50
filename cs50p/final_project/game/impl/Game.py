@@ -56,7 +56,7 @@ class Game:
         self._inception_level: int = inception_level
         self._win_conditions: Set[Tuple[int]] = self._calculate_win_conditions()
         self._board: Playable = Board(
-            self._board_size**self._board_dimensions, self._inception_level
+            self._board_size**self._board_dimensions, self._win_conditions, self._inception_level
         )
 
     def _validate_player_count(self, player_count):
@@ -101,17 +101,21 @@ class Game:
                 if diagonals.shape[0] == self._board_size:
                     result.append(np.diagonal(diagonals).tolist())
                 board = np.rot90(board, axes=axes.pop())
+
             return result
 
         array = np.arange(self._board_size**self._board_dimensions).reshape(
             self._board_size, *([self._board_size] * (self._board_dimensions - 1))
         )
-        axes = list(permutations(range(self._board_dimensions), 2))
+
         win_conditions = []
+
+        axes = list(permutations(range(self._board_dimensions), 2))
         while axes:
             reshape = self._board_size ** (self._board_dimensions - 1)
             win_conditions.extend(array.reshape(reshape, self._board_size).tolist())
             diagonals = generate_diagonals(array)
             win_conditions.extend(diagonals)
             array = np.rot90(array, axes=axes.pop())
+
         return {tuple(sorted(row)) for row in win_conditions}
