@@ -1,8 +1,8 @@
 import itertools
 import random
 
-from game.impl.Game import Game
 from game.impl.Board import Board
+from game.impl.Game import Game
 from game.impl.Players import RandomPlayer
 
 
@@ -36,10 +36,11 @@ def main() -> None:
         print(*printable_board(size, dimensions, board), sep="\n")
         counter += 1
 
-    game = Game((RandomPlayer("X", "'x'"), RandomPlayer("O", "'o'")), size, dimensions, 0)
+    game = Game((RandomPlayer("X", "'x'"), RandomPlayer("O", "'o'")), 3, 2, 0)
+
     wins = game._win_conditions
     print(f"{len(wins)=}")
-    print(*wins, sep="\n")
+    print(wins, sep="\n")
 
 
 if __name__ == "__main__":

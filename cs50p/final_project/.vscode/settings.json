@@ -12,5 +12,6 @@
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
   "python.pipenvPath": "/home/thenin/.pyenv/shims/pipenv",
-  "python.terminal.executeInFileDir": true
+  "python.terminal.executeInFileDir": true,
+  "python.analysis.typeCheckingMode": "off"
 }

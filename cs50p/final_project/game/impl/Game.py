@@ -1,10 +1,10 @@
 from itertools import permutations
 from typing import Iterable, List, Set, Tuple
+
+import numpy as np
 from game.abstract import Playable
 from game.impl.Board import Board
 from game.impl.Players import ABCPlayer
-
-import numpy as np
 
 
 class Game:
@@ -24,35 +24,40 @@ class Game:
         Initializes a new instance of the Game class.
 
         Args:
-            players (Iterable[ABCPlayer]): An iterable of ABCPlayer objects
-                                            representing the players.
-            board_size (int, optional): The size of the game board.
-                                            Defaults to MIN_BOARD_SIZE.
-            board_dimensions (int, optional): The dimensions of the game board.
-                                                Defaults to MIN_BOARD_DIMENSIONS.
+            calculate_win_conditions (Callable): A callable that calculates the win conditions for
+            the game.
+            players (Iterable[ABCPlayer]): An iterable of players participating in the game.
+            board_size (int, optional): The size of the game board. Defaults to MIN_BOARD_SIZE.
+            board_dimensions (int, optional): The number of dimensions of the game board.
+            Defaults to the first element of BOARD_DIMENSIONS.
             inception_level (int, optional): The inception level of the game.
-                                                Defaults to MIN_INCEPTION_LEVEL.
+            Defaults to MIN_INCEPTION_LEVEL.
 
         Returns:
             None
 
         Raises:
-            ValueError: If the number of players exceeds the maximum allowed.
-            ValueError: If the board size is less than the minimum allowed.
-            ValueError: If the board dimensions are less than the minimum allowed.
-            ValueError: If the inception level is less than the minimum allowed.
+            ValueError: If the number of players is greater than MAX_PLAYERS, if the board size
+            is less than MIN_BOARD_SIZE, if the board dimensions are not in BOARD_DIMENSIONS,
+            or if the inception level is less than MIN_INCEPTION_LEVEL.
+
+        Initializes the game with the specified players, board size, board dimensions,
+        inception level, and win conditions.
         """
+
         self._validate_player_count(len(players))
         self._validate_board_size(board_size)
         self._validate_board_dimensions(board_dimensions)
         self._validate_inception_level(inception_level)
 
-        self._players = players
-        self._board_size = board_size
-        self._board_dimensions = board_dimensions
-        self._inception_level = inception_level
-        self._win_conditions = self._calculate_win_conditions()
-        self._board = Board(self._board_size**self._board_dimensions, self._inception_level)
+        self._players: ABCPlayer = players
+        self._board_size: int = board_size
+        self._board_dimensions: int = board_dimensions
+        self._inception_level: int = inception_level
+        self._win_conditions: Set[Tuple[int]] = self._calculate_win_conditions()
+        self._board: Playable = Board(
+            self._board_size**self._board_dimensions, self._inception_level
+        )
 
     def _validate_player_count(self, player_count):
         if player_count > self.MAX_PLAYERS:
@@ -78,49 +83,35 @@ class Game:
     def players(self) -> Iterable[ABCPlayer]:
         return self._players
 
-    def _calculate_diagonals(self, board: np.ndarray) -> List[List[int]]:
+    def _calculate_win_conditions(self) -> Set[Tuple[int, ...]]:
         """
-        Calculates all possible diagonals in the given game board.
-
-        Args:
-            board (np.ndarray): The game board represented as a 2D numpy array.
+        Calculates the win conditions for a game board of given size and dimensions.
 
         Returns:
-            List[List[int]]: A list of lists representing all possible diagonals in the game board.
+            Set[Tuple[int, ...]]: A set of tuples representing the win conditions.
         """
-        result = []
-        axes = list(permutations(range(self._board_dimensions), 2))
-        while axes:
-            reshape = self._board_size ** (self._board_dimensions - 2)
-            diagonals = np.diagonal(board).reshape(reshape, self._board_size)
-            result.extend(diagonals.tolist())
-            if diagonals.shape[0] == self._board_size:
-                result.append(np.diagonal(diagonals).tolist())
-            board = np.rot90(board, axes=axes.pop())
 
-        return result
+        def generate_diagonals(board: np.ndarray) -> List[List[int]]:
+            result = []
+            axes = list(permutations(range(self._board_dimensions), 2))
+            while axes:
+                reshape = self._board_size ** (self._board_dimensions - 2)
+                diagonals = np.diagonal(board).reshape(reshape, self._board_size)
+                result.extend(diagonals.tolist())
+                if diagonals.shape[0] == self._board_size:
+                    result.append(np.diagonal(diagonals).tolist())
+                board = np.rot90(board, axes=axes.pop())
+            return result
 
-    def _calculate_win_conditions(self) -> Set[Tuple[int]]:
-        """
-        Calculates all possible win conditions for the game board.
-
-        Returns:
-            A set of tuples representing all possible win conditions.
-        """
-        # Generate all possible win conditions
-        result = []
         array = np.arange(self._board_size**self._board_dimensions).reshape(
             self._board_size, *([self._board_size] * (self._board_dimensions - 1))
         )
         axes = list(permutations(range(self._board_dimensions), 2))
+        win_conditions = []
         while axes:
-            # add all rows in current array
             reshape = self._board_size ** (self._board_dimensions - 1)
-            result.extend(array.reshape(reshape, self._board_size).tolist())
-            # Generate all possible diagonals
-            diagonals = self._calculate_diagonals(array)
-            result.extend(diagonals)
-            # Rotate the array
+            win_conditions.extend(array.reshape(reshape, self._board_size).tolist())
+            diagonals = generate_diagonals(array)
+            win_conditions.extend(diagonals)
             array = np.rot90(array, axes=axes.pop())
-        # Flatten and sort the result
-        return {tuple(sorted(item)) for item in result}
+        return {tuple(sorted(row)) for row in win_conditions}

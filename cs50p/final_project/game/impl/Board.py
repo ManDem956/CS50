@@ -1,25 +1,26 @@
-from typing import Tuple
+from typing import Iterable, Tuple
 
-from game.abstract import HasValue
+from game.abstract.Board import Value
+from game.abstract.Cell import HasValue
 from game.impl.Players import ABCPlayer
 
 
 class Cell:
-    def __init__(self, value: ABCPlayer = None) -> None:
+    def __init__(self, value: Value = None) -> None:
         self._value = value
 
     @property
-    def value(self) -> ABCPlayer:
+    def value(self) -> Value:
         return self._value
 
     @value.setter
-    def value(self, value: ABCPlayer) -> None:
+    def value(self, value: Value) -> None:
         self._value = value
 
     def is_empty(self) -> bool:
         return self._value is None
 
-    def __str__(self) -> str:
+    def __str__(self) -> str | None:
         if self._value is None:
             return None
         return str(self._value)
@@ -33,9 +34,9 @@ class Cell:
 
 class Board:
     def __init__(self, cells_count: int, inception: int) -> None:
-        self._cells = self.__fill_cells(cells_count, inception=inception)
+        self._cells: Tuple[HasValue, ...] = self.__fill_cells(cells_count, inception=inception)
 
-    def __fill_cells(self, cells_count: int, inception: int):
+    def __fill_cells(self, cells_count: int, inception: int) -> Tuple[HasValue, ...]:
         """
         Fills the cells of the board based on the inception level.
 
@@ -55,7 +56,7 @@ class Board:
             for _ in range(cells_count)
         )
 
-    def available_moves(self) -> Tuple[int]:
+    def available_moves(self) -> Tuple[int, ...]:
         """
         Returns a tuple of available moves represented by their indices.
         """
@@ -70,15 +71,6 @@ class Board:
         """
         return not self.is_done()
 
-    def is_won(self) -> bool:
-        """
-        Returns True if the board is won.
-
-        :return: A boolean value indicating if the board is won.
-        :rtype: bool
-        """
-        return False
-
     def is_done(self) -> bool:
         """
         Check if the game is completed regardless of the result.
@@ -88,26 +80,32 @@ class Board:
         """
         return len(self.available_moves()) == 0
 
-    def get_winner(self) -> ABCPlayer:
+    def get_winner(self, conditions: Iterable[Iterable[int]]) -> Value | None:
         """
-        Returns the winner of the board.
+        Check if any of the win conditions are satisfied.
 
-        :return: An ABCPlayer representing the winner of the board.
-        :rtype: ABCPlayer
+        Args:
+            conditions (Iterable[Iterable[int]]): The win conditions to check.
+
+        Returns:
+            Value | None: The value of the winner, or None if no winner.
         """
+        for condition in conditions:
+            values = [
+                self._cells[index].value
+                for index in condition
+                if self._cells[index].value is not None
+            ]
+            if len(values) == len(condition) and len(set(values)) == 1:
+                return values.pop()
         return None
 
-    def value(self) -> ABCPlayer:
-        """
-        Returns the value of the board is the the board itself is a cell.
+    def value(self) -> Value:
 
-        :return: An ABCPlayer representing the winner of the board.
-        :rtype: ABCPlayer
-        """
-        return self.get_winner()
+        return None
 
     @property
-    def cells(self) -> Tuple[HasValue]:
+    def cells(self) -> Tuple[Value, ...]:
         """
         Returns a tuple of cells, where each cell is either the cell itself if it
         has a value, or its index if it doesn't.
