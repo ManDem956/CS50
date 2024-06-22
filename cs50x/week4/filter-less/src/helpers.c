@@ -66,24 +66,37 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     }
 }
 
-RGBTRIPLE blur_pixel(int height, int width, RGBTRIPLE image[height][width], int h, int w)
+RGBTRIPLE blur_pixel(int height, int width, RGBTRIPLE image[height][width], int row, int col)
 {
-    RGBTRIPLE result = {0, 0, 0};
-    int counter = 0;
-    for (int i = -1; i < 2; i++)
+    RGBTRIPLE result = {0, 0, 0};    
+    double red = 0;
+    double green = 0;
+    double blue = 0;
+
+    int pixelCount = 0;
+
+    for (int i = -1; i <= 1; i++)
     {
-        for (int j = -1; j < 2; j++)
+        for (int j = -1; j <= 1; j++)
         {
-            if (h + i >= 0 && h + i < height && w + j >= 0 && w + j < width)
+            int currentRow = row + i;
+            int currentCol = col + j;
+
+            if (currentRow >= 0 && currentRow < height && currentCol >= 0 && currentCol < width)
             {
-                counter += 1;
-                result.rgbtBlue = round((result.rgbtBlue + image[h + i][w + j].rgbtBlue) / counter);
-                result.rgbtGreen =
-                    round((result.rgbtGreen + image[h + i][w + j].rgbtGreen) / counter);
-                result.rgbtRed = round((result.rgbtRed + image[h + i][w + j].rgbtRed) / counter);
+                red += image[currentRow][currentCol].rgbtRed;
+                green += image[currentRow][currentCol].rgbtGreen;
+                blue += image[currentRow][currentCol].rgbtBlue;
+
+                pixelCount++;
             }
         }
     }
+
+    result.rgbtRed = round(red / (double)pixelCount);
+    result.rgbtGreen = round(green / (double)pixelCount);
+    result.rgbtBlue = round(blue / (double)pixelCount);
+
     return result;
 }
 
@@ -98,5 +111,13 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             tmp[h][w] = blur_pixel(height, width, image, h, w);
         }
     }
-    image = tmp;
+
+    // Swap the image and tmp array
+    for (int h = 0; h < height; h++)
+    {
+        for (int w = 0; w < width; w++)
+        {
+            image[h][w] = tmp[h][w];
+        }
+    }
 }
