@@ -75,6 +75,8 @@ docs/_build/
 .pybuilder/
 target/
 
+!*.ipynb
+
 # Jupyter Notebook
 .ipynb_checkpoints
 
