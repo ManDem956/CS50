@@ -52,6 +52,7 @@ void do_run(string key)
     printf("ciphertext: %s\n", encode(text, to_upper(key)));
 }
 
+#ifndef TEST
 int main(int argc, char **argv)
 {
     if ((argc != 2) || (strlen(argv[1]) != MAX_KEY_LENGTH) ||
@@ -65,3 +66,4 @@ int main(int argc, char **argv)
     string key = argv[1];
     do_run(key);
 }
+#endif

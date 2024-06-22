@@ -14,6 +14,7 @@ data*
 *.zip
 *.csv*
 *.wav
+*.bmp
 
 !*.c
 # Prerequisites

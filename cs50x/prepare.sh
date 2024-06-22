@@ -51,5 +51,5 @@ if [[ "${TESTS}" -eq 1 ]]; then
     for f in "$path"/test/*; do mv "$f" "${f/template/$project}"; done
     sed -i -e "s/template/$project/g" "$path"/test/*
     sed -i -e "s/TEMPLATE/${project^^}/g" "${path}"/test/*
-    ln -s ~/mine/unity "$path"/unity
+    ln -s ~/mine/lib/unity "$path"/unity
 fi
