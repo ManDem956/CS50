@@ -39,7 +39,7 @@ fi
 
 mkdir "$path" && cp Makefile.template "$_"/Makefile
 
-code --add "$path"
+# code --add "$path"
 
 cp -rfn .template/src "$path"/src
 for f in "$path"/src/*; do mv "$f" "${f/template/$project}"; done
