@@ -15,6 +15,7 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
     }
 }
 
+// Swaps the RGBTRIPLE values pointed to by left and right pointers.
 void swap(RGBTRIPLE *left, RGBTRIPLE *right)
 {
     RGBTRIPLE tmp = *left;
@@ -38,7 +39,20 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     }
 }
 
-RGBTRIPLE blur_pixel(int height, int width, RGBTRIPLE image[height][width], int row, int col)
+/**
+ * Calculates the blurred pixel value by averaging the RGB values of the surrounding pixels.
+ *
+ * @param height The height of the image.
+ * @param width The width of the image.
+ * @param image The image matrix.
+ * @param row The row index of the pixel to blur.
+ * @param col The column index of the pixel to blur.
+ *
+ * @return The RGBTRIPLE structure representing the blurred pixel value.
+ *
+ * @throws None.
+ */
+RGBTRIPLE blurPixel(int height, int width, RGBTRIPLE image[height][width], int row, int col)
 {
     RGBTRIPLE result = {0, 0, 0};
     double red = 0;
@@ -56,9 +70,10 @@ RGBTRIPLE blur_pixel(int height, int width, RGBTRIPLE image[height][width], int 
 
             if (currentRow >= 0 && currentRow < height && currentCol >= 0 && currentCol < width)
             {
-                red += image[currentRow][currentCol].rgbtRed;
-                green += image[currentRow][currentCol].rgbtGreen;
-                blue += image[currentRow][currentCol].rgbtBlue;
+                RGBTRIPLE current_pixel = image[currentRow][currentCol];
+                red += current_pixel.rgbtRed;
+                green += current_pixel.rgbtGreen;
+                blue += current_pixel.rgbtBlue;
 
                 pixelCount++;
             }
@@ -80,7 +95,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int w = 0; w < width; w++)
         {
-            tmp[h][w] = blur_pixel(height, width, image, h, w);
+            tmp[h][w] = blurPixel(height, width, image, h, w);
         }
     }
 
@@ -94,7 +109,17 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     }
 }
 
-RGBTRIPLE sobel_sum(int height, int width, RGBTRIPLE image[height][width], int row, int col)
+// Calculates the Sobel operator for a given pixel in the image matrix based on the gradient 
+// in the x and y directions.
+// Parameters:
+//  - height: The height of the image.
+//  - width: The width of the image.
+//  - image: The image matrix containing RGBTRIPLE pixels.
+//  - row: The row index of the pixel to process.
+//  - col: The column index of the pixel to process.
+// Returns:
+//  - The RGBTRIPLE structure representing the result of the Sobel operator for the specified pixel.
+RGBTRIPLE sobelSum(int height, int width, RGBTRIPLE image[height][width], int row, int col)
 {
     RGBTRIPLE result = {0, 0, 0};
     int gx_kernel[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
@@ -149,7 +174,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int w = 0; w < width; w++)
         {
-            tmp[h][w] = sobel_sum(height, width, image, h, w);
+            tmp[h][w] = sobelSum(height, width, image, h, w);
         }
     }
 

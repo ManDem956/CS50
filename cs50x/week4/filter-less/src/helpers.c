@@ -66,9 +66,9 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     }
 }
 
-RGBTRIPLE blur_pixel(int height, int width, RGBTRIPLE image[height][width], int row, int col)
+RGBTRIPLE blurPixel(int height, int width, RGBTRIPLE image[height][width], int row, int col)
 {
-    RGBTRIPLE result = {0, 0, 0};    
+    RGBTRIPLE result = {0, 0, 0};
     double red = 0;
     double green = 0;
     double blue = 0;
@@ -93,9 +93,9 @@ RGBTRIPLE blur_pixel(int height, int width, RGBTRIPLE image[height][width], int 
         }
     }
 
-    result.rgbtRed = round(red / (double)pixelCount);
-    result.rgbtGreen = round(green / (double)pixelCount);
-    result.rgbtBlue = round(blue / (double)pixelCount);
+    result.rgbtRed = round(red / (double) pixelCount);
+    result.rgbtGreen = round(green / (double) pixelCount);
+    result.rgbtBlue = round(blue / (double) pixelCount);
 
     return result;
 }
@@ -108,7 +108,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int w = 0; w < width; w++)
         {
-            tmp[h][w] = blur_pixel(height, width, image, h, w);
+            tmp[h][w] = blurPixel(height, width, image, h, w);
         }
     }
 
