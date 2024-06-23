@@ -77,91 +77,35 @@ void setUp(void)
     }
 }
 
-void initializeImagePixels_blur(RGBTRIPLE image[3][3], int rows, int cols)
+void initializeImagePixels_blur(RGBTRIPLE image[3][3], int height, int width)
 {
-    // first row: (10, 20, 30), (40, 50, 60), (70, 80, 90)
-    // second row: (110, 130, 140), (120, 140, 150), (130, 150, 160)
-    // third row: (200, 210, 220), (220, 230, 240), (240, 250, 255)
-    image[0][0].rgbtRed = 10;
-    image[0][0].rgbtGreen = 20;
-    image[0][0].rgbtBlue = 30;
+    int row, col;
+    int red[] = {10, 40, 70, 110, 120, 130, 200, 220, 240};
+    int green[] = {20, 50, 80, 130, 140, 150, 210, 230, 250};
+    int blue[] = {30, 60, 90, 140, 150, 160, 220, 240, 255};
 
-    image[0][1].rgbtRed = 40;
-    image[0][1].rgbtGreen = 50;
-    image[0][1].rgbtBlue = 60;
-
-    image[0][2].rgbtRed = 70;
-    image[0][2].rgbtGreen = 80;
-    image[0][2].rgbtBlue = 90;
-
-    image[1][0].rgbtRed = 110;
-    image[1][0].rgbtGreen = 130;
-    image[1][0].rgbtBlue = 140;
-
-    image[1][1].rgbtRed = 120;
-    image[1][1].rgbtGreen = 140;
-    image[1][1].rgbtBlue = 150;
-
-    image[1][2].rgbtRed = 130;
-    image[1][2].rgbtGreen = 150;
-    image[1][2].rgbtBlue = 160;
-
-    image[2][0].rgbtRed = 200;
-    image[2][0].rgbtGreen = 210;
-    image[2][0].rgbtBlue = 220;
-
-    image[2][1].rgbtRed = 220;
-    image[2][1].rgbtGreen = 230;
-    image[2][1].rgbtBlue = 240;
-
-    image[2][2].rgbtRed = 240;
-    image[2][2].rgbtGreen = 250;
-    image[2][2].rgbtBlue = 255;
+    for (row = 0; row < height; row++)
+    {
+        for (col = 0; col < width; col++)
+        {
+            image[row][col].rgbtRed = red[row * width + col];
+            image[row][col].rgbtGreen = green[row * width + col];
+            image[row][col].rgbtBlue = blue[row * width + col];
+        }
+    }
 }
 void initializeImagePixels_edges(RGBTRIPLE image[3][3])
 {
-    // first row: (0, 10, 25), (0, 10, 30), (40, 60, 80)
-    // second row: (20, 30, 90), (30, 40, 100), (80, 70, 90)
-    // third row: (20, 20, 40), (30, 10, 30), (50, 40, 10)
-
     // Define colors for each pixel
-    // (0, 10, 25);
-    image[0][0].rgbtRed = 0;
-    image[0][0].rgbtGreen = 10;
-    image[0][0].rgbtBlue = 25;
-
-    // (0, 10, 30)
-    image[0][1].rgbtRed = 0;
-    image[0][1].rgbtGreen = 10;
-    image[0][1].rgbtBlue = 30;
-    // (40, 60, 80)
-    image[0][2].rgbtRed = 40;
-    image[0][2].rgbtGreen = 60;
-    image[0][2].rgbtBlue = 80;
-    // (20, 30, 90)
-    image[1][0].rgbtRed = 20;
-    image[1][0].rgbtGreen = 30;
-    image[1][0].rgbtBlue = 90;
-    // (30, 40, 100),
-    image[1][1].rgbtRed = 30;
-    image[1][1].rgbtGreen = 40;
-    image[1][1].rgbtBlue = 100;
-    // (80, 70, 90)
-    image[1][2].rgbtRed = 80;
-    image[1][2].rgbtGreen = 70;
-    image[1][2].rgbtBlue = 90;
-    // (20, 20, 40),
-    image[2][0].rgbtRed = 20;
-    image[2][0].rgbtGreen = 20;
-    image[2][0].rgbtBlue = 40;
-    // (30, 10, 30), (50, 40, 10)
-    image[2][1].rgbtRed = 30;
-    image[2][1].rgbtGreen = 10;
-    image[2][1].rgbtBlue = 30;
-    // (50, 40, 10)
-    image[2][2].rgbtRed = 50;
-    image[2][2].rgbtGreen = 40;
-    image[2][2].rgbtBlue = 10;
+    image[0][0] = (RGBTRIPLE){25, 10, 0};
+    image[0][1] = (RGBTRIPLE){30, 10, 0};
+    image[0][2] = (RGBTRIPLE){80, 60, 40};
+    image[1][0] = (RGBTRIPLE){90, 30, 20};
+    image[1][1] = (RGBTRIPLE){100, 40, 30};
+    image[1][2] = (RGBTRIPLE){90, 70, 80};
+    image[2][0] = (RGBTRIPLE){40, 20, 20};
+    image[2][1] = (RGBTRIPLE){30, 10, 30};
+    image[2][2] = (RGBTRIPLE){10, 40, 50};
 }
 
 void tearDown(void)
