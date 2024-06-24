@@ -1,7 +1,9 @@
 from typing import Set, Tuple
+
 import numpy as np
 import pytest
-from project import generate_diagonals, generate_win_combinations, reshape_to_2d
+
+from engine import Game
 
 
 class TestHelpers:
@@ -32,7 +34,7 @@ class TestHelpers:
         ],
     )
     def test_reshape_to_2d(self, input, size, expected):
-        assert reshape_to_2d(input, size).tolist() == expected
+        assert Game.reshape_to_2d(input, size).tolist() == expected
 
     # fmt: off
     @pytest.mark.parametrize(
@@ -62,7 +64,7 @@ class TestHelpers:
     )
     # fmt: on
     def test_generate_diagonals(self, array_nxm, size, expected):
-        actual = self.get_set_from_list(generate_diagonals(array_nxm, size).tolist())
+        actual = self.get_set_from_list(Game.generate_diagonals(array_nxm, size).tolist())
         expected = self.get_set_from_list(expected)
         assert actual == expected
 
@@ -75,5 +77,5 @@ class TestHelpers:
         ],
     )
     def test_generate_win_combinations(self, size: int, dimensions: int, expected: int):
-        actual = len(generate_win_combinations(size, dimensions))
+        actual = len(Game.generate_win_combinations(size, dimensions))
         assert actual == expected

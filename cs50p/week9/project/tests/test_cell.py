@@ -1,6 +1,6 @@
 import pytest
 
-from engine import Cell
+from engine.cell import Cell
 
 
 class TestCell:

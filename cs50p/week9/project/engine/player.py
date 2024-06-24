@@ -1,20 +1,8 @@
-from abc import ABC, abstractmethod
-from dataclasses import dataclass
-import random
-from typing import Hashable, Iterable
+from typing import Iterable
+
+from engine.abstracts import Movable
 
 
-@dataclass
-class ABCPlayer(ABC):
-    name: str
-    token: Hashable
-
-    @abstractmethod
+class RandomPLayer(Movable):
     def choose_move(self, moves: Iterable[int]) -> int:
-        raise NotImplementedError()
-
-
-class RandomPLayer(ABCPlayer):
-
-    def choose_move(self, moves: Iterable[int]) -> int:
-        return random.choice(moves)
+        raise NotImplementedError

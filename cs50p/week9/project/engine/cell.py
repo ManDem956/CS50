@@ -1,17 +1,12 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Hashable
+from typing import Any
+
+from engine.abstracts import Valuable
 
 
 @dataclass
-class ABCCell(ABC):
-    value: Hashable = None
+class Cell(Valuable):
+    value: Any = None
 
-    @abstractmethod
-    def is_empty(self) -> bool:
-        raise NotImplementedError()
-
-
-class Cell(ABCCell):
     def is_empty(self) -> bool:
         return self.value is None
