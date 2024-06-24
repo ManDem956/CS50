@@ -10,3 +10,8 @@ class ABCCell(ABC):
     @abstractmethod
     def is_empty(self) -> bool:
         raise NotImplementedError()
+
+
+class Cell(ABCCell):
+    def is_empty(self) -> bool:
+        return self.value is None
