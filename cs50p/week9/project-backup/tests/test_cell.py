@@ -15,4 +15,4 @@ class TestCell:
     )
     def test_cell(self, generic_cell, input: bool, expected: bool):
         generic_cell.value = input
-        assert generic_cell.is_empty() == expected
+        assert generic_cell.is_empty == expected

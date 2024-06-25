@@ -1,12 +1,11 @@
 from dataclasses import dataclass
-from typing import Any
-
-from engine.abstracts import Valuable
+from engine.abstracts import Movable, Valuable
 
 
 @dataclass
 class Cell(Valuable):
-    value: Any = None
+    value: Movable | None = None
 
+    @property
     def is_empty(self) -> bool:
         return self.value is None
