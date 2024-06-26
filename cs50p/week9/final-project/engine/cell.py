@@ -1,10 +1,12 @@
 from dataclasses import dataclass
-from typing import Any
+from typing import Hashable
+
+from engine.abstracts import CanBeEmpty
 
 
 @dataclass
-class Cell:
-    value: Any = None
+class Cell(CanBeEmpty):
+    value: Hashable = None
 
     def is_empty(self) -> bool:
         return self.value is None

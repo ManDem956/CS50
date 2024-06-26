@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any, Iterable, Set, Tuple
+from typing import Any, List, Set, Tuple
 
-from engine.abstracts import CanBeEmpty, HasWinner, Moves, Playable
+from engine.abstracts import CanBeEmpty, Moves, Playable
 from engine.cell import Cell
 
 
 @dataclass
-class Board(Playable, CanBeEmpty, HasWinner):
+class Board(Playable):
     size: int
     dimensions: int
     inception: int
@@ -23,6 +23,8 @@ class Board(Playable, CanBeEmpty, HasWinner):
             )
 
     def is_empty(self) -> bool:
+        if self.value is not None:
+            return False
         return any(cell.is_empty() for cell in self.cells)
 
     def get_available_moves(self) -> Moves[int]:
@@ -36,14 +38,26 @@ class Board(Playable, CanBeEmpty, HasWinner):
         }
         return result
 
-    def place_move(self, move: Iterable[int], player: Any) -> None:
-        raise NotImplementedError
+    def place_move(self, move: List[int], player: Any) -> None:
+        if len(move) != self.inception + 1:
+            raise ValueError("Invalid move")
 
-    def __get_winner(self) -> None:
+        current_move = move.pop()
+
+        if current_move not in self.get_available_moves():
+            raise ValueError("Invalid move")
+
+        if self.inception == 0:
+            self.cells[current_move].value = player
+        else:
+            self.cells[current_move].place_move(move, player)
+
+    def __get_winner(self) -> Any:
         for combination in self.win_combinations:
             cell_values = {self.cells[idx].value for idx in combination}
-            if len(cell_values) == 1 and cell_values[0] is not None:
-                return cell_values.pop()
+            result = cell_values.pop()
+            if len(cell_values) == 0 and result is not None:
+                return result
         return None
 
     @property
