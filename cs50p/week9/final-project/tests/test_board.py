@@ -53,16 +53,8 @@ class TestBoard:
     @pytest.mark.parametrize(
         "board, moves, expected",
         [
-            (
-                {"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}},
-                ([0], [2]),
-                False,
-            ),
-            (
-                {"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}},
-                ([0], [1]),
-                True,
-            ),
+            ({"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}}, ([0], [2]), False),
+            ({"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}}, ([0], [1]), True),
         ],
         indirect=["board"],
     )
@@ -89,7 +81,7 @@ class TestBoard:
                         (1, 4, 7),
                         (2, 5, 8),
                         (0, 4, 8),
-                        (2, 4, 6)
+                        (2, 4, 6),
                     },
                 },
                 4242,
@@ -108,7 +100,7 @@ class TestBoard:
                         (1, 4, 7),
                         (2, 5, 8),
                         (0, 4, 8),
-                        (2, 4, 6)
+                        (2, 4, 6),
                     },
                 },
                 424242,
