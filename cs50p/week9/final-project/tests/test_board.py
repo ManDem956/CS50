@@ -12,24 +12,24 @@ class TestBoard:
         size = request.param["size"]
         dimensions = request.param["dimensions"]
         inception = request.param["inception"]
-        win_combinations = request.param["wins"]
+        win_combinations = request.param["winners"]
         return Board(size, dimensions, inception, win_combinations)
 
     @pytest.mark.parametrize(
         "board, expected",
         [
-            ({"size": 2, "dimensions": 2, "inception": 0, "wins": {(0, 2)}}, 2**2),
-            ({"size": 2, "dimensions": 2, "inception": 1, "wins": {(0, 2)}}, 2**2),
-            ({"size": 2, "dimensions": 2, "inception": 2, "wins": {(0, 2)}}, 2**2),
-            ({"size": 3, "dimensions": 2, "inception": 0, "wins": {(0, 4, 8)}}, 3**2),
-            ({"size": 3, "dimensions": 2, "inception": 1, "wins": {(0, 4, 8)}}, 3**2),
-            ({"size": 3, "dimensions": 2, "inception": 2, "wins": {(0, 4, 8)}}, 3**2),
-            ({"size": 3, "dimensions": 3, "inception": 0, "wins": {(0, 13, 26)}}, 3**3),
-            ({"size": 3, "dimensions": 3, "inception": 1, "wins": {(0, 13, 26)}}, 3**3),
-            ({"size": 3, "dimensions": 3, "inception": 2, "wins": {(0, 13, 26)}}, 3**3),
-            ({"size": 4, "dimensions": 3, "inception": 0, "wins": {(0, 5, 10, 15)}}, 4**3),
-            ({"size": 4, "dimensions": 3, "inception": 1, "wins": {(0, 5, 10, 15)}}, 4**3),
-            ({"size": 4, "dimensions": 3, "inception": 2, "wins": {(0, 5, 10, 15)}}, 4**3),
+            ({"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}}, 2**2),
+            ({"size": 2, "dimensions": 2, "inception": 1, "winners": {(0, 2)}}, 2**2),
+            ({"size": 2, "dimensions": 2, "inception": 2, "winners": {(0, 2)}}, 2**2),
+            ({"size": 3, "dimensions": 2, "inception": 0, "winners": {(0, 4, 8)}}, 3**2),
+            ({"size": 3, "dimensions": 2, "inception": 1, "winners": {(0, 4, 8)}}, 3**2),
+            ({"size": 3, "dimensions": 2, "inception": 2, "winners": {(0, 4, 8)}}, 3**2),
+            ({"size": 3, "dimensions": 3, "inception": 0, "winners": {(0, 13, 26)}}, 3**3),
+            ({"size": 3, "dimensions": 3, "inception": 1, "winners": {(0, 13, 26)}}, 3**3),
+            ({"size": 3, "dimensions": 3, "inception": 2, "winners": {(0, 13, 26)}}, 3**3),
+            ({"size": 4, "dimensions": 3, "inception": 0, "winners": {(0, 5, 10, 15)}}, 4**3),
+            ({"size": 4, "dimensions": 3, "inception": 1, "winners": {(0, 5, 10, 15)}}, 4**3),
+            ({"size": 4, "dimensions": 3, "inception": 2, "winners": {(0, 5, 10, 15)}}, 4**3),
         ],
         indirect=["board"],
     )
@@ -40,10 +40,10 @@ class TestBoard:
     @pytest.mark.parametrize(
         "board, expected",
         [
-            ({"size": 2, "dimensions": 2, "inception": 0, "wins": {(0, 2)}}, True),
-            ({"size": 3, "dimensions": 2, "inception": 0, "wins": {(0, 4, 8)}}, True),
-            ({"size": 3, "dimensions": 3, "inception": 0, "wins": {(0, 13, 26)}}, True),
-            ({"size": 4, "dimensions": 3, "inception": 0, "wins": {(0, 5, 10, 15)}}, True),
+            ({"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}}, True),
+            ({"size": 3, "dimensions": 2, "inception": 0, "winners": {(0, 4, 8)}}, True),
+            ({"size": 3, "dimensions": 3, "inception": 0, "winners": {(0, 13, 26)}}, True),
+            ({"size": 4, "dimensions": 3, "inception": 0, "winners": {(0, 5, 10, 15)}}, True),
         ],
         indirect=["board"],
     )
@@ -54,12 +54,12 @@ class TestBoard:
         "board, moves, expected",
         [
             (
-                {"size": 2, "dimensions": 2, "inception": 0, "wins": {(0, 2)}},
+                {"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}},
                 ([0], [2]),
                 False,
             ),
             (
-                {"size": 2, "dimensions": 2, "inception": 0, "wins": {(0, 2)}},
+                {"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}},
                 ([0], [1]),
                 True,
             ),
@@ -81,7 +81,7 @@ class TestBoard:
                     "size": 3,
                     "dimensions": 2,
                     "inception": 0,
-                    "wins": {
+                    "winners": {
                         (0, 1, 2),
                         (3, 4, 5),
                         (6, 7, 8),
@@ -100,7 +100,7 @@ class TestBoard:
                     "size": 3,
                     "dimensions": 2,
                     "inception": 0,
-                    "wins": {
+                    "winners": {
                         (0, 1, 2),
                         (3, 4, 5),
                         (6, 7, 8),
