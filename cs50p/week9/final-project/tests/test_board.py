@@ -5,45 +5,47 @@ import pytest
 from engine.board import Board
 
 
+def get_expected(length: int, inception: int):
+    if inception == 0:
+        return tuple(range(length))
+    return {key: get_expected(length, inception - 1) for key in range(length)}
+
+
 class TestBoard:
 
     @pytest.fixture
     def board(self, request) -> Board:
-        size = request.param["size"]
-        dimensions = request.param["dimensions"]
-        inception = request.param["inception"]
-        win_combinations = request.param["winners"]
-        return Board(size, dimensions, inception, win_combinations)
+        return Board(**request.param)
 
     @pytest.mark.parametrize(
         "board, expected",
         [
-            ({"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}}, 2**2),
-            ({"size": 2, "dimensions": 2, "inception": 1, "winners": {(0, 2)}}, 2**2),
-            ({"size": 2, "dimensions": 2, "inception": 2, "winners": {(0, 2)}}, 2**2),
-            ({"size": 3, "dimensions": 2, "inception": 0, "winners": {(0, 4, 8)}}, 3**2),
-            ({"size": 3, "dimensions": 2, "inception": 1, "winners": {(0, 4, 8)}}, 3**2),
-            ({"size": 3, "dimensions": 2, "inception": 2, "winners": {(0, 4, 8)}}, 3**2),
-            ({"size": 3, "dimensions": 3, "inception": 0, "winners": {(0, 13, 26)}}, 3**3),
-            ({"size": 3, "dimensions": 3, "inception": 1, "winners": {(0, 13, 26)}}, 3**3),
-            ({"size": 3, "dimensions": 3, "inception": 2, "winners": {(0, 13, 26)}}, 3**3),
-            ({"size": 4, "dimensions": 3, "inception": 0, "winners": {(0, 5, 10, 15)}}, 4**3),
-            ({"size": 4, "dimensions": 3, "inception": 1, "winners": {(0, 5, 10, 15)}}, 4**3),
-            ({"size": 4, "dimensions": 3, "inception": 2, "winners": {(0, 5, 10, 15)}}, 4**3),
+            ({"size": 2, "dimensions": 2, "inception": 0, "wins": {(0, 2)}}, get_expected(2**2, 0)),
+            ({"size": 2, "dimensions": 2, "inception": 1, "wins": {(0, 2)}}, get_expected(2**2, 1)),
+            ({"size": 2, "dimensions": 2, "inception": 2, "wins": {(0, 2)}}, get_expected(2**2, 2)),
+            ({"size": 3, "dimensions": 2, "inception": 0, "wins": {(0, 4, 8)}}, get_expected(3**2, 0)),
+            ({"size": 3, "dimensions": 2, "inception": 1, "wins": {(0, 4, 8)}}, get_expected(3**2, 1)),
+            ({"size": 3, "dimensions": 2, "inception": 2, "wins": {(0, 4, 8)}}, get_expected(3**2, 2)),
+            ({"size": 3, "dimensions": 3, "inception": 0, "wins": {(0, 13, 26)}}, get_expected(3**3, 0)),
+            ({"size": 3, "dimensions": 3, "inception": 1, "wins": {(0, 13, 26)}}, get_expected(3**3, 1)),
+            ({"size": 3, "dimensions": 3, "inception": 2, "wins": {(0, 13, 26)}}, get_expected(3**3, 2)),
+            ({"size": 4, "dimensions": 3, "inception": 0, "wins": {(0, 5, 10, 15)}}, get_expected(4**3, 0)),
+            ({"size": 4, "dimensions": 3, "inception": 1, "wins": {(0, 5, 10, 15)}}, get_expected(4**3, 1)),
+            ({"size": 4, "dimensions": 3, "inception": 2, "wins": {(0, 5, 10, 15)}}, get_expected(4**3, 2)),
         ],
         indirect=["board"],
     )
     def test_board_available_moves(self, board, expected):
-        assert len(board.get_available_moves()) == expected
+        assert board.get_available_moves() == expected
         assert board.value is None
 
     @pytest.mark.parametrize(
         "board, expected",
         [
-            ({"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}}, True),
-            ({"size": 3, "dimensions": 2, "inception": 0, "winners": {(0, 4, 8)}}, True),
-            ({"size": 3, "dimensions": 3, "inception": 0, "winners": {(0, 13, 26)}}, True),
-            ({"size": 4, "dimensions": 3, "inception": 0, "winners": {(0, 5, 10, 15)}}, True),
+            ({"size": 2, "dimensions": 2, "inception": 0, "wins": {(0, 2)}}, True),
+            ({"size": 3, "dimensions": 2, "inception": 0, "wins": {(0, 4, 8)}}, True),
+            ({"size": 3, "dimensions": 3, "inception": 0, "wins": {(0, 13, 26)}}, True),
+            ({"size": 4, "dimensions": 3, "inception": 0, "wins": {(0, 5, 10, 15)}}, True),
         ],
         indirect=["board"],
     )
@@ -53,8 +55,8 @@ class TestBoard:
     @pytest.mark.parametrize(
         "board, moves, expected",
         [
-            ({"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}}, ([0], [2]), False),
-            ({"size": 2, "dimensions": 2, "inception": 0, "winners": {(0, 2)}}, ([0], [1]), True),
+            ({"size": 2, "dimensions": 2, "inception": 0, "wins": {(0, 2)}}, ([0], [2]), False),
+            ({"size": 2, "dimensions": 2, "inception": 0, "wins": {(0, 2)}}, ([0], [1]), True),
         ],
         indirect=["board"],
     )
@@ -73,16 +75,7 @@ class TestBoard:
                     "size": 3,
                     "dimensions": 2,
                     "inception": 0,
-                    "winners": {
-                        (0, 1, 2),
-                        (3, 4, 5),
-                        (6, 7, 8),
-                        (0, 3, 6),
-                        (1, 4, 7),
-                        (2, 5, 8),
-                        (0, 4, 8),
-                        (2, 4, 6),
-                    },
+                    "wins": {(0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6)},
                 },
                 4242,
                 0,
@@ -92,16 +85,7 @@ class TestBoard:
                     "size": 3,
                     "dimensions": 2,
                     "inception": 0,
-                    "winners": {
-                        (0, 1, 2),
-                        (3, 4, 5),
-                        (6, 7, 8),
-                        (0, 3, 6),
-                        (1, 4, 7),
-                        (2, 5, 8),
-                        (0, 4, 8),
-                        (2, 4, 6),
-                    },
+                    "wins": {(0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6)},
                 },
                 424242,
                 1,
@@ -114,8 +98,6 @@ class TestBoard:
         players_cycle = itertools.cycle(random_players)
         while not board.value:
             current_player = next(players_cycle)
-            board.place_move(
-                current_player.calculate_move(board.get_available_moves()), current_player
-            )
+            board.place_move(current_player.calculate_move(board.get_available_moves()), current_player)
 
         assert board.value == random_players[expected]

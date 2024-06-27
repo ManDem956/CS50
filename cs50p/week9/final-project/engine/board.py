@@ -10,7 +10,7 @@ class Board(Playable):
     size: int
     dimensions: int
     inception: int
-    win_combinations: Set[Tuple[int]]
+    wins: Set[Tuple[int]]
     cells: Tuple[CanBeEmpty, ...] = field(init=False)
 
     def __post_init__(self):
@@ -18,7 +18,7 @@ class Board(Playable):
             self.cells = tuple(Cell() for _ in range(self.size**self.dimensions))
         else:
             self.cells = tuple(
-                Board(self.size, self.dimensions, self.inception - 1, self.win_combinations)
+                Board(self.size, self.dimensions, self.inception - 1, self.wins)
                 for _ in range(self.size**self.dimensions)
             )
 
@@ -53,7 +53,7 @@ class Board(Playable):
             self.cells[current_move].place_move(move, player)
 
     def __get_winner(self) -> Any:
-        for combination in self.win_combinations:
+        for combination in self.wins:
             cell_values = {self.cells[idx].value for idx in combination}
             result = cell_values.pop()
             if len(cell_values) == 0 and result is not None:

@@ -7,30 +7,30 @@ from contextlib import nullcontext as does_not_raise
 
 from engine.player import RandomPlayer
 
-MAX_VALUE_LENGTH = 16
+MAX_VALUE_LENGTH = 70
 
 
-def shorten(value) -> str:
+def shorten(value, max_len=MAX_VALUE_LENGTH) -> str:
     result = str(value)
-    if len(result) > MAX_VALUE_LENGTH:
-        result = f"{result[:MAX_VALUE_LENGTH]}..."
-    return f"( {result} )"
+    if len(result) > max_len:
+        result = f"{result[:MAX_VALUE_LENGTH//4]}...{result[-MAX_VALUE_LENGTH//4:]}"
+    return result
+
+
+def shorten_dict(value, max_len=MAX_VALUE_LENGTH) -> str:
+    result = str(value)
+    if len(result) > max_len:
+        return f"{result[:MAX_VALUE_LENGTH//4]}...{result[-MAX_VALUE_LENGTH//4:]}"
+    return "-".join(f"{key}:{shorten(val)}" for key, val in value.items())
 
 
 def pytest_make_parametrize_id(config: pytest.Config, val: object, argname: str) -> str | None:
     if isinstance(val, (int, float, bool)):
+        return f"{argname}:{val}"
+    elif isinstance(val, (tuple, list, set)):
         return f"{argname}:{shorten(val)}"
-    if isinstance(val, (dict,)):
-        return "-".join(f"{key}:{shorten(value)}" for key, value in val.items())
-    elif isinstance(
-        val,
-        (
-            tuple,
-            list,
-            set,
-        ),
-    ):
-        return f"{argname}:{str(len(val))}"
+    elif isinstance(val, (dict,)):
+        return f"{argname}:{shorten_dict(val)}"
     elif isinstance(val, (does_not_raise,)):
         return f"{argname}:does_not_raise"
     elif isinstance(val, (NoneType,)):
@@ -44,12 +44,12 @@ def pytest_make_parametrize_id(config: pytest.Config, val: object, argname: str)
 
 @pytest.fixture
 def random_player_x():
-    return RandomPlayer('x')
+    return RandomPlayer("x")
 
 
 @pytest.fixture
 def random_player_y():
-    return RandomPlayer('o')
+    return RandomPlayer("o")
 
 
 @pytest.fixture
