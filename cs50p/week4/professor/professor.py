@@ -2,7 +2,7 @@ import random
 
 CONST_USER_PROMPT_LEVEL = "Level"
 CONST_ERROR = "EEE"
-CONST_RANGES = {1: (0, 10), 2: (10, 100), 3: (100, 1000)}
+CONST_ALLOW_RANGE = range(1, 4)
 
 
 def get_user_input(message: str, sep: str = ": ") -> str:
@@ -11,7 +11,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 
 def get_level(message: str = CONST_USER_PROMPT_LEVEL) -> int:
     result = 0
-    while result not in range(1, 4):
+    while result not in CONST_ALLOW_RANGE:
         try:
             result = int(get_user_input(message))
         except ValueError:
@@ -21,9 +21,10 @@ def get_level(message: str = CONST_USER_PROMPT_LEVEL) -> int:
 
 
 def generate_integer(level: int) -> int:
-    if level not in range(1, 4):
-        raise ValueError("Level must in range [1..3] inclusive")
-    return random.randrange(*CONST_RANGES[level])
+    if level not in CONST_ALLOW_RANGE:
+        raise ValueError(f"Level must in range {list(CONST_ALLOW_RANGE)}")
+    the_range = (10**level,) if level <= 1 else (10 ** (level - 1), 10**level)
+    return random.randrange(*the_range)
 
 
 def do_game(level) -> int:
