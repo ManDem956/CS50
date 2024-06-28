@@ -4,6 +4,7 @@
 
 #include "helpers.h"
 
+#ifndef TEST
 int main(int argc, char *argv[])
 {
     // Define allowable filters
@@ -148,3 +149,4 @@ int main(int argc, char *argv[])
     fclose(outptr);
     return 0;
 }
+#endif

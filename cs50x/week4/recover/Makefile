@@ -15,14 +15,14 @@ endif
 
 CD = cd
 
-# .SECONDARY:
+.SECONDARY:
 
 CHECK50 = check50 cs50/problems/2024/x/
 STYLE50 = style50
 
 .PHONY: clean
 .PHONY: test
-# .PHONY: %
+.PHONY: %
 .PHONY: run
 
 PATHU = unity/src/
@@ -55,8 +55,6 @@ CS50LIBS = -lcrypt -lcs50 -lm
 
 RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT) )
 RUNPATHS = $(patsubst $(PATHS)%.c,$(PATHB)%,$(SRCS) )
-OBJPATHS = $(patsubst $(PATHS)%.c,$(PATHO)%.o,$(SRCS) )
-
 
 PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL = `grep -s FAIL $(PATHR)*.txt`
@@ -66,7 +64,7 @@ run: $(RUNPATHS)
 	./$< $(ARGS)
 
 %: $(PATHB)% #$(PATHD)Test%.d
-	@echo Building....
+	@echo
 
 validate/%:
 	$(CD) $(PATHS) ; pwd ; $(CHECK50)$(*F); $(STYLE50) $(*F).c
@@ -84,10 +82,10 @@ test: $(BUILD_PATHS) $(RESULTS)
 $(PATHR)%.txt: $(PATHB)%.$(TARGET_EXTENSION)
 	-./$< > $@ 2>&1
 
-$(PATHB)%: $(PATHO)%.o $(filter-out $(MAKECMDGOALS:%=$(PATHO)%.o), $(OBJPATHS)) #$(PATHD)%.d
+$(PATHB)%: $(PATHO)%.o #$(PATHD)Test%.d
 	$(LINK)  -o  $@  $^ $(CS50LIBS)
 
-$(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(filter-out $(MAKECMDGOALS:%=$(PATHO)%.o), $(OBJPATHS)) $(PATHO)unity.o #$(PATHD)Test%.d
+$(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)%.o $(PATHO)unity.o #$(PATHD)Test%.d
 	$(LINK)  -o  $@  $^ $(CS50LIBS)
 
 $(PATHO)%.o:: $(PATHT)%.c
