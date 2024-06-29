@@ -1,3 +1,4 @@
+#include <cs50.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,6 +10,8 @@ typedef struct node
     struct node *right;
     int height;
 } node;
+
+bool unload(node *list);
 
 int height(struct node *root)
 {
@@ -31,19 +34,22 @@ int getBalance(struct node *root)
 
 node *push(node *root, int value)
 {
-    node *new = malloc(sizeof(node));
-    if (new == NULL)
-    {
-        printf("Error: unable to allocate memory\n");
-        return NULL;
-    }
 
     if (root == NULL)
     {
+        node *new = malloc(sizeof(node));
+        if (new == NULL)
+        {
+            printf("Error: unable to allocate memory\n");
+            unload(root);
+            return NULL;
+        }
+
         new->value = value;
         new->left = NULL;
         new->right = NULL;
         new->height = 1;
+
         return new;
     }
 
@@ -56,11 +62,9 @@ node *push(node *root, int value)
         root->right = push(root->right, value);
     }
 
-
     root->height = 1 + max(height(root->left), height(root->right));
 
     return root;
-
 }
 
 int main(int argc, char **argv)
@@ -84,9 +88,29 @@ int main(int argc, char **argv)
     {
         printf("%d\n", root->value);
         printf("%d\n", getBalance(root));
-
     }
+
+    if (root !=NULL)
+        unload(root);
     return 0;
+}
 
+bool unload(node *list)
+{
+    if (list == NULL)
+        return (list == NULL);
 
+    if (list->left != NULL)
+    {
+        unload(list->left);
+    }
+
+    if (list->right != NULL)
+    {
+        unload(list->right);
+    }
+
+    free(list);
+
+    return (list == NULL);
 }
