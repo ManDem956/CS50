@@ -77,7 +77,7 @@ int main(int argc, char **argv)
     // create a binary tree of 10 elements
     for (int i = 0; i < count; i++)
     {
-        root = push(root, i);
+        root = push(root, rand() % 10);
     }
 
     if (root != NULL)
