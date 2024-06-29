@@ -25,8 +25,11 @@ int main(void)
 
         node *new = malloc(sizeof(node));
         if (new == NULL)
+        {
+            unload(list);
             return 1;
-            
+        }
+
         new->phrase = phrase;
         new->next = list;
         list = new;
