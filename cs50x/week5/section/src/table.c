@@ -1,4 +1,5 @@
 #include <cs50.h>
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -25,11 +26,64 @@ int main(void)
         // Find phrase bucket
         int bucket = hash(phrase);
         printf("%s hashes to %i\n", phrase, bucket);
+        node *new = malloc(sizeof(node));
+        if (new == NULL)
+        {
+            for (char bucket = 0; bucket < 26; bucket++)
+                unload(table[bucket]);
+            return 1;
+        }
+
+        new->phrase = phrase;
+        new->next = table[bucket];
+
+        table[bucket] = new;
     }
+
+    for (char bucket = 'A'; bucket < 'Z'; bucket++)
+    {
+
+        if (table[bucket - 'A'] != NULL)
+        {
+            printf("Bucket of [%c]:\n", toupper(bucket));
+            visualizer(table[bucket - 'A']);
+        }
+    }
+
+    for (char bucket = 0; bucket < 26; bucket++)
+        unload(table[bucket]);
 }
 
-// TODO: return the correct bucket for a given phrase
+// return the correct bucket for a given phrase
 int hash(string phrase)
 {
-    return 0;
+    int result = toupper(phrase[0]) - 'A';
+    if ((0 <= result) && (result <= 26))
+        return result;
+    return -1;
+}
+
+bool unload(node *list)
+{
+    while (list != NULL)
+    {
+        node *tmp = list->next;
+        free(list);
+        list = tmp;
+    }
+    return (list == NULL);
+}
+
+void visualizer(node *list)
+{
+    if (list == NULL)
+        return;
+
+    printf("\n+-- List Visualizer --+\n\n");
+    while (list != NULL)
+    {
+        printf("Location %p\nPhrase: \"%s\"\nNext: %p\n\n", list, list->phrase, list->next);
+        list = list->next;
+    }
+    printf("+---------------------+\n\n");
 }
