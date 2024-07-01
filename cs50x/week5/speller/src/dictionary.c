@@ -18,6 +18,7 @@ typedef struct node
 
 // hash data
 const unsigned int M_MOD = 10000019 + 1; // 664580-th prime number
+// const unsigned int M_MOD = 1000000009 + 1;  // magic number
 const unsigned char PRIME = 31;
 unsigned int hashLength = 12;
 unsigned long long *primePowersCache;
@@ -100,7 +101,7 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
     FILE *fp = fopen(dictionary, "rt");
-    hashLength = 5;
+    // hashLength = 6;
     initHashSettings(fp);
     initPrimePowerCache();
 
