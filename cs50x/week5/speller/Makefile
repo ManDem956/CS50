@@ -40,10 +40,10 @@ SRCS = $(wildcard $(PATHS)*.c)
 
 undefine CFLAGS
 
-COMPILE=gcc -c -g
-LINK=gcc
+COMPILE=clang -c -g
+LINK=clang
 DEPEND=gcc -MM -MG -MF 
-CFLAGS=-I. -I$(PATHU) -I$(PATHS)
+CFLAGS=-I. -I$(PATHU) -I$(PATHS) -ggdb3 -gdwarf-4 -O0 -Qunused-arguments -std=c11 -Wall -Werror -Wextra -Wno-gnu-folding-constant -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow
 
 # COMPILE=clang
 # LINK=clang -v
@@ -51,7 +51,7 @@ CFLAGS=-I. -I$(PATHU) -I$(PATHS)
 # CFLAGS=-ferror-limit=1 -gdwarf-4 -ggdb3 -O0 -std=c11 -pedantic -Wall -Werror -Wextra -Wno-gnu-folding-constant -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Wshadow -Wnonportable-include-path -I. -I$(PATHU) -I$(PATHS)
 
 # from CS50
-CS50LIBS = -lcrypt -lcs50 -lm
+CS50LIBS = -lm
 
 RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT) )
 RUNPATHS = $(patsubst $(PATHS)%.c,$(PATHB)%,$(SRCS) )
@@ -84,16 +84,16 @@ test: $(BUILD_PATHS) $(RESULTS)
 $(PATHR)%.txt: $(PATHB)%.$(TARGET_EXTENSION)
 	-./$< > $@ 2>&1
 
-$(PATHB)%: $(PATHO)%.o  #$(PATHD)%.d
+$(PATHB)%: $(PATHO)%.o  $(filter-out $(MAKECMDGOALS:%=$(PATHO)%.o), $(OBJPATHS)) #$(PATHD)%.d
 	$(LINK)  -o  $@  $^ $(CS50LIBS)
 
-$(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)unity.o #$(PATHD)Test%.d
+$(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)dictionary.o $(PATHO)unity.o #$(PATHD)Test%.d
 	$(LINK)  -o  $@  $^ $(CS50LIBS)
 
 $(PATHO)%.o:: $(PATHT)%.c
 	$(COMPILE) $(CFLAGS) $< -o $@ $(CS50LIBS)
 
-$(PATHO)%.o:: $(PATHS)%.c #$(PATHS)%.h
+$(PATHO)%.o:: $(PATHS)%.c $(PATHS)%.h
 	$(COMPILE) $(CFLAGS) $< -o $@ $(CS50LIBS)
 
 $(PATHO)%.o:: $(PATHU)%.c $(PATHU)%.h	
