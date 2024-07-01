@@ -8,12 +8,12 @@
 // Maximum length for a word
 // (e.g., pneumonoultramicroscopicsilicovolcanoconiosis)
 #define LENGTH 45
+#define ABCLENGTH 26
 
 typedef struct stats
 {
     unsigned int length;
     unsigned int count;
-    float ratio;
     unsigned int weight;
 } stats;
 
@@ -27,7 +27,10 @@ unsigned int size(void);
 bool unload(void);
 
 
+void print_buckets(void);
 void initHashSettings(FILE *fp);
+void initPrimePowerCache();
+void initCharHashMRUHash();
 void statFile(FILE *fp, stats *wordLengths);
 void swap(stats *left, stats *right);
 void do_sort(size_t size, stats n[]);

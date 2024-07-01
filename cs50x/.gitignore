@@ -13,7 +13,8 @@
 texts*
 keys*
 dictionaries*
-build
+output*
+build*
 data*
 *.zip
 *.csv*
