@@ -39,26 +39,30 @@ bool unload_bucket(node *list);
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    // for ( ; *word; ++word) *word = tolower(*word);
     unsigned int currentHash = hash(word);
-    // if (table[currentHash] != NULL)
-    // {
-
-    const char *lastPart = &word[0];
-    if (strlen(word) > hashLength)
-        lastPart = &word[hashLength];
+    unsigned int wordLength = strlen(word);
 
     node *currentWord = table[currentHash];
     while (currentWord != NULL)
     {
-        // if (wordLength < hashLength)
-        //     return true;
+        unsigned int currentWordLength = strlen(currentWord->word);
+        if (wordLength != currentWordLength)
+        {
+            currentWord = currentWord->next;
+            continue;
+        }
+
         const char *currentLastPart = &(currentWord->word)[0];
-        if (strlen(currentWord->word) > hashLength)
+        if (currentWordLength > hashLength)
             currentLastPart = &(currentWord->word)[hashLength];
 
-        if (strcasecmp(lastPart, currentLastPart) == 0)
+        const char *wordLastPart = &word[0];
+        if (wordLength > hashLength)
+            wordLastPart = &word[hashLength];
+
+        if (strcasecmp(wordLastPart, currentLastPart) == 0)
             return true;
+
         currentWord = currentWord->next;
     }
     // }
@@ -97,7 +101,7 @@ bool load(const char *dictionary)
 {
     FILE *fp = fopen(dictionary, "rt");
     hashLength = 5;
-    // initHashSettings(fp);
+    initHashSettings(fp);
     initPrimePowerCache();
 
     char line[LENGTH + 1];
@@ -273,12 +277,12 @@ void do_sort(size_t size, stats n[])
 void print_buckets(void)
 {
     unsigned long sum_sq = 0;
-    int num_words = (int)size();
+    int num_words = (int) size();
 
     // use dynamic memory allocation instead of the stack for these arrays,
     // in order to prevent a possible stack overflow
     int *collisionCount = calloc(num_words, sizeof *collisionCount);
-    int *bucketCounter  = calloc(N, sizeof *bucketCounter);
+    int *bucketCounter = calloc(N, sizeof *bucketCounter);
     if (bucketCounter == NULL || collisionCount == NULL)
     {
         printf("Memory allocation error!\n");
@@ -312,8 +316,8 @@ void print_buckets(void)
 
     // print final information
     printf("\n");
-    printf("Sum  of squares: %lu\n",  sum_sq);
-    printf("Mean of squares: %.3f\n", (double)sum_sq / num_words);
+    printf("Sum  of squares: %lu\n", sum_sq);
+    printf("Mean of squares: %.3f\n", (double) sum_sq / num_words);
 
     // Exit the program prematurely, so that you can see the diagnostic output
     // instead of the misspelled words. Exiting prematurely will cause memory leaks,
