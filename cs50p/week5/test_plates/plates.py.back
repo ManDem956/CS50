@@ -18,21 +18,7 @@ def is_valid(s: str) -> bool:
     if not 2 <= len(s) <= 6:
         return False
 
-    d_idx = get_first_digit_index(s)
-
-    if d_idx > 0:
-        if d_idx < 2:
-            return False
-
-        if s[d_idx] == "0":
-            return False
-
-        if not is_valid_digit(s[d_idx:]):
-            return False
-
-        return is_valid_alpha(s[:d_idx])
-
-    return is_valid_alpha(s)
+    return is_valid_alpha(s[0:2]) and is_valid_digit(s)
 
 
 def get_first_digit_index(s: str) -> int:
@@ -43,8 +29,9 @@ def get_first_digit_index(s: str) -> int:
 
 
 def is_valid_digit(s: str) -> bool:
-
-    return all(char.isdigit() for char in s)
+    if (digit_index := get_first_digit_index(s)) > 0:
+        return (s[digit_index] != "0") and all(char.isdigit() for char in s[digit_index:])
+    return True
 
 
 def is_valid_alpha(s: str) -> bool:
