@@ -89,3 +89,8 @@ dkms.conf
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+*.txt
+*.csv
+
+*.pyc
