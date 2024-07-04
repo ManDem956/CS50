@@ -1,0 +1,180 @@
+{
+	"folders": [
+		{
+			"name": "week0 - einstein",
+			"path": "week0/einstein"
+		},
+		{
+			"name": "week0 - faces",
+			"path": "week0/faces"
+		},
+		{
+			"name": "week0 - indoor",
+			"path": "week0/indoor"
+		},
+		{
+			"name": "week0 - playback",
+			"path": "week0/playback"
+		},
+		{
+			"name": "week0 - tip",
+			"path": "week0/tip"
+		},
+		{
+			"name": "week1 - bank",
+			"path": "week1/bank"
+		},
+		{
+			"name": "week1 - deep",
+			"path": "week1/deep"
+		},
+		{
+			"name": "week1 - extensions",
+			"path": "week1/extensions"
+		},
+		{
+			"name": "week1 - interpreter",
+			"path": "week1/interpreter"
+		},
+		{
+			"name": "week1 - meal",
+			"path": "week1/meal"
+		},
+		{
+			"name": "week2 - camel",
+			"path": "week2/camel"
+		},
+		{
+			"name": "week2 - coke",
+			"path": "week2/coke"
+		},
+		{
+			"name": "week2 - nutrition",
+			"path": "week2/nutrition"
+		},
+		{
+			"name": "week2 - plates",
+			"path": "week2/plates"
+		},
+		{
+			"name": "week2 - twttr",
+			"path": "week2/twttr"
+		},
+		{
+			"name": "week3 - fuel",
+			"path": "week3/fuel"
+		},
+		{
+			"name": "week3 - grocery",
+			"path": "week3/grocery"
+		},
+		{
+			"name": "week3 - outdated",
+			"path": "week3/outdated"
+		},
+		{
+			"name": "week3 - taqueria",
+			"path": "week3/taqueria"
+		},
+		{
+			"name": "week4 - adieu",
+			"path": "week4/adieu"
+		},
+		{
+			"name": "week4 - bitcoin",
+			"path": "week4/bitcoin"
+		},
+		{
+			"name": "week4 - emojize",
+			"path": "week4/emojize"
+		},
+		{
+			"name": "week4 - figlet",
+			"path": "week4/figlet"
+		},
+		{
+			"name": "week4 - game",
+			"path": "week4/game"
+		},
+		{
+			"name": "week4 - professor",
+			"path": "week4/professor"
+		},
+		{
+			"name": "week5 - test_bank",
+			"path": "week5/test_bank"
+		},
+		{
+			"name": "week5 - test_fuel",
+			"path": "week5/test_fuel"
+		},
+		{
+			"name": "week5 - test_plates",
+			"path": "week5/test_plates"
+		},
+		{
+			"name": "week5 - test_twttr",
+			"path": "week5/test_twttr"
+		},
+		{
+			"name": "week6 - lines",
+			"path": "week6/lines"
+		},
+		{
+			"name": "week6 - pizza",
+			"path": "week6/pizza"
+		},
+		{
+			"name": "week6 - scourgify",
+			"path": "week6/scourgify"
+		},
+		{
+			"name": "week6 - shirt",
+			"path": "week6/shirt"
+		},
+		{
+			"name": "week7 - numb3rs",
+			"path": "week7/numb3rs"
+		},
+		{
+			"name": "week7 - response",
+			"path": "week7/response"
+		},
+		{
+			"name": "week7 - um",
+			"path": "week7/um"
+		},
+		{
+			"name": "week7 - watch",
+			"path": "week7/watch"
+		},
+		{
+			"name": "week7 - working",
+			"path": "week7/working"
+		},
+		{
+			"name": "week8 - jar",
+			"path": "week8/jar"
+		},
+		{
+			"name": "week8 - seasons",
+			"path": "week8/seasons"
+		},
+		{
+			"name": "week8 - shirtificate",
+			"path": "week8/shirtificate"
+		},
+		{
+			"name": "week9 - final-project",
+			"path": "week9/final-project"
+		},
+		{
+			"name": "week9 - project-backup",
+			"path": "week9/project-backup"
+		},
+		{
+			"path": "extra"
+		}
+	],
+	"settings": {}
+}
