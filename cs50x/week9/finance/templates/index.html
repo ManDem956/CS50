@@ -1,25 +1,44 @@
 {% extends "layout.html" %}
 {% block title %}Log In{% endblock %}
 {% block main %}
-        <table class="table table-striped">
-            <thead >
-                <tr>
-                    <th scope="col">Symbol</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for res in result %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for res in result %}
+                {% if res["symbol"] != 'Cash' %}
                     <tr>
                         <td>{{ res["symbol"] }}</td>
-                        <td>{{ res["quantity"] }}</td>
-                        <td>{{ res["price"] | usd }}</td>
+                        <td>
+                            {% if res["quantity"] %}{{ res["quantity"] }}{% endif %}
+                        </td>
+                        <td>
+                            {% if res["price"] %}{{ res["price"] | usd }}{% endif %}
+                        </td>
                         <td>{{ res["amount"] | usd }}</td>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+                {% endif %}
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Cash</td>
+                <td>{{ cash | usd }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Total</td>
+                <td>{{ result | sum(attribute='amount') | usd }}</td>
+            </tr>
+        </tfoot>
+    </table>
 {% endblock %}

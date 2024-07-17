@@ -25,3 +25,7 @@ nav .navbar-brand .green
 div .alert .warning {
     background-color: #f5b82e;;
 }
+
+tfoot{
+    font-weight: bolder;
+}

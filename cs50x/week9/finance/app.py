@@ -18,6 +18,7 @@ app = Flask(__name__)
 
 
 SQL_INSERT_USER = "insert into users (username, hash) values(?,?)"
+SQL_GET_USER_CASH = "select cash from users where id = ?"
 
 SQL_INSERT_TRANSACTION = "insert into user_transaction (user_id, transation_type_id, symbol, quantity, price)\
     VALUES(?,\
@@ -88,6 +89,7 @@ def index():
     """Show portfolio of stocks"""
     try:
         result = db.execute(SQL_GET_STOCKS, session["user_id"])
+        cash = db.execute(SQL_GET_USER_CASH, session["user_id"])[0]["cash"]
     except (RuntimeError, ValueError) as e:
         do_report(str(e))
 
@@ -96,7 +98,8 @@ def index():
         res["price"] = lookup_result["price"]
         res["amount"] = round(lookup_result["price"] * res["quantity"], 2)
 
-    return render_template("index.html", result=result)
+    result.append({"symbol": "Cash", "quantity": None, "price": None, "amount": cash})
+    return render_template("index.html", result=result, cash=cash)
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -110,9 +113,6 @@ def buy():
             if int(shares) <= 0:
                 raise ValueError(f"Incorrect number of shares {shares=}")
             result = do_lookup(symbol)
-            balance = get_balance()
-            # if balance < int(shares) * float(result["price"]):
-            #     raise ValueError("Not enough funds.")
             db.execute(SQL_INSERT_TRANSACTION, session["user_id"], "BUY", result["symbol"], shares, result["price"])
         except ValueError as e:
             return do_report(str(e), "warning")
