@@ -111,8 +111,8 @@ def buy():
                 raise ValueError(f"Incorrect number of shares {shares=}")
             result = do_lookup(symbol)
             balance = get_balance()
-            if balance < int(shares) * float(result["price"]):
-                raise ValueError("Not enough funds.")
+            # if balance < int(shares) * float(result["price"]):
+            #     raise ValueError("Not enough funds.")
             db.execute(SQL_INSERT_TRANSACTION, session["user_id"], "BUY", result["symbol"], shares, result["price"])
         except ValueError as e:
             return do_report(str(e), "warning")

@@ -6,7 +6,7 @@ CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     username TEXT NOT NULL,
     hash TEXT NOT NULL,
-    cash NUMERIC NOT NULL DEFAULT 10000.00
+    cash NUMERIC NOT NULL DEFAULT 10000.00 CHECK (cash >= 0.00)
 );
 -- CREATE TABLE sqlite_sequence(name,seq);
 CREATE UNIQUE INDEX username ON users (username);
@@ -54,8 +54,22 @@ CREATE TABLE user_transaction (
     FOREIGN KEY(user_id) REFERENCES users(id) FOREIGN KEY(transation_type_id) REFERENCES transaction_type(id)
 );
 CREATE INDEX trn_symbol ON user_transaction (symbol);
-
- CREATE TRIGGER update_user_balance
+CREATE TRIGGER validate_user_balance BEFORE
+INSERT ON user_transaction BEGIN
+SELECT CASE
+        WHEN new.amount > (
+            SELECT cash
+            FROM users
+            WHERE users.id = new.user_id
+        )
+        AND new.transation_type_id IN (
+            SELECT id
+            FROM transaction_type
+            WHERE TYPE = 'credit'
+        ) THEN RAISE (ABORT, 'Insufficient funds.')
+    END;
+END;
+CREATE TRIGGER update_user_balance
 AFTER
 INSERT ON user_transaction BEGIN
 UPDATE users
@@ -78,5 +92,5 @@ FROM (
             )
         GROUP BY user_id
     ) bal
-    where bal.user_id = users.id;
+WHERE bal.user_id = users.id;
 END;
