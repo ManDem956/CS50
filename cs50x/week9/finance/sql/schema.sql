@@ -54,6 +54,36 @@ CREATE TABLE user_transaction (
     FOREIGN KEY(user_id) REFERENCES users(id) FOREIGN KEY(transation_type_id) REFERENCES transaction_type(id)
 );
 CREATE INDEX trn_symbol ON user_transaction (symbol);
+CREATE TRIGGER validate_shares_count BEFORE
+INSERT ON user_transaction BEGIN
+SELECT CASE
+        WHEN new.quantity > (
+            SELECT sum(quantity) quantity
+            FROM(
+                    SELECT ut.user_id,
+                        ut.symbol,
+                        tt.type,
+                        CASE
+                            tt.type
+                            WHEN 'debit' THEN ut.quantity * -1
+                            ELSE ut.quantity
+                        END quantity
+                    FROM user_transaction ut
+                        JOIN transaction_type tt ON tt.id = ut.transation_type_id
+                    ORDER BY ut.user_id,
+                        tt.type
+                )
+            GROUP BY user_id,
+                symbol
+            HAVING symbol NOT NULL
+        )
+        AND new.transation_type_id IN (
+            SELECT id
+            FROM transaction_type
+            WHERE TYPE = 'debit'
+        ) THEN RAISE (ABORT, 'Not enough shares to sell.')
+    END;
+END;
 CREATE TRIGGER validate_user_balance BEFORE
 INSERT ON user_transaction BEGIN
 SELECT CASE

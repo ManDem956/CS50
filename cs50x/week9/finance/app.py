@@ -60,7 +60,7 @@ FROM(
     )
 GROUP BY user_id,
     symbol
-HAVING symbol NOT NULL and user_id = ?"""
+HAVING symbol NOT NULL and sum(quantity) > 0 and user_id = ?"""
 
 # Custom filter
 app.jinja_env.filters["usd"] = usd
@@ -215,7 +215,19 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        shares = request.form.get("shares")
+        try:
+            if int(shares) <= 0:
+                raise ValueError(f"Incorrect number of shares {shares=}")
+            result = do_lookup(symbol)
+            db.execute(SQL_INSERT_TRANSACTION, session["user_id"], "SELL", result["symbol"], shares, result["price"])
+        except ValueError as e:
+            return do_report(str(e), "warning")
+        else:
+            return redirect("/")
+    return render_template("sell.html", quotes=session.get("quotes"))
 
 
 def create_user(username: str, password: str, confirm: str) -> None:

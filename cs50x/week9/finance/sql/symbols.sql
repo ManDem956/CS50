@@ -18,5 +18,5 @@ FROM(
     )
 GROUP BY user_id,
     symbol
-HAVING symbol NOT NULL 
+HAVING symbol NOT NULL and sum(quantity) > 0
 -- and user_id = ?
