@@ -6,9 +6,64 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import apology, login_required, lookup, usd
+# from helpers import apology, login_required, lookup, usd
 
 # Configure application
 app = Flask(__name__)
+
+
+# def lookup(symbol):
+#     price = round(sum(ord(char) for char in symbol.upper()), 2)
+#     return {"price": price, "symbol": symbol}
+
+
+SQL_INSERT_USER = "insert into users (username, hash) values(?,?)"
+SQL_INSERT_TRANSACTION_DEFAULTS = "insert into user_transaction (user_id, transation_type_id, quantity, price)\
+                        values((SELECT last_insert_rowid()),\
+                                (select id from transaction_type where name = 'TOPUP'),\
+                                1,\
+                                (select cash from users where id = (SELECT last_insert_rowid())))"
+SQL_INSERT_TRANSACTION = "insert into user_transaction (user_id, transation_type_id, symbol, quantity, price)\
+    VALUES(?,\
+        (select id from transaction_type where name = ?),\
+        ?,?,?)"
+
+SQL_GET_BALANMCE = """select user_id, sum(amount) balance FROM(
+SELECT ut.user_id,
+    tt.type,
+    CASE
+        tt.type
+        WHEN 'credit' THEN ut.amount * -1
+        ELSE ut.amount
+    END amount
+FROM user_transaction ut
+    JOIN transaction_type tt ON tt.id = ut.transation_type_id
+ORDER BY ut.user_id,
+    tt.type)
+WHERE user_id = ?"""
+
+
+SQL_GET_STOCKS = """
+SELECT user_id,
+    symbol,
+    sum(quantity) quantity
+FROM(
+        SELECT ut.user_id,
+            ut.symbol,
+            tt.type,
+            CASE
+                tt.type
+                WHEN 'debit' THEN ut.quantity * -1
+                ELSE ut.quantity
+            END quantity
+        FROM user_transaction ut
+            JOIN transaction_type tt ON tt.id = ut.transation_type_id
+        ORDER BY ut.user_id,
+            tt.type
+    )
+GROUP BY user_id,
+    symbol
+HAVING symbol NOT NULL and user_id = ?"""
 
 # Custom filter
 app.jinja_env.filters["usd"] = usd
@@ -35,14 +90,40 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
+    try:
+        result = db.execute(SQL_GET_STOCKS, session["user_id"])
+    except (RuntimeError, ValueError) as e:
+        do_report(str(e))
+
+    for res in result:
+        lookup_result = do_lookup(res["symbol"])
+        res["price"] = lookup_result["price"]
+        res["amount"] = round(lookup_result["price"] * res["quantity"],2)
+
+    return render_template("index.html", result=result)
 
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
     """Buy shares of stock"""
-    return apology("TODO")
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        shares = request.form.get("shares")
+        try:
+            if int(shares) <= 0:
+                raise ValueError(f"Incorrect number of shares {shares=}")
+            result = do_lookup(symbol)
+            balance = get_balance()
+            if balance < int(shares) * float(result["price"]):
+                raise ValueError("Not enough funds.")
+            db.execute(SQL_INSERT_TRANSACTION, session["user_id"], "BUY", result["symbol"], shares, result["price"])
+        except ValueError as e:
+            return do_report(str(e), "warning")
+        else:
+            return redirect("/")
+
+    return render_template("buy.html", quotes=session.get("quotes"))
 
 
 @app.route("/history")
@@ -71,7 +152,8 @@ def login():
 
         # Query database for username
         rows = db.execute(
-            "SELECT * FROM users WHERE username = ?", request.form.get("username")
+            "SELECT * FROM users WHERE username = ?", request.form.get(
+                "username")
         )
 
         # Ensure username exists and password is correct
@@ -106,13 +188,31 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
+    if request.method == "POST":
+        try:
+            do_lookup(request.form.get("symbol"))
+        except ValueError as e:
+            do_report(str(e), "warning")
+
+    return render_template("quote.html", quotes=session.get("quotes"))
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
+    if request.method == "POST":
+        try:
+            create_user(
+                request.form.get("username"),
+                request.form.get("password"),
+                request.form.get("confirm"),
+            )
+        except ValueError as e:
+            do_report(str(e), "warning")
+        else:
+            return redirect("/login")
+
+    return render_template("register.html")
 
 
 @app.route("/sell", methods=["GET", "POST"])
@@ -120,3 +220,49 @@ def register():
 def sell():
     """Sell shares of stock"""
     return apology("TODO")
+
+
+def create_user(username: str, password: str, confirm: str) -> None:
+
+    if not username:
+        raise ValueError(f"Invalid username `{username=}`")
+
+    password = generate_password_hash(request.form.get("password"))
+    confirm = request.form.get("confirm")
+
+    if not check_password_hash(password, confirm):
+        raise ValueError("Passwords do not match")
+
+    try:
+        db.execute(SQL_INSERT_USER, username, password)
+        db.execute(SQL_INSERT_TRANSACTION_DEFAULTS)
+    except (RuntimeError, ValueError) as e:
+        msg = str(e)
+        if msg.startswith('UNIQUE'):
+            msg = "User already esists"
+        raise ValueError(msg)
+
+
+def do_lookup(symbol):
+    if not session.get("quotes"):
+        session["quotes"] = {}
+
+    result = lookup(symbol)
+
+    if result is not None:
+        session["quotes"][result["symbol"]] = result["price"]
+    else:
+        raise ValueError(f"Symbol `{symbol=}` does not exist.")
+
+    return result
+
+
+def do_report(msg: str, category: str):
+    app.logger.warning(msg)
+    flash(msg, category=category)
+    return apology(msg)
+
+
+def get_balance():
+    result = db.execute(SQL_GET_BALANMCE, session["user_id"])
+    return float(result[0]["balance"])

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Log In{% endblock %}
+{% block main %}
+        <table class="table table-striped">
+            <thead >
+                <tr>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for res in result %}
+                    <tr>
+                        <td>{{ res["symbol"] }}</td>
+                        <td>{{ res["quantity"] }}</td>
+                        <td>{{ res["price"] | usd }}</td>
+                        <td>{{ res["amount"] | usd }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

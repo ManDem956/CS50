@@ -13,11 +13,15 @@ nav .navbar-brand .red
 {
     color: #ea433b;
 }
-nav .navbar-brand .yellow
+nav .navbar-brand .yellow .warning
 {
     color: #f5b82e;
 }
 nav .navbar-brand .green
 {
     color: #2e944b;
+}
+
+div .alert .warning {
+    background-color: #f5b82e;;
 }
