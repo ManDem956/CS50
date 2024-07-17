@@ -25,21 +25,6 @@ SQL_INSERT_TRANSACTION = "insert into user_transaction (user_id, transation_type
         (select id from transaction_type where name = ?),\
         ?,?,?)"
 
-SQL_GET_BALANMCE = """select user_id, sum(amount) balance FROM(
-SELECT ut.user_id,
-    tt.type,
-    CASE
-        tt.type
-        WHEN 'credit' THEN ut.amount * -1
-        ELSE ut.amount
-    END amount
-FROM user_transaction ut
-    JOIN transaction_type tt ON tt.id = ut.transation_type_id
-ORDER BY ut.user_id,
-    tt.type)
-WHERE user_id = ?"""
-
-
 SQL_GET_STOCKS = """
 SELECT user_id,
     symbol,
@@ -268,8 +253,3 @@ def do_report(msg: str, category: str):
     app.logger.warning(msg)
     flash(msg, category=category)
     return apology(msg)
-
-
-def get_balance():
-    result = db.execute(SQL_GET_BALANMCE, session["user_id"])
-    return float(result[0]["balance"])
