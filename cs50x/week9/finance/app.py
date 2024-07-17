@@ -18,11 +18,7 @@ app = Flask(__name__)
 
 
 SQL_INSERT_USER = "insert into users (username, hash) values(?,?)"
-SQL_INSERT_TRANSACTION_DEFAULTS = "insert into user_transaction (user_id, transation_type_id, quantity, price)\
-                        values((SELECT last_insert_rowid()),\
-                                (select id from transaction_type where name = 'TOPUP'),\
-                                1,\
-                                (select cash from users where id = (SELECT last_insert_rowid())))"
+
 SQL_INSERT_TRANSACTION = "insert into user_transaction (user_id, transation_type_id, symbol, quantity, price)\
     VALUES(?,\
         (select id from transaction_type where name = ?),\
@@ -98,7 +94,7 @@ def index():
     for res in result:
         lookup_result = do_lookup(res["symbol"])
         res["price"] = lookup_result["price"]
-        res["amount"] = round(lookup_result["price"] * res["quantity"],2)
+        res["amount"] = round(lookup_result["price"] * res["quantity"], 2)
 
     return render_template("index.html", result=result)
 
@@ -235,7 +231,6 @@ def create_user(username: str, password: str, confirm: str) -> None:
 
     try:
         db.execute(SQL_INSERT_USER, username, password)
-        db.execute(SQL_INSERT_TRANSACTION_DEFAULTS)
     except (RuntimeError, ValueError) as e:
         msg = str(e)
         if msg.startswith('UNIQUE'):
