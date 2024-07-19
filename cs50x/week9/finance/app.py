@@ -13,8 +13,7 @@ app = Flask(__name__)
 
 
 # def lookup(symbol):
-#     price = round(sum(ord(char) for char in symbol.upper()), 2)
-#     return {"price": price, "symbol": symbol}
+#     return {"price": 1.00, "symbol": symbol}
 
 
 SQL_INSERT_USER = "insert into users (username, hash) values(?,?)"
@@ -46,6 +45,17 @@ FROM(
 GROUP BY user_id,
     symbol
 HAVING symbol NOT NULL and sum(quantity) > 0 and user_id = ?"""
+
+SQL_USER_HISTORY = """SELECT DATETIME(ut.transation_time, 'localtime') time, tt.name,
+    ut.symbol,
+    ut.quantity,
+    ut.price,
+    ut.amount
+FROM user_transaction ut
+    JOIN transaction_type tt ON tt.id = ut.transation_type_id
+WHERE ut.user_id = ?
+ORDER BY transation_time ASC
+"""
 
 # Custom filter
 app.jinja_env.filters["usd"] = usd
@@ -98,7 +108,8 @@ def buy():
             if int(shares) <= 0:
                 raise ValueError(f"Incorrect number of shares {shares=}")
             result = do_lookup(symbol)
-            db.execute(SQL_INSERT_TRANSACTION, session["user_id"], "BUY", result["symbol"], shares, result["price"])
+            db.execute(SQL_INSERT_TRANSACTION, session["user_id"],
+                       "BUY", result["symbol"], shares, result["price"])
         except ValueError as e:
             return do_report(str(e), "warning")
         else:
@@ -111,7 +122,8 @@ def buy():
 @login_required
 def history():
     """Show history of transactions"""
-    return apology("TODO")
+    result = db.execute(SQL_USER_HISTORY, session["user_id"])
+    return render_template("history.html", history=result)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -173,12 +185,12 @@ def quote():
         try:
             do_lookup(request.form.get("symbol"))
         except ValueError as e:
-            do_report(str(e), "warning")
+            return do_report(str(e), "warning")
 
     return render_template("quote.html", quotes=session.get("quotes"))
 
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/register/", methods=["GET", "POST"])
 def register():
     """Register user"""
     if request.method == "POST":
@@ -186,10 +198,10 @@ def register():
             create_user(
                 request.form.get("username"),
                 request.form.get("password"),
-                request.form.get("confirm"),
+                request.form.get("confirmation"),
             )
         except ValueError as e:
-            do_report(str(e), "warning")
+            return do_report(str(e), "warning")
         else:
             return redirect("/login")
 
@@ -207,21 +219,27 @@ def sell():
             if int(shares) <= 0:
                 raise ValueError(f"Incorrect number of shares {shares=}")
             result = do_lookup(symbol)
-            db.execute(SQL_INSERT_TRANSACTION, session["user_id"], "SELL", result["symbol"], shares, result["price"])
+            db.execute(SQL_INSERT_TRANSACTION, session["user_id"],
+                       "SELL", result["symbol"], shares, result["price"])
         except ValueError as e:
             return do_report(str(e), "warning")
         else:
             return redirect("/")
-    return render_template("sell.html", quotes=session.get("quotes"))
+
+    try:
+        result = db.execute(SQL_GET_STOCKS, session["user_id"])
+    except ValueError as e:
+        do_report(str(e))
+    else:
+        return render_template("sell.html", quotes=session.get("quotes"), stocks=result)
 
 
 def create_user(username: str, password: str, confirm: str) -> None:
 
-    if not username:
-        raise ValueError(f"Invalid username `{username=}`")
+    if not username or not password:
+        raise ValueError("Invalid username or password`")
 
-    password = generate_password_hash(request.form.get("password"))
-    confirm = request.form.get("confirm")
+    password = generate_password_hash(password)
 
     if not check_password_hash(password, confirm):
         raise ValueError("Passwords do not match")
@@ -249,7 +267,9 @@ def do_lookup(symbol):
     return result
 
 
-def do_report(msg: str, category: str):
+def do_report(msg: str, category: str, r_302: str = None, status: int = 400):
     app.logger.warning(msg)
     flash(msg, category=category)
+    if r_302:
+        return redirect(r_302)
     return apology(msg)

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Log In{% endblock %}
+{% block main %}
+    {% if history %}
+        <table class="table table-striped">
+            <thead >
+                <tr>
+                    <th scope="col">Time</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in history %}
+                    <tr>
+                        <td>{{ item["time"] }}</td>
+                        <td>{{ item["name"] }}</td>
+                        <td>{% if item["symbol"] %}
+                            {{ item["symbol"] }}
+                        {% endif %}</td>
+                        <td>{{ item["quantity"] }}</td>
+                        <td>{{ item["price"] | usd }}</td>
+                        <td>{{ item["amount"] | usd }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

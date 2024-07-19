@@ -75,7 +75,7 @@ SELECT CASE
                 )
             GROUP BY user_id,
                 symbol
-            HAVING symbol NOT NULL
+            HAVING symbol NOT NULL and symbol = new.symbol
         )
         AND new.transation_type_id IN (
             SELECT id
