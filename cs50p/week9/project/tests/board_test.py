@@ -61,7 +61,7 @@ def test_simple(board, expected, winner):
 
 
 @pytest.mark.parametrize("players, board_moves, expected, winner", [(None, ((3, 2, 0, WINS_3x2), 4242), tuple(sorted((1, 4))), 0),
-                                                              (None, ((3, 2, 0, WINS_3x2), 424242), (1, ), 1)],
+                                                                    (None, ((3, 2, 0, WINS_3x2), 424242), (1, ), 1)],
                          indirect=["players", "board_moves"])
 def test_board_moves(players, board_moves, expected, winner):
     assert board_moves.available_moves() == expected
