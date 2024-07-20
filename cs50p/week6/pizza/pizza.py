@@ -1,3 +1,4 @@
+import csv
 import sys
 
 import argparse
@@ -7,23 +8,21 @@ from tabulate import tabulate
 
 
 def build_grid(filename: str) -> int:
-    rows = []
     with open(filename) as file:
-        for line in file:
-            rows.append(cell.strip() for cell in line.split(","))
-    return tabulate(rows, tablefmt="grid", headers="firstrow")
+        reader = csv.reader(file)
+        return tabulate(reader, tablefmt="grid", headers="firstrow")
 
 
 def validate(filename: str) -> NoReturn:
     file = Path(filename)
     if not file.is_file():
-        raise FileNotFoundError(filename)
+        raise FileNotFoundError(f"File not found {file.absolute()}")
 
     if file.suffix != ".csv":
-        raise ValueError(f"{filename} is not a python file")
+        raise ValueError(f"{file.absolute()} is not a csv file")
 
     if file.stat().st_size <= 0:
-        raise ValueError(f"{filename} is empty")
+        raise ValueError(f"{file.absolute()} is empty")
 
 
 def main() -> None:
@@ -35,10 +34,9 @@ def main() -> None:
     try:
         args = parser.parse_args()
         validate(args.filename)
-    except SystemExit:
-        sys.exit(1)
-    else:
         print(build_grid(args.filename))
+    except (ValueError, FileNotFoundError) as e:
+        sys.exit(str(e))
 
 
 if __name__ == "__main__":
