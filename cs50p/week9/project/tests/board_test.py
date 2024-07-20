@@ -33,15 +33,21 @@ def players():
 
 
 @pytest.fixture
-def board(players, request, monkeypatch):
-    random.seed(request.param[1])
+def board(request):
+    board = Board(*request.param[0])
+
+    return board
+
+
+@pytest.fixture
+def board_moves(players, request):
+    if len(request.param) >= 2:
+        random.seed(request.param[1])
     players_cycle = itertools.cycle(players)
 
     board = Board(*request.param[0])
     while len(board.available_moves()) > 0 and board.value is None:
         board.value = next(players_cycle)
-
-    monkeypatch.setattr(Board, "available_moves", tmp)
 
     return board
 
@@ -54,9 +60,9 @@ def test_simple(board, expected, winner):
     assert board.value == winner
 
 
-@pytest.mark.parametrize("players, board, expected, winner", [(None, ((3, 2, 0, WINS_3x2), 4242), tuple(sorted((5, 1, 7, 8))), 0),
-                                                              (None, ((3, 2, 0, WINS_3x2), 42424242), tuple(range(9)), 0)],
-                         indirect=["players", "board"])
-def test_board_moves(players, board, expected, winner):
-    assert board.available_moves() == expected
-    assert board.value == players[0]
+@pytest.mark.parametrize("players, board_moves, expected, winner", [(None, ((3, 2, 0, WINS_3x2), 4242), tuple(sorted((1, 4))), 0),
+                                                              (None, ((3, 2, 0, WINS_3x2), 424242), (1, ), 1)],
+                         indirect=["players", "board_moves"])
+def test_board_moves(players, board_moves, expected, winner):
+    assert board_moves.available_moves() == expected
+    assert board_moves.value == players[winner]

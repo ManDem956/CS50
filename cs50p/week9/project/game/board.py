@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Set, Sized, Tuple
-from .abstracts import Playable, Valuable, Value, Winnable
+from .abstracts import Valuable, Value, Winnable
 
 type cellValue = tuple[Cell, ...] | tuple[Board, ...]
 
@@ -52,5 +52,5 @@ class Board(Winnable):
     def available_moves(self) -> Sized:
         return tuple(idx for idx, item in enumerate(self._value) if item.value is None or (self.last_move > 0 and idx == self.last_move))
 
-    def get_winner(self) -> Playable | None:
-        raise NotImplementedError
+    def get_curent_wins(self):
+        return [tuple(self._value[idx].value for idx in win) for win in self.wins]

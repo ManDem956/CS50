@@ -29,7 +29,3 @@ class Winnable(Valuable, Protocol):
     def available_moves(self) -> Sized:
         """Returns number of available moves"""
         ...
-
-    def get_winner(self) -> Value:
-        """Returns current winner"""
-        ...
