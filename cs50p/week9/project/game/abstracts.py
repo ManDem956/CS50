@@ -1,11 +1,17 @@
 
-from typing import Hashable, Protocol, Sized
+from dataclasses import dataclass
+from typing import Any, Hashable, Protocol, Sized
 
 
-type Value = (Playable | None)
+type Value = (Marker | None)
 
 
-class Playable(Hashable, Protocol):
+@dataclass
+class Marker(Hashable, Protocol):
+    value: Any
+
+
+class Playable(Marker, Protocol):
 
     def calculate_move(self, moves: tuple[int]) -> int:
         """Calculates next move"""

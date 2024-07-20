@@ -46,7 +46,7 @@ def board_moves(players, request):
     players_cycle = itertools.cycle(players)
 
     board = Board(*request.param[0])
-    while len(board.available_moves()) > 0 and board.value is None:
+    while len(board.available_moves) > 0 and board.value is None:
         board.value = next(players_cycle)
 
     return board
@@ -56,13 +56,15 @@ def board_moves(players, request):
                                                      (((3, 2, 1, {(0, 1, 2)}), ()), tuple(range(9)), None)],
                          indirect=["board"])
 def test_simple(board, expected, winner):
-    assert board.available_moves() == expected
+    assert board.available_moves == expected
     assert board.value == winner
 
 
 @pytest.mark.parametrize("players, board_moves, expected, winner", [(None, ((3, 2, 0, WINS_3x2), 4242), tuple(sorted((1, 4))), 0),
-                                                                    (None, ((3, 2, 0, WINS_3x2), 424242), (1, ), 1)],
+                                                                    (None, ((3, 2, 0, WINS_3x2), 424242), (1, ), 1),
+                                                                    (None, ((3, 2, 1, WINS_3x2), 424242), (1, ), 1),
+                                                                    ],
                          indirect=["players", "board_moves"])
 def test_board_moves(players, board_moves, expected, winner):
-    assert board_moves.available_moves() == expected
+    assert board_moves.available_moves == expected
     assert board_moves.value == players[winner]
