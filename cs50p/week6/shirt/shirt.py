@@ -1,4 +1,3 @@
-import sys
 
 import argparse
 from pathlib import Path, PurePath
@@ -40,18 +39,14 @@ def validate(in_file_name: str, out_file_name: str) -> NoReturn:
 def main() -> None:
     # initialise an argparser object with one positional argument to receive
     # a file name from user
-    parser = argparse.ArgumentParser(prog="Lines",
+    parser = argparse.ArgumentParser(prog="python shirt.py",
                                      description="Count lines in a file")
     parser.add_argument("in_file")
     parser.add_argument("out_file")
 
-    try:
-        args = parser.parse_args()
-        validate(args.in_file, args.out_file)
-    except SystemExit:
-        sys.exit(1)
-    else:
-        convert(args.in_file, args.out_file)
+    args = parser.parse_args()
+    validate(args.in_file, args.out_file)
+    convert(args.in_file, args.out_file)
 
 
 if __name__ == "__main__":
