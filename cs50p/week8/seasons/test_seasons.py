@@ -19,8 +19,7 @@ from datetime import date
         (
             "2000-01-01",
             "1995-01-01",
-            "Two million, six hundred twenty-nine thousand, four"
-            + " hundred forty minutes",
+            "Two million, six hundred twenty-nine thousand, four hundred forty minutes",
         ),
         (
             "2003-01-01",

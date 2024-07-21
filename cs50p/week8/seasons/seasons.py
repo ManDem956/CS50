@@ -30,8 +30,7 @@ def main() -> None:
         calc = TimeCalculator(get_user_input("Birthday 🍪"))
         minutes = calc.humanize()
     except ValueError:
-        print("invalid birthdate value {birthdate}")
-        sys.exit(1)
+        sys.exit("invalid birthdate value {birthdate}")
     else:
         print(f"{minutes}")
 
