@@ -18,12 +18,13 @@ def convert(input: str) -> int:
 
 
 def gauge(percentage: int) -> str:
-    if percentage in range(2, 99):
+    if percentage > 100 or percentage < 0:
+        raise ValueError(f"Value {percentage=} is not within [0..100] range")
+    elif percentage in range(2, 99):
         return f"{percentage}%"
     elif percentage <= 1:
         return "E"
-    else:
-        return "F"
+    return "F"
 
 
 def main() -> None:
