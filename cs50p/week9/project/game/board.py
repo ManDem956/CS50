@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Hashable, OrderedDict, Set, Tuple
+from typing import Hashable, OrderedDict, Set, Tuple, cast
 from game.abstracts import Calculable, Valuable, Winnable
 
 
@@ -10,7 +10,7 @@ class Board(Winnable):
     inception: int
     calc_win_combinations: Calculable
     wins: Set[Tuple[int, ...]] = field(init=False)
-    moves: OrderedDict[int, Valuable] = field(init=False, default_factory=OrderedDict)
+    moves: OrderedDict[int, Winnable | Valuable] = field(init=False, default_factory=OrderedDict)
 
     def __post_init__(self):
         self.wins = self.calc_win_combinations(self.size, self.dimentions)
@@ -27,3 +27,16 @@ class Board(Winnable):
         if idx not in self.available_moves():
             raise ValueError(f"Invalid move {idx=}")
         self.moves[idx] = value
+
+    def undo_last_move(self) -> None:
+        if self.inception > 0:
+            last_move = cast(Board, self.moves[self.last_move])
+            last_move.undo_last_move()
+            if len(last_move.moves) <= 0:
+                self.moves.popitem()
+
+        self.moves.popitem()
+
+    @property
+    def last_move(self) -> int:
+        return next(reversed(self.moves))

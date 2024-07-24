@@ -33,3 +33,12 @@ class Winnable(Valuable, Protocol):
     def available_moves(self) -> tuple[int]:
         """Get available moves"""
         ...
+
+    def undo_last_move(self) -> None:
+        """Undo the last move"""
+        ...
+
+    @property
+    def last_move(self) -> int:
+        """Get last move"""
+        ...
