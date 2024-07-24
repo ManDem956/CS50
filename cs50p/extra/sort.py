@@ -22,6 +22,7 @@ def write_file(size: int, the_list: Iterable, name) -> None:
     filename = f"{path}/{name}-{size:>06}.txt"
     print(f"Writing {filename}")
     with open(filename, "w") as csvfile:
+        
         sortwriter = csv.writer(
             csvfile, delimiter=" ", quotechar="|", quoting=csv.QUOTE_MINIMAL
         )
