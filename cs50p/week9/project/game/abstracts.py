@@ -1,37 +1,35 @@
-
 from dataclasses import dataclass
-from typing import Any, Hashable, Protocol, Sized
-
-
-type Value = (Marker | None)
+from typing import Hashable, Protocol, Set, Tuple
 
 
 @dataclass
-class Marker(Hashable, Protocol):
-    value: Any
-
-
-class Playable(Marker, Protocol):
-
-    def calculate_move(self, moves: tuple[int]) -> int:
-        """Calculates next move"""
-        ...
-
-
-class Valuable(Protocol):
-    _value: Value
+class Valuable(Hashable, Protocol):
 
     @property
-    def value(self):
+    def value(self) -> Hashable:
         ...
 
-    @value.setter
-    def value(self, value):
+
+@dataclass
+class Player(Valuable, Protocol):
+
+    def calculate_move(self, Winnable) -> int:
+        """Calculate next move"""
+        ...
+
+
+class Calculable(Protocol):
+    def __call__(self, size: int, dimensions: int) -> Set[Tuple[int]]:
+        """Mehtod to calculate win combinations"""
         ...
 
 
 class Winnable(Valuable, Protocol):
 
-    def available_moves(self) -> Sized:
-        """Returns number of available moves"""
+    def place_move(self, idx: int, value: Valuable) -> None:
+        """Place move"""
+        ...
+
+    def available_moves(self) -> tuple[int]:
+        """Get available moves"""
         ...

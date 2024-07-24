@@ -68,6 +68,7 @@ class TestHelpers:
         expected = self.get_set_from_list(expected)
         assert actual == expected
 
+    # (5^n - 3^n)/2.
     @pytest.mark.parametrize(
         "size, dimensions, expected",
         [
@@ -78,14 +79,4 @@ class TestHelpers:
     )
     def test_generate_win_combinations_counts(self, size: int, dimensions: int, expected: int):
         actual = len(generate_win_combinations(size, dimensions))
-        assert actual == expected
-
-    @pytest.mark.parametrize(
-        "size, dimensions, expected",
-        [
-            (3, 2, {(0, 1, 2), (3, 4, 5), (6, 7, 8), (2, 5, 8), (1, 4, 7), (0, 3, 6), (0, 4, 8), (2, 4, 6)}),
-        ],
-    )
-    def test_generate_win_combinations(self, size: int, dimensions: int, expected: int):
-        actual = generate_win_combinations(size, dimensions)
         assert actual == expected
