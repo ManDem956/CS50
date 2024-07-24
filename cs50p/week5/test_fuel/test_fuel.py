@@ -28,19 +28,22 @@ def test_convert(input, expected, expectation):
 
 
 @pytest.mark.parametrize(
-    "input,expected",
+    "input,expected, expectation",
     [
-        (75, "75%"),
-        (33, "33%"),
-        (67, "67%"),
-        (0, "E"),
-        (1, "E"),
-        (100, "F"),
-        (99, "F"),
+        (75, "75%", does_not_raise()),
+        (33, "33%", does_not_raise()),
+        (67, "67%", does_not_raise()),
+        (0, "E", does_not_raise()),
+        (1, "E", does_not_raise()),
+        (100, "F", does_not_raise()),
+        (99, "F", does_not_raise()),
+        (101, "F", pytest.raises(ValueError)),
+        (-1, "F", pytest.raises(ValueError)),
     ],
 )
-def test_gauge(input, expected):
-    assert gauge(input) == expected
+def test_gauge(input, expected, expectation):
+    with expectation:
+        assert gauge(input) == expected
 
 
 if __name__ == "__main__":
