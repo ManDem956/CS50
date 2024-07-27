@@ -14,13 +14,16 @@ def convert(input: str) -> int:
     if dividend > divisor:
         raise ValueError("Dividend can not be larger than divisor.")
 
-    return round((dividend / divisor) * 100)
+    result = round((dividend / divisor) * 100)
+
+    if result not in range(0, 101):
+        raise ValueError("Result must be an int between 0 and 100, inclusive.")
+
+    return result
 
 
 def gauge(percentage: int) -> str:
-    if percentage > 100 or percentage < 0:
-        raise ValueError(f"Value {percentage=} is not within [0..100] range")
-    elif percentage in range(2, 99):
+    if percentage in range(2, 99):
         return f"{percentage}%"
     elif percentage <= 1:
         return "E"
@@ -31,7 +34,8 @@ def main() -> None:
     while True:
         try:
             result = convert(get_user_input(CONST_USER_PROMPT))
-        except (ValueError, ZeroDivisionError):
+        except (ValueError, ZeroDivisionError) as e:
+            print(str(e))
             continue
         else:
             print(gauge(result))
