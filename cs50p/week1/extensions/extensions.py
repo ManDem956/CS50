@@ -10,8 +10,19 @@ CONST_FILE_MAP = {
 
 CONST_DEFAULT_VALUE = "application/octet-stream"
 
+
+def get_user_input(str) -> str:
+    res: str = input(f"{str}: ").strip()
+    return res
+
+
+def get_ext(filename: str) -> str:
+    dot_index = filename.rfind(".")
+    result = CONST_FILE_MAP.get(filename[dot_index:].lower(), CONST_DEFAULT_VALUE)
+    return result
+
+
 if __name__ == "__main__":
-    user_input: str = input("File name: ").strip().lower()
-    dot_index = user_input.rfind(".")
-    result = CONST_FILE_MAP.get(user_input[dot_index:], CONST_DEFAULT_VALUE)
-    print(result)
+    user_input: str = get_user_input("File name: ").strip()
+
+    print(get_ext(user_input))
