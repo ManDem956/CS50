@@ -20,19 +20,21 @@ def is_valid(s: str) -> bool:
 
     d_idx = get_first_digit_index(s)
 
-    if d_idx > 0:
-        if d_idx < 2:
-            return False
+    if d_idx in (0, 1):
+        return False
 
+    if d_idx > 1:
         if s[d_idx] == "0":
             return False
 
-        if not is_valid_digit(s[d_idx:]):
+        try:
+            int(s[d_idx:])
+        except ValueError:
             return False
 
-        return is_valid_alpha(s[:d_idx])
+        return s[:d_idx].isalpha()
 
-    return is_valid_alpha(s)
+    return s.isalpha()
 
 
 def get_first_digit_index(s: str) -> int:
@@ -40,15 +42,6 @@ def get_first_digit_index(s: str) -> int:
         if char.isdigit():
             return idx
     return -1
-
-
-def is_valid_digit(s: str) -> bool:
-
-    return all(char.isdigit() for char in s)
-
-
-def is_valid_alpha(s: str) -> bool:
-    return all(char.isalpha() for char in s)
 
 
 if __name__ == "__main__":

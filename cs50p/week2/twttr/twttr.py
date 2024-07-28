@@ -1,5 +1,14 @@
-CONST_VOWELS = "AEIOU"
 CONST_USER_PROMPT = "Input"
+VOWELS = "aeiou"
+
+
+def shorten(word: str) -> str:
+    res = ""
+    for char in word:
+        if char.lower() not in VOWELS:
+            res += char
+
+    return res
 
 
 def get_user_input(str) -> str:
@@ -9,12 +18,8 @@ def get_user_input(str) -> str:
 
 def main() -> None:
     input = get_user_input(CONST_USER_PROMPT)
-    result = ""
-    for character in input:
-        if character.upper() not in CONST_VOWELS:
-            result += character
-
-    print(f"Output: {result.strip()}")
+    result = shorten(input)
+    print(f"Output: {result}")
 
 
 if __name__ == "__main__":
