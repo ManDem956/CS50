@@ -1,4 +1,5 @@
-from pyfiglet import Figlet
+import sys
+from pyfiglet import Figlet, FontNotFound
 import argparse
 import random
 
@@ -23,7 +24,10 @@ def main() -> None:
     args = parser.parse_args()
 
     figlet = Figlet()
-    figlet.setFont(font=args.font)
+    try:
+        figlet.setFont(font=args.font)
+    except FontNotFound:
+        sys.exit("Invalid font")
 
     input = get_user_input(CONST_USER_PROMPT)
 
@@ -31,4 +35,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    exit(main())
