@@ -28,5 +28,6 @@ vendor/
 !*.ts
 !*.txt
 !Makefile
+!*code-workspace
 
 # Ignore files larger than 100M
