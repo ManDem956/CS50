@@ -8,7 +8,7 @@ def validate(email: str) -> str:
 def main() -> None:
     try:
         validate(input("Email: ").strip())
-    except ValueError:
+  except ValueError:
         print("Invalid")
     else:
         print("Valid")
