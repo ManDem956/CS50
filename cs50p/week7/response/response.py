@@ -4,7 +4,7 @@ from validator_collection import validators
 def validate(email: str) -> str:
     try:
         validators.email(email)
-    except ValueError:
+   except ValueError:
         return "Invalid"
     else:
         return "Valid"
