@@ -2,7 +2,6 @@ import sys
 
 import argparse
 from pathlib import Path
-from typing import NoReturn
 
 
 def is_empty(line: str):
@@ -16,10 +15,10 @@ def count(filename: str) -> int:
     return lines_count
 
 
-def validate(filename: str) -> NoReturn:
+def validate(filename: str) -> None:
     file = Path(filename)
     if not file.is_file():
-        raise FileNotFoundError(filename)
+        raise FileNotFoundError(f"{filename} could not be found")
 
     if file.suffix != ".py":
         raise ValueError(f"{filename} is not a python file")

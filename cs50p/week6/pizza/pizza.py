@@ -10,7 +10,7 @@ from tabulate import tabulate
 def build_grid(filename: str) -> int:
     with open(filename) as file:
         reader = csv.reader(file)
-        # tabulate can just accept reader, no need to biffer in the form of a python collection
+        # tabulate can just accept reader, no need to buffer in the form of a python collection
         return tabulate(reader, tablefmt="grid", headers="firstrow")
 
 
