@@ -7,16 +7,13 @@ class Test_Function:
         "input,expected",
         [
             ("CS50", True),
+            ("12CS50", False),
             ("CS05", False),
             ("ECTO88", True),
             ("50", False),
             ("CS50P2", False),
-            # ("PI3.14", False),
             ("aAa99@", False),
-            # ("BGH22!", False),
-            # ("H", False),
             ("OUTATIME", False),
-            # ("NRVOUS", True),
         ],
     )
     def test_is_valid(self, input, expected):

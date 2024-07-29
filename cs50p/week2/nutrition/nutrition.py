@@ -1,5 +1,3 @@
-
-
 CONST_USER_PROMPT = "Item"
 CONST_FRUIT_MAPPING = {
     "apple": 130,

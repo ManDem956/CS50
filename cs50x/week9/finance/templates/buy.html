@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block title %}Log In{% endblock %}
+{% block main %}
+    <form action="/buy" method="post">
+        <div class="mb-3 row">
+            <input autocomplete="off"
+                   autofocus
+                   class="form-control mx-auto w-50"
+                   name="symbol"
+                   placeholder="Symbol"
+                   type="text">
+            <input autocomplete="off"
+                   autofocus
+                   class="form-control mx-auto w-50"
+                   name="shares"
+                   placeholder="Number of shares"
+                   type="text">
+        </div>
+        <div class="mb-3 row">
+            <button class="btn btn-primary" type="submit">Buy</button>
+        </div>
+    </form>
+    {% if quotes %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quote in quotes %}
+                    <tr>
+                        <td>{{ quote }}</td>
+                        <td>{{ quotes[quote] | usd }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

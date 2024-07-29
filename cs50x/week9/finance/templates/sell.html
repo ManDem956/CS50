@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Log In{% endblock %}
+{% block main %}
+    <form action="/sell" method="post">
+        <div class="mb-3 row">
+            <select name="symbol" id="symbol" class="form-select mx-auto w-50">
+                <option disabled selected value="">Symbols</option>
+                {% for item in stocks %}<option value="{{ item['symbol'] }}">{{ item["symbol"] }}</option>{% endfor %}
+            </select>
+            <input autocomplete="off"
+                   autofocus
+                   class="form-control mx-auto w-50"
+                   name="shares"
+                   placeholder="Number of shares"
+                   type="text">
+        </div>
+        <div class="mb-3 row">
+            <button class="btn btn-primary" type="submit">Sell</button>
+        </div>
+    </form>
+    {% if quotes %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quote in quotes %}
+                    <tr>
+                        <td>{{ quote }}</td>
+                        <td>{{ quotes[quote] | usd }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
