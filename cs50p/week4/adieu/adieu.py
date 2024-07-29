@@ -8,7 +8,8 @@ def get_user_input(message: str, sep: str = ": ") -> str:
     return res
 
 
-def main(p: inflect.engine) -> None:
+def main() -> None:
+    p = inflect.engine()
     user_input = []
     while True:
         try:
@@ -20,5 +21,4 @@ def main(p: inflect.engine) -> None:
 
 
 if __name__ == "__main__":
-    p = inflect.engine()
-    main(p)
+    exit(main())
