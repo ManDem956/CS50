@@ -48,7 +48,6 @@ def do_game(level) -> int:
 
 
 def main() -> None:
-    random.seed(0)
     level = get_level(CONST_USER_PROMPT_LEVEL)
     score = 0
     for _ in range(10):
