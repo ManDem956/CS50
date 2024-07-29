@@ -11,7 +11,8 @@ class PDF(FPDF):
         # Moving cursor to the right:
         self.cell(80)
         # Printing title:
-        self.cell(50, 50, "CS50 Shirtificate", align="C")
+        self.cell(None, None, "CS50 Shirtificate", border=0,
+                  align="C", center=True)
         # Performing a line break:
         self.ln(20)
 
@@ -19,14 +20,20 @@ class PDF(FPDF):
         self.set_fill_color(0, 0, 0)
         self.add_page()
         self.set_font("helvetica", "B", 30)
-        self.image(image, x=10, y=70, w=190)
+        self.image(image, x=10, y=70, w=190, keep_aspect_ratio=True)
+
+        # self.set_text_color(2550, 2550, 2550)
         self.set_text_color(255, 255, 255)
+
         self.cell(
                 190,
                 190,
                 message,
+                new_x="LMARGIN",
+                new_y="NEXT",
                 border=0,
                 align="C",
+                center=True,
         )
 
 
