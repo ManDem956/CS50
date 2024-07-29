@@ -1,10 +1,7 @@
-from string import ascii_uppercase as caps
-
-
 def convert(value: str) -> str:
     result = ""
     for character in value:
-        if character in caps:
+        if character.isupper():
             result += "_"
         result += character.lower()
     return result

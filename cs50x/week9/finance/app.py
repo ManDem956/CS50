@@ -83,7 +83,7 @@ def index():
     try:
         result = db.execute(SQL_GET_STOCKS, session["user_id"])
         cash = db.execute(SQL_GET_USER_CASH, session["user_id"])[0]["cash"]
-   except (RuntimeError, ValueError) as e:
+    except (RuntimeError, ValueError) as e:
         do_report(str(e))
 
     for res in result:
@@ -188,7 +188,7 @@ def quote():
     return render_template("quote.html", quotes=session.get("quotes"))
 
 
-@app.route("/register/", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
     if request.method == "POST":
