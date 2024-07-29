@@ -1,16 +1,12 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"name": "CS50 - Python",
+			"path": "cs50p"
 		},
 		{
-			"path": "cs50p/week8/jar"
-		},
-		{
-			"path": "cs50p/week8/seasons"
-		},
-		{
-			"path": "cs50p/week8/shirtificate"
+			"name": "CS50 - X",
+			"path": "cs50x"
 		}
 	],
 	"settings": {}
