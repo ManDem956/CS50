@@ -2,17 +2,17 @@ from validator_collection import validators
 
 
 def validate(email: str) -> str:
-    return validators.email(email)
+    try:
+        validators.email(email)
+    except ValueError:
+        return "Invalid"
+    else:
+        return "Valid"
 
 
 def main() -> None:
-    try:
-        validate(input("Email: ").strip())
-    except ValueError:
-        print("Invalid")
-    else:
-        print("Valid")
+    print(validate(input("Email: ").strip()))
 
 
 if __name__ == "__main__":
-    main()
+    exit(main())
