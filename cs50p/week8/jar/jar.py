@@ -22,7 +22,7 @@ class Jar:
 
     def __check_bounds(self, n: int) -> bool:
         return (0 <= self.__count + n <= self.__capacity)
-    
+
     @property
     def capacity(self) -> int:
         return self.__capacity

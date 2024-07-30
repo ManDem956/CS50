@@ -9,12 +9,16 @@
 			"path": "cs50x"
 		},
 		{
+			"name": "CS50 - AI",
+			"path": "cs50ai"
+		},
+		{
 			"name": "CS50 - games (deprecated)",
 			"path": "cs50g"
 		},
 		{
 			"path": "cs50x/week9/finance"
-		},
+		}
 	],
 	"settings": {}
 }
