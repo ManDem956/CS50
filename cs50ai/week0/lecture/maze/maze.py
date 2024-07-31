@@ -1,17 +1,17 @@
 
 from abc import ABC, abstractmethod
 import argparse
-from typing import Any, Protocol
+from typing import Any, Protocol, Sequence
 
 
 class BaseNode(Protocol):
     state: tuple[int, int]
     parent: Any
-    position: str
+    position: str | None
 
 
-class Node():
-    def __init__(self, state: tuple[int, int], parent: BaseNode, position: str) -> None:
+class Node(BaseNode):
+    def __init__(self, state: tuple[int, int], parent: BaseNode | None, position: str | None = None) -> None:
         self.state = state
         self.parent = parent
         self.position = position
@@ -143,15 +143,16 @@ class Maze():
                     tracker.add(child)
 
 
-def main() -> None:
+def main(argv: Sequence | None = None) -> int:
     parser = argparse.ArgumentParser(prog="gen_maze",
                                      description="generate a maze")
     parser.add_argument("filename", help="file containing maze definition")
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     maze = Maze(args.filename)
     maze.solve()
     maze.print()
+    return 0
 
 
 if __name__ == "__main__":
