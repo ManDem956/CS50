@@ -3,18 +3,17 @@ import sys
 
 import argparse
 from pathlib import Path
-from typing import NoReturn
 from tabulate import tabulate
 
 
-def build_grid(filename: str) -> int:
+def build_grid(filename: str) -> str:
     with open(filename) as file:
         reader = csv.reader(file)
         # tabulate can just accept reader, no need to buffer in the form of a python collection
         return tabulate(reader, tablefmt="grid", headers="firstrow")
 
 
-def validate(filename: str) -> NoReturn:
+def validate(filename: str) -> None:
     """Validate the file. file.stat() will throw the FileNotFoundError"""
     file = Path(filename)
 

@@ -1,7 +1,6 @@
 
 import argparse
 from pathlib import Path, PurePath
-from typing import NoReturn
 
 from PIL import Image, ImageOps
 
@@ -20,7 +19,7 @@ def convert(in_file_name: str, out_file_name: str) -> None:
         in_file.save(out_file_name)
 
 
-def validate(in_file_name: str, out_file_name: str) -> NoReturn:
+def validate(in_file_name: str, out_file_name: str) -> None:
     in_file = Path(in_file_name)
     out_file = Path(out_file_name)
     if not in_file.is_file():
