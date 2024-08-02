@@ -22,6 +22,9 @@
 		{
 			"name": "CS50 - AI - lecture - maze",
 			"path": "cs50ai/week0/lecture/maze"
+		},
+		{
+			"path": "cs50p/week6/shirt"
 		}
 	],
 	"settings": {}
