@@ -14,7 +14,8 @@ def convert(in_file_name: str, out_file_name: str) -> None:
     with Image.open(in_file_name, "r", ("JPEG", "PNG")) as in_file, Image.open(
         PurePath(CURRENT_PATH, SHIRT), "r", ("JPEG", "PNG")
     ) as shirt:
-        in_file = ImageOps.fit(in_file, shirt.size)
+        # in_file = ImageOps.fit(in_file, shirt.size, method=Image.LANCZOS, centering=(0.5, 0.5))
+        in_file = ImageOps.fit(in_file, shirt.size, method=Image.Resampling.BICUBIC, centering=(0.5, 0.5))
         in_file.paste(shirt, (0, 0), shirt)
         in_file.save(out_file_name)
 
