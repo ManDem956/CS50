@@ -23,8 +23,9 @@ def get_level(message: str = CONST_USER_PROMPT_LEVEL) -> int:
 def generate_integer(level: int) -> int:
     if level not in CONST_ALLOW_RANGE:
         raise ValueError(f"Level must in range {list(CONST_ALLOW_RANGE)}")
-    the_range = (10**level,) if level <= 1 else (10 ** (level - 1), (10**level)-1)
-    print(the_range)
+    # the_range = (10**level,) if level <= 1 else (10 ** (level - 1), (10**level)-1)
+    the_range = (10 ** (level - 1), (10**level)-1)
+    # print(the_range)
     return random.randrange(*the_range)
 
 
@@ -48,11 +49,15 @@ def do_game(level) -> int:
 
 
 def main() -> None:
-    # random.seed(0)
+    random.seed(0)
     level = get_level(CONST_USER_PROMPT_LEVEL)
     score = 0
     for _ in range(10):
-        score += do_game(level)
+        try:
+            score += do_game(level)
+        except EOFError:
+            print("Interrupted by user, exiting")
+            exit(0)
 
     print(f"Score: {score}")
 
