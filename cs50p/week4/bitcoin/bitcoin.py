@@ -1,4 +1,3 @@
-
 import argparse
 import requests
 
@@ -18,8 +17,8 @@ def main() -> None:
     except requests.RequestException as e:
         print(f"An HTTP error occurred: {e}")
     else:
-        json = res.json()
-        print(f"${float(json["bpi"]["USD"]["rate_float"]) * args.amount:,.4f}")
+        data = res.json()
+        print(f"${float(data["bpi"]["USD"]["rate_float"]) * args.amount:,.4f}")
 
 
 if __name__ == "__main__":
