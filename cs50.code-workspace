@@ -25,6 +25,12 @@
 		},
 		{
 			"path": "cs50p/week6/shirt"
+		},
+		{
+			"path": "cs50p/week4/figlet"
+		},
+		{
+			"path": "cs50p/week4/bitcoin"
 		}
 	],
 	"settings": {}
