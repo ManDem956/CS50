@@ -17,7 +17,7 @@ def render(f: Figlet, input: str) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        prog="Figlet", description="Renders user's input in ASCII font"
+        prog="python figlet.py", description="Renders user's input in ASCII font"
     )
     parser.add_argument("-f", "--font",
                         default=random.choice(Figlet().getFonts()))
