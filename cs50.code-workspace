@@ -1,6 +1,11 @@
 {
 	"folders": [
 		{
+			"name": "CS50p - Final Project",
+			"path": "cs50p/week9/project"
+		},
+
+		{
 			"name": "CS50 - Python",
 			"path": "cs50p"
 		},
@@ -37,7 +42,7 @@
 		},
 		{
 			"path": "cs50p/week8/seasons"
-		}
+		},
 	],
 	"settings": {}
 }
