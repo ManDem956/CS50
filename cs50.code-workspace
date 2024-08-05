@@ -31,6 +31,12 @@
 		},
 		{
 			"path": "cs50p/week4/bitcoin"
+		},
+		{
+			"path": "cs50p/week6/scourgify"
+		},
+		{
+			"path": "cs50p/week8/seasons"
 		}
 	],
 	"settings": {}
