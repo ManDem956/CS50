@@ -4,8 +4,10 @@ import sys
 
 
 def main() -> None:
-    """The main method"""
-    '''another doc string'''
+    """The main method
+    '''the docstring'''
+    # the_comment'''
+    """
     pass
 
 
