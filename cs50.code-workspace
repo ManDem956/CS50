@@ -4,7 +4,6 @@
 			"name": "CS50p - Final Project",
 			"path": "cs50p/week9/project"
 		},
-
 		{
 			"name": "CS50 - Python",
 			"path": "cs50p"
@@ -43,6 +42,19 @@
 		{
 			"path": "cs50p/week8/seasons"
 		},
+		{
+			"path": "cs50p/week6/lines"
+		},
+		{
+			"path": "cs50p/week4/professor"
+		},
+		{
+			"path": "cs50p/week7/working"
+		},
+		{
+			"name": "CS50p - tests",
+			"path": "cs50p/week5"
+		}
 	],
 	"settings": {}
 }
