@@ -12,6 +12,7 @@
         </thead>
         <tbody>
             {% for res in result %}
+                {% if res.symbol != 'Cash' %}
                     <tr>
                         <td>{{ res.symbol }}</td>
                         <td>
@@ -22,6 +23,7 @@
                         </td>
                         <td>{{ res["amount"] | usd }}</td>
                     </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
         <tfoot>
