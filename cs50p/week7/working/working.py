@@ -2,33 +2,37 @@ import re
 
 
 REGEX_TIME_12 = r"(\b(?:1[0-2]|0?[1-9])(?::(?:[0-5][0-9])?)?\s(?:AM|PM)\b)(\sto\s)(\b(?:1[0-2]|0?[1-9])(?::(?:[0-5][0-9])?)?\s(?:AM|PM)\b)"  # noqa: E501
+REGEX_TIME_12 = r"\b((?:1[0-2]|0?[1-9])(?::(?:[0-5][0-9])?)?)\s((?:AM|PM))(\sto\s)?"  # noqa: E501
+REGEX_TIME_12 = r"\b(?:(1[0-2]|0?[1-9])(?::([0-5][0-9])?)?)\s((?:AM|PM))(?:\s(to)\s)?"  # noqa: E501
+# current   ^(\d{1,2})(?::?(\d{1,2}))? (AM|PM) to (\d{1,2})(?::? (\d{1,2})?) (AM|PM)$
+# fixed     ^(\d{1,2})(?::?(\d{1,2}))? (AM|PM) to (\d{1,2})(?::?(\d{1,2}))? (AM|PM)
 
 
-def convert_12_to_24(value: str) -> str:
-    time, noon = value.split()
-    hours, _, minutes = time.partition(":")
-
+def convert_12_to_24(hours, minutes, noon) -> str:
     if not minutes:
-        minutes = "00"
+        minutes = 0
 
-    if noon == "PM":
-        hours = str(int(hours) + 12) if int(hours) < 12 else hours
-    else:
-        hours = str(int(hours) % 12)
+    hours = int(hours)
+    minutes = int(minutes)
 
-    return f"{hours:>02}:{minutes}"
+    if hours > 12 or minutes > 59 or noon not in ("AM", "PM"):
+        raise ValueError("Invalid hours value")
 
+    if noon == "AM":
+        hours = hours % 12
+    elif noon == "PM" and (hours % 12) > 0:
+        hours += 12
 
-def do_replace(match: re.Match) -> str:
-    return f"{convert_12_to_24(match.group(1))}{match.group(2)}{convert_12_to_24(match.group(3))}"
+    return f"{hours:>02}:{minutes:>02}"
 
 
 def convert(time_delta: str) -> str:
-    pattern = re.compile(REGEX_TIME_12)
-    res = re.sub(pattern, do_replace, time_delta)
+    result = re.findall(REGEX_TIME_12, time_delta)
 
-    if res == time_delta:
+    if len(result) < 2 or result[0][3] == "":
         raise ValueError(f"Invalid time delta: {time_delta}")
+
+    res = " to ".join(convert_12_to_24(*time[:3]) for time in result)
 
     return res
 
