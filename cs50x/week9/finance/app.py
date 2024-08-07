@@ -204,6 +204,26 @@ def quote():
     return render_template("quote.html", quotes=session.get("quotes"))
 
 
+@app.route("/topup", methods=["GET", "POST"])
+@login_required
+def topup():
+    """Add funds to user's account."""
+    if request.method == "POST":
+        amount = request.form.get("amount")
+        try:
+            if int(amount) <= 0:
+                raise ValueError(f"Amount must be positive: {amount}")
+            db.execute(SQL_INSERT_TRANSACTION, session["user_id"], "TOPUP", None, 1, int(amount))
+        except ValueError as e:
+            return do_report(str(e), "warning")
+
+    try:
+        result = db.execute(SQL_USER_HISTORY, session["user_id"])
+        return render_template("topup.html",  history=result)
+    except Exception as e:
+        return do_report(str(e), "warning")
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""

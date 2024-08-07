@@ -48,7 +48,7 @@ CREATE TABLE user_transaction (
     transation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     transation_type_id INTEGER NOT NULL,
     symbol TEXT DEFAULT NULL,
-    quantity INTEGER NOT NULL,
+    quantity INTEGER NOT NULL DEFAULT 1,
     price REAL NOT NULL,
     amount REAL NOT NULL GENERATED ALWAYS AS (quantity * price),
     FOREIGN KEY(user_id) REFERENCES users(id) FOREIGN KEY(transation_type_id) REFERENCES transaction_type(id)

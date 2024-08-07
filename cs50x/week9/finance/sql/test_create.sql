@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS user_type;
+
+CREATE TABLE user_type (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    typename TEXT NOT NULL
+);
+
+CREATE TABLE user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    username TEXT NOT NULL,
+    user_type_id INTEGER NOT NULL,
+    FOREIGN KEY(user_type_id) REFERENCES user_type(id)
+);
+
+

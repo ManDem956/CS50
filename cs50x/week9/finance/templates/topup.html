@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block title %}Log In{% endblock %}
+{% block main %}
+    <form action="/topup" method="post">
+        <div class="mb-3 row">
+            <input autocomplete="off"
+                   autofocus
+                   class="form-control mx-auto w-100"
+                   name="amount"
+                   placeholder="Top-up amount"
+                   type="text">
+        </div>
+        <div class="mb-3 row">
+            <button class="btn btn-primary" type="submit">Quote</button>
+        </div>
+    </form>
+    {% if history %}
+    <table class="table table-striped">
+        <thead >
+            <tr>
+                <th scope="col">Time</th>
+                <th scope="col">Type</th>
+                <th scope="col">Symbol</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in history %}
+                <tr>
+                    <td>{{ item["time"] }}</td>
+                    <td>{{ item["name"] }}</td>
+                    <td>{% if item["symbol"] %}
+                        {{ item["symbol"] }}
+                    {% endif %}</td>
+                    <td>{{ item["quantity"] }}</td>
+                    <td>{{ item["price"] | usd }}</td>
+                    <td>{{ item["amount"] | usd }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Cash balance</td>
+                <td>{{ history | sum(attribute='balance_amount') | usd }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endif %}
+{% endblock %}
