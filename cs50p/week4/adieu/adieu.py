@@ -17,7 +17,7 @@ def main() -> None:
         except EOFError:
             break
 
-    print(f"\nAdieu, adieu, to {p.join(user_input)}")
+    print(f"Adieu, adieu, to {p.join(user_input)}")
 
 
 if __name__ == "__main__":
