@@ -6,7 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required, lookup, usd
 
 
-def lookup(symbol):
+def lookup(symbol):  # noqa:F811
     from helpers import lookup as real_lookup
 
     if symbol.lower().startswith("test"):
