@@ -91,7 +91,7 @@ def index():
         res["price"] = lookup_result["price"]
         res["amount"] = round(lookup_result["price"] * res["quantity"], 2)
 
-    result.append({"symbol": "Cash", "quantity": None, "price": None, "amount": cash})
+    # result.append({"symbol": "Cash", "quantity": None, "price": None, "amount": cash})
     return render_template("index.html", result=result, cash=cash)
 
 
