@@ -53,6 +53,11 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto mt-2">
+                            {% if user_data %}
+                                <li class="nav-item">
+                                    <a class="nav-link user" href="/topup">{{ user_data["username"] }} {{ user_data["cash"] | usd }}</a>
+                                </li>
+                            {% endif %}
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">Log Out</a>
                             </li>

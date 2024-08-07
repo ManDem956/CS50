@@ -108,7 +108,7 @@ def index():
         res["amount"] = round(lookup_result["price"] * res["quantity"], 2)
 
     result.append({"symbol": "Cash", "quantity": None, "price": None, "amount": cash})
-    return render_template("index.html", result=result, cash=cash)
+    return do_render("index.html", result=result, cash=cash)
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -129,7 +129,7 @@ def buy():
         else:
             return redirect("/")
 
-    return render_template("buy.html", quotes=session.get("quotes"))
+    return do_render("buy.html", quotes=session.get("quotes"))
 
 
 @app.route("/history")
@@ -137,7 +137,7 @@ def buy():
 def history():
     """Show history of transactions"""
     result = db.execute(SQL_USER_HISTORY, session["user_id"])
-    return render_template("history.html", history=result)
+    return do_render("history.html", history=result)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -201,7 +201,7 @@ def quote():
         except ValueError as e:
             return do_report(str(e), "warning")
 
-    return render_template("quote.html", quotes=session.get("quotes"))
+    return do_render("quote.html", quotes=session.get("quotes"))
 
 
 @app.route("/topup", methods=["GET", "POST"])
@@ -219,7 +219,7 @@ def topup():
 
     try:
         result = db.execute(SQL_USER_HISTORY, session["user_id"])
-        return render_template("topup.html",  history=result)
+        return do_render("topup.html",  history=result)
     except Exception as e:
         return do_report(str(e), "warning")
 
@@ -265,7 +265,7 @@ def sell():
     except ValueError as e:
         do_report(str(e))
     else:
-        return render_template("sell.html", quotes=session.get("quotes"), stocks=result)
+        return do_render("sell.html", quotes=session.get("quotes"), stocks=result)
 
 
 def create_user(username: str, password: str, confirm: str) -> None:
@@ -307,3 +307,8 @@ def do_report(msg: str, category: str, r_302: str = None, status: int = 400):
     if r_302:
         return redirect(r_302)
     return apology(msg)
+
+
+def do_render(*args, **kwargs):
+    user_data = db.execute("select username, cash from users where id=?", session["user_id"])[0]
+    return render_template(*args, **kwargs, user_data=user_data)

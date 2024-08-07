@@ -29,3 +29,8 @@ div .alert .warning {
 tfoot{
     font-weight: bolder;
 }
+
+.user{
+    font-weight: bolder;
+    color: darkcyan;
+}
