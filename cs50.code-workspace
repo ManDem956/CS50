@@ -26,34 +26,6 @@
 		{
 			"name": "CS50 - AI - lecture - maze",
 			"path": "cs50ai/week0/lecture/maze"
-		},
-		{
-			"path": "cs50p/week6/shirt"
-		},
-		{
-			"path": "cs50p/week4/figlet"
-		},
-		{
-			"path": "cs50p/week4/bitcoin"
-		},
-		{
-			"path": "cs50p/week6/scourgify"
-		},
-		{
-			"path": "cs50p/week8/seasons"
-		},
-		{
-			"path": "cs50p/week6/lines"
-		},
-		{
-			"path": "cs50p/week4/professor"
-		},
-		{
-			"path": "cs50p/week7/working"
-		},
-		{
-			"name": "CS50p - tests",
-			"path": "cs50p/week5"
 		}
 	],
 	"settings": {}
