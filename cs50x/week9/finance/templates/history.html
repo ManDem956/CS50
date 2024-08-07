@@ -27,6 +27,16 @@
                     </tr>
                 {% endfor %}
             </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Cash balance</td>
+                    <td>{{ history | sum(attribute='balance_amount') | usd }}</td>
+                </tr>
+            </tfoot>
         </table>
     {% endif %}
 {% endblock %}
