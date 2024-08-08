@@ -1,5 +1,5 @@
 from jar import Jar
-from contextlib import nullcontext as does_not_raise
+# from contextlib import nullcontext as does_not_raise
 import pytest
 
 
@@ -16,69 +16,95 @@ def default_jar_full() -> Jar:
 
 
 @pytest.mark.parametrize(
-    "capacity, expected, exception",
+    "capacity, expected",
     [
-        (10, 10, does_not_raise()),
-        (1, 1, does_not_raise()),
-        (100, 100, does_not_raise()),
-        (1400, 1400, does_not_raise()),
-        (None, 12, does_not_raise()),
-        (-10, None, pytest.raises(ValueError)),
+        (10, 10),
+        (1, 1),
+        (100, 100),
+        (1400, 1400),
+        (None, 12),
     ],
 )
-def test_init(capacity, expected, exception):
-    with exception:
-        jar = Jar(capacity) if capacity is not None else Jar()
-        assert jar.capacity == expected
-        assert jar.size == 0
+def test_init(capacity, expected):
+    jar = Jar(capacity) if capacity is not None else Jar()
+    assert jar.capacity == expected
+    assert jar.size == 0
 
 
 @pytest.mark.parametrize(
-    "deposit, expected, exception",
+    "capacity",
     [
-        (10, "🍪" * 10, does_not_raise()),
-        (11, "🍪" * 11, does_not_raise()),
-        (12, "🍪" * 12, does_not_raise()),
-        (1, "🍪" * 1, does_not_raise()),
-        (12, "🍪" * 12, does_not_raise()),
-        (0, "🍪" * 0, does_not_raise()),
+        (-10),
     ],
 )
-def test_str_default_jar(default_jar: Jar, deposit, expected, exception):
+def test_init_error(capacity):
+    with pytest.raises(ValueError):
+        Jar(capacity)
+
+
+@pytest.mark.parametrize(
+    "deposit, expected",
+    [
+        (10, "🍪" * 10),
+        (11, "🍪" * 11),
+        (12, "🍪" * 12),
+        (1, "🍪" * 1),
+        (12, "🍪" * 12),
+        (0, "🍪" * 0),
+    ],
+)
+def test_str_default_jar_str(default_jar: Jar, deposit, expected):
+    default_jar.deposit(deposit)
+    assert str(default_jar) == expected
+
+
+@pytest.mark.parametrize(
+    "deposit, expected",
+    [
+        (10, 10),
+        (1, 1),
+        (12, 12),
+        (0, 0),
+    ],
+)
+def test_deposit_size(default_jar: Jar, deposit, expected):
+    default_jar.deposit(deposit)
+    assert default_jar.size == expected
+
+
+@pytest.mark.parametrize(
+    "deposit, exception",
+    [
+        (-10, pytest.raises(ValueError)),
+        (13, pytest.raises(ValueError)),
+    ],
+)
+def test_deposit_size_error(default_jar: Jar, deposit, exception):
     with exception:
         default_jar.deposit(deposit)
-        assert str(default_jar) == expected
 
 
 @pytest.mark.parametrize(
-    "deposit, expected, exception",
+    "withdraw, expected",
     [
-        (10, 10, does_not_raise()),
-        (1, 1, does_not_raise()),
-        (12, 12, does_not_raise()),
-        (0, 0, does_not_raise()),
-        (-10, None, pytest.raises(ValueError)),
-        (13, None, pytest.raises(ValueError)),
+        (10, 2),
+        (1, 11),
+        (12, 0),
+        (0, 12),
     ],
 )
-def test_deposit(default_jar: Jar, deposit, expected, exception):
-    with exception:
-        default_jar.deposit(deposit)
-        assert default_jar.size == expected
+def test_withdraw(default_jar_full: Jar, withdraw, expected):
+    default_jar_full.withdraw(withdraw)
+    assert default_jar_full.size == expected
 
 
 @pytest.mark.parametrize(
-    "withdraw, expected, exception",
+    "withdraw",
     [
-        (10, 2, does_not_raise()),
-        (1, 11, does_not_raise()),
-        (12, 0, does_not_raise()),
-        (0, 12, does_not_raise()),
-        (-10, None, pytest.raises(ValueError)),
-        (13, None, pytest.raises(ValueError)),
+        (-10),
+        (13),
     ],
 )
-def test_withdraw(default_jar_full: Jar, withdraw, expected, exception):
-    with exception:
+def test_withdraw_error(default_jar_full: Jar, withdraw):
+    with pytest.raises(ValueError):
         default_jar_full.withdraw(withdraw)
-        assert default_jar_full.size == expected
