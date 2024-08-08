@@ -288,6 +288,7 @@ def create_user(username: str, password: str, confirm: str) -> None:
 
 
 def do_lookup(symbol):
+    """Lookup and store symbols in session storage"""
     if not session.get("quotes"):
         session["quotes"] = {}
 
@@ -302,6 +303,7 @@ def do_lookup(symbol):
 
 
 def do_report(msg: str, category: str, r_302: str = None, status: int = 400):
+    """Generic error reporting"""
     app.logger.warning(msg)
     flash(msg, category=category)
     if r_302:
@@ -310,5 +312,6 @@ def do_report(msg: str, category: str, r_302: str = None, status: int = 400):
 
 
 def do_render(*args, **kwargs):
+    """Generic render function"""
     user_data = db.execute("select username, cash from users where id=?", session["user_id"])[0]
     return render_template(*args, **kwargs, user_data=user_data)
