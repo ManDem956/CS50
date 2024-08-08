@@ -240,7 +240,7 @@ def register():
         else:
             return redirect("/login")
 
-    return render_template("register.html")
+    return do_render("register.html")
 
 
 @app.route("/sell", methods=["GET", "POST"])
@@ -314,5 +314,8 @@ def do_report(msg: str, category: str, r_302: str = None, status: int = 400):
 
 def do_render(*args, **kwargs):
     """Generic render function"""
-    user_data = db.execute("select username, cash from users where id=?", session["user_id"])[0]
-    return render_template(*args, **kwargs, user_data=user_data)
+    if session.get("user_id"):
+        user_data = db.execute("select username, cash from users where id=?", session["user_id"])[0]
+        return render_template(*args, **kwargs, user_data=user_data)
+
+    return None
