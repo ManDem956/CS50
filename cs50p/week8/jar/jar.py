@@ -15,7 +15,7 @@ class Jar:
         self.__count += n
 
     def withdraw(self, n: int) -> None:
-        if not self.__check_bounds(n*(-1)):
+        if not self.__check_bounds(-1*n):
             raise ValueError("Can not withdraw {n} cookies, jar is empty")
 
         self.__count -= n
