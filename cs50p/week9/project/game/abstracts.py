@@ -1,44 +1,46 @@
 from dataclasses import dataclass
-from typing import Hashable, Protocol, Set, Tuple
+from typing import Hashable, Protocol
 
 
-@dataclass
 class Valuable(Hashable, Protocol):
 
     @property
     def value(self) -> Hashable:
-        ...
+        """retriurns a value"""
 
 
-@dataclass
-class Player(Valuable, Protocol):
-
-    def calculate_move(self, Winnable) -> int:
-        """Calculate next move"""
-        ...
-
-
-class Calculable(Protocol):
-    def __call__(self, size: int, dimensions: int) -> Set[Tuple[int]]:
-        """Mehtod to calculate win combinations"""
-        ...
-
-
-class Winnable(Valuable, Protocol):
+class Playable(Valuable, Protocol):
 
     def place_move(self, idx: int, value: Valuable) -> None:
         """Place move"""
-        ...
-
-    def available_moves(self) -> tuple[int]:
-        """Get available moves"""
-        ...
-
-    def undo_last_move(self) -> None:
-        """Undo the last move"""
-        ...
 
     @property
     def last_move(self) -> int:
         """Get last move"""
-        ...
+
+    def undo(self) -> None:
+        """Undo the last move"""
+
+
+class Actionable(Valuable, Protocol):
+
+    def calculate_move(self, board: Playable) -> int:
+        """Calculate next move"""
+
+
+class Movable(Protocol):
+
+    def get_available_moves(self, board: Playable) -> tuple[int]:
+        """Get available moves"""
+
+
+class Winnable(Protocol):
+
+    def get_winner(self, board: Playable) -> Valuable | None:
+        """Check if winner exists"""
+
+
+@dataclass
+class Manageable(Protocol):
+    moves_strategy: Movable
+    win_strategy: Winnable
