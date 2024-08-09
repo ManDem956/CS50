@@ -7,4 +7,3 @@ class ClassicRules(Movable):
 
     def check_winner(self) -> Valuable | None:
         raise NotImplementedError
-
