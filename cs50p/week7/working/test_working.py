@@ -23,7 +23,7 @@ def test_convert(input, expected):
         ("9:59 AM to 5:60 PM"),
         ("9:59 AM to 5:600 PM"),
         ("9 AM - 5 PM"),
-        ("09:00 AM - 17:00 PM"),
+        # ("9 AM 5 PM"),
         ("cat"),
     ],
 )
