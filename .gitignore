@@ -28,8 +28,5 @@ vendor/
 !*.ts
 !*.txt
 !Makefile
-!*code-workspace
 
 # Ignore files larger than 100M
-cs50x/week9/finance/app_test.py
-cs50p/week6/shirt/after001.jpg
