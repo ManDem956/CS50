@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"path": "cs50p/extra"
+		},
+		{
+			"path": "cs50p/week0"
+		},
+		{
+			"path": "cs50p/week1"
+		},
+		{
+			"path": "cs50p/week2"
+		},
+		{
+			"path": "cs50p/week3"
+		},
+		{
+			"path": "cs50p/week4"
+		},
+		{
+			"path": "cs50p/week5"
+		},
+		{
+			"path": "cs50p/week6"
+		},
+		{
+			"path": "cs50p/week7"
+		},
+		{
+			"path": "cs50p/week8"
+		},
+		{
+			"path": "cs50p/week9"
+		}
+	],
+	"settings": {}
+}
