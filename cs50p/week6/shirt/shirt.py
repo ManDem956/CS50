@@ -11,13 +11,14 @@ SHIRT = "shirt.png"
 
 
 def convert(in_file_name: str, out_file_name: str) -> None:
-    with Image.open(in_file_name, "r", ("JPEG", "PNG")) as in_file, Image.open(
+    with Image.open(in_file_name, "r", ("JPEG", "PNG")) as muppet, Image.open(
         PurePath(CURRENT_PATH, SHIRT), "r", ("JPEG", "PNG")
     ) as shirt:
-        # in_file = ImageOps.fit(in_file, shirt.size, method=Image.LANCZOS, centering=(0.5, 0.5))
-        in_file = ImageOps.fit(in_file, shirt.size, method=Image.Resampling.BICUBIC, centering=(0.5, 0.5))
-        in_file.paste(shirt, (0, 0), shirt)
-        in_file.save(out_file_name)
+        # muppet = ImageOps.fit(muppet, shirt.size, method=Image.LANCZOS, centering=(0.5, 0.5))
+        # muppet = ImageOps.fit(muppet, shirt.size, method=Image.Resampling.BICUBIC, centering=(0.5, 0.5))
+        muppet = ImageOps.fit(muppet, shirt.size)
+        muppet.paste(shirt, shirt)
+        muppet.save(out_file_name)
 
 
 def validate(in_file_name: str, out_file_name: str) -> None:
@@ -45,8 +46,11 @@ def main() -> None:
     parser.add_argument("out_file")
 
     args = parser.parse_args()
-    validate(args.in_file, args.out_file)
-    convert(args.in_file, args.out_file)
+    try:
+        validate(args.in_file, args.out_file)
+        convert(args.in_file, args.out_file)
+    except FileNotFoundError:
+        print(f"File {args.in_file} does not exist")
 
 
 if __name__ == "__main__":
