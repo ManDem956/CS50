@@ -1,16 +1,11 @@
 {
     "gitdoc.enabled": true,
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true,
     "python.REPL.enableREPLSmartSend": false,
     "cSpell.words": [
         "andword",
         "Baja",
         "fpdf",
-        "LMARGIN",
+       "LMARGIN",
         "shirtificate"
     ],
-    "python.testing.pytestArgs": [
-        "."
-    ]
 }
