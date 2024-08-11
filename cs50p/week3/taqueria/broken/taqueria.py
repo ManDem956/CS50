@@ -12,17 +12,12 @@ CONST_MENU = {
 }
 
 
-def get_user_input(str) -> str:
-    res: str = input(f"{str}: ").strip()
-    return res
-
-
 def main() -> None:
     total = 0
     while True:
         try:
-            input = get_user_input(CONST_USER_PROMPT)
-            total += CONST_MENU.get(input.title(), 0)
+            order = input(CONST_USER_PROMPT).strip()
+            total += CONST_MENU.get(order.title(), 0)
             print(f"Total: ${total:.2f}")
         except EOFError:
             print()

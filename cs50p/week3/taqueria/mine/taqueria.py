@@ -1,4 +1,4 @@
-CONST_USER_PROMPT = "Item"
+CONST_USER_PROMPT = "Item: "
 CONST_MENU = {
     "Baja Taco": 4.25,
     "Burrito": 7.50,
@@ -12,17 +12,12 @@ CONST_MENU = {
 }
 
 
-def get_user_input(str) -> str:
-    res: str = input(f"{str}: ").strip()
-    return res
-
-
 def main() -> None:
     total = 0
     while True:
         try:
-            input = get_user_input(CONST_USER_PROMPT)
-            if (price := CONST_MENU.get(input.title())) is not None:
+            order = input(CONST_USER_PROMPT).strip()
+            if (price := CONST_MENU.get(order.title())) is not None:
                 total += price
                 print(f"Total: ${total:.2f}")
         except EOFError:
