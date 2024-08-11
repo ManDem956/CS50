@@ -41,7 +41,7 @@ def main() -> None:
     # initialise an argparser object with one positional argument to receive
     # a file name from user
     parser = argparse.ArgumentParser(prog="python shirt.py",
-                                     description="Count lines in a file")
+                                     description="Puts a shirt on a muppet")
     parser.add_argument("in_file")
     parser.add_argument("out_file")
 
