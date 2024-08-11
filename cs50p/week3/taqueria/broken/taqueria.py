@@ -1,4 +1,4 @@
-CONST_USER_PROMPT = "Item"
+CONST_USER_PROMPT = "Item: "
 CONST_MENU = {
     "Baja Taco": 4.25,
     "Burrito": 7.50,
