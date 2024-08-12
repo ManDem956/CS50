@@ -28,5 +28,6 @@ vendor/
 !*.ts
 !*.txt
 !Makefile
+!*.sh
 
 # Ignore files larger than 100M
