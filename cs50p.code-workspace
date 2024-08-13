@@ -31,5 +31,11 @@
 			"path": "cs50p/week8"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"workbench.colorCustomizations": {
+			"titleBar.activeBackground": "#222238",
+			"titleBar.inactiveBackground": "#222238",
+			"activityBar.background": "#222239",
+		}
+	}
 }
