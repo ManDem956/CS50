@@ -1,3 +1,4 @@
+from abc import ABC
 from dataclasses import dataclass
 from typing import Hashable, Protocol
 
@@ -22,13 +23,13 @@ class Playable(Valuable, Protocol):
         """Undo the last move"""
 
 
-class Actionable(Valuable, Protocol):
+class Calculated(Valuable, Protocol):
 
     def calculate_move(self, board: Playable) -> int:
         """Calculate next move"""
 
 
-class Movable(Protocol):
+class Available(Protocol):
 
     def get_available_moves(self, board: Playable) -> tuple[int]:
         """Get available moves"""
@@ -41,6 +42,6 @@ class Winnable(Protocol):
 
 
 @dataclass
-class Manageable(Protocol):
-    moves_strategy: Movable
+class Manageable(ABC):
+    moves_strategy: Available
     win_strategy: Winnable

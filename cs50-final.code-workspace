@@ -1,9 +1,19 @@
 {
 	"folders": [
 		{
+			"name": "CS50p - week9",
+			"path": "cs50p/week9"
+		},
+		{
 			"name": "CS50p - Final Project",
 			"path": "cs50p/week9/project"
-		}
+		},
 	],
-	"settings": {}
+	"settings": {
+		"workbench.colorCustomizations": {
+			"titleBar.activeBackground": "#222211",
+			"titleBar.inactiveBackground": "#222211",
+			"activityBar.background": "#222211",
+		}
+	}
 }

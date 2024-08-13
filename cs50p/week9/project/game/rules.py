@@ -1,9 +1,4 @@
-from game.abstracts import Movable, Valuable
+from game.abstracts import Manageable, Valuable
 
 
-class ClassicRules(Movable):
-    def get_available_moves(self) -> tuple[int]:
-        raise NotImplementedError
-
-    def check_winner(self) -> Valuable | None:
-        raise NotImplementedError
+class ClassicRules(Manageable):
