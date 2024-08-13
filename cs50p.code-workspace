@@ -1,8 +1,50 @@
 {
 	"folders": [
 		{
+			"name": "CS50 - Python - Extras",
 			"path": "cs50p/extra"
-		}
+		},
+		{
+			"name": "CS50 - Pyhton - Week4 - Little Professor",
+			"path": "cs50p/week4/professor"
+		},
+		{
+			"name": "CS50 - Pyhton - Week5 - test_bank",
+			"path": "cs50p/week5/test_bank"
+		},
+		{
+			"name": "CS50 - Pyhton - Week5 - test_fuel",
+			"path": "cs50p/week5/test_fuel"
+		},
+		{
+			"name": "CS50 - Pyhton - Week5 - test_plates",
+			"path": "cs50p/week5/test_plates"
+		},
+		{
+			"name": "CS50 - Pyhton - Week5 - test_twttr",
+			"path": "cs50p/week5/test_twttr"
+		},
+		{
+			"name": "CS50 - Pyhton - Week6 - lecture",
+			"path": "cs50p/week6/lecture"
+		},
+		{
+			"name": "CS50 - Pyhton - Week6 - lines",
+			"path": "cs50p/week6/lines"
+		},
+		{
+			"name": "CS50 - Pyhton - Week6 - pizza",
+			"path": "cs50p/week6/pizza"
+		},
+		{
+			"name": "CS50 - Pyhton - Week6 - scourgify",
+			"path": "cs50p/week6/scourgify"
+		},
+		{
+			"name": "CS50 - Pyhton - Week6 - shirt",
+			"path": "cs50p/week6/shirt"
+		},
+
 	],
 	"settings": {
 		"workbench.colorCustomizations": {
