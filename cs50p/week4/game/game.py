@@ -1,1 +1,1 @@
-wrong/game.py
+mine/game.py

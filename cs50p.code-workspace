@@ -5,6 +5,46 @@
 			"path": "cs50p/extra"
 		},
 		{
+			"name": "CS50 - Pyhton - Week3 - fuel",
+			"path": "cs50p/week3/fuel"
+		},
+		{
+			"name": "CS50 - Pyhton - Week3 - grocery",
+			"path": "cs50p/week3/grocery"
+		},
+		{
+			"name": "CS50 - Pyhton - Week3 - outdated",
+			"path": "cs50p/week3/outdated"
+		},
+		{
+			"name": "CS50 - Pyhton - Week3 - taqueria",
+			"path": "cs50p/week3/taqueria"
+		},
+		{
+			"name": "CS50 - Pyhton - Week4 - adieu",
+			"path": "cs50p/week4/adieu"
+		},
+		{
+			"name": "CS50 - Pyhton - Week4 - bitcoin",
+			"path": "cs50p/week4/bitcoin"
+		},
+		{
+			"name": "CS50 - Pyhton - Week4 - emoji",
+			"path": "cs50p/week4/emoji"
+		},
+		{
+			"name": "CS50 - Pyhton - Week4 - emojize",
+			"path": "cs50p/week4/emojize"
+		},
+		{
+			"name": "CS50 - Pyhton - Week4 - figlet",
+			"path": "cs50p/week4/figlet"
+		},
+		{
+			"name": "CS50 - Pyhton - Week4 - game",
+			"path": "cs50p/week4/game"
+		},
+		{
 			"name": "CS50 - Pyhton - Week4 - Little Professor",
 			"path": "cs50p/week4/professor"
 		},
@@ -43,8 +83,7 @@
 		{
 			"name": "CS50 - Pyhton - Week6 - shirt",
 			"path": "cs50p/week6/shirt"
-		},
-
+		}
 	],
 	"settings": {
 		"workbench.colorCustomizations": {
