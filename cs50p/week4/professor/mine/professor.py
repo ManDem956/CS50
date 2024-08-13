@@ -25,7 +25,7 @@ def get_level(message: str = CONST_USER_PROMPT_LEVEL) -> int:
 def generate_integer(level: int) -> int:
     if level not in CONST_ALLOW_RANGE:
         raise ValueError(f"Level must in range {list(CONST_ALLOW_RANGE)}")
-    the_range = (10**level,) if level <= 1 else (10 ** (level - 1), (10**level)-1)
+    the_range = (10**level,) if level <= 1 else (10 ** (level - 1), (10**level))
     # the_range = (10 ** (level - 1), (10**level))
     return random.randrange(*the_range)
 
