@@ -5,6 +5,66 @@
 			"path": "cs50p/extra"
 		},
 		{
+			"name": "CS50 - Pyhton - Week0 - einstein",
+			"path": "cs50p/week0/einstein"
+		},
+		{
+			"name": "CS50 - Pyhton - Week0 - faces",
+			"path": "cs50p/week0/faces"
+		},
+		{
+			"name": "CS50 - Pyhton - Week0 - indoor",
+			"path": "cs50p/week0/indoor"
+		},
+		{
+			"name": "CS50 - Pyhton - Week0 - playback",
+			"path": "cs50p/week0/playback"
+		},
+		{
+			"name": "CS50 - Pyhton - Week0 - tip",
+			"path": "cs50p/week0/tip"
+		},
+		{
+			"name": "CS50 - Pyhton - Week1 - bank",
+			"path": "cs50p/week1/bank"
+		},
+		{
+			"name": "CS50 - Pyhton - Week1 - deep",
+			"path": "cs50p/week1/deep"
+		},
+		{
+			"name": "CS50 - Pyhton - Week1 - extensions",
+			"path": "cs50p/week1/extensions"
+		},
+		{
+			"name": "CS50 - Pyhton - Week1 - interpreter",
+			"path": "cs50p/week1/interpreter"
+		},
+		{
+			"name": "CS50 - Pyhton - Week1 - meal",
+			"path": "cs50p/week1/meal"
+		},
+		{
+			"name": "CS50 - Pyhton - Week2 - camel",
+			"path": "cs50p/week2/camel"
+		},
+		{
+			"name": "CS50 - Pyhton - Week2 - coke",
+			"path": "cs50p/week2/coke"
+		},
+		{
+			"name": "CS50 - Pyhton - Week2 - nutrition",
+			"path": "cs50p/week2/nutrition"
+		},
+		{
+			"name": "CS50 - Pyhton - Week2 - plates",
+			"path": "cs50p/week2/plates"
+		},
+		{
+			"name": "CS50 - Pyhton - Week2 - twttr",
+			"path": "cs50p/week2/twttr"
+		},
+		{
 			"name": "CS50 - Pyhton - Week3 - fuel",
 			"path": "cs50p/week3/fuel"
 		},
@@ -83,6 +143,38 @@
 		{
 			"name": "CS50 - Pyhton - Week6 - shirt",
 			"path": "cs50p/week6/shirt"
+		},
+		{
+			"name": "CS50 - Pyhton - Week7 - numb3rs",
+			"path": "cs50p/week7/numb3rs"
+		},
+		{
+			"name": "CS50 - Pyhton - Week7 - response",
+			"path": "cs50p/week7/response"
+		},
+		{
+			"name": "CS50 - Pyhton - Week7 - um",
+			"path": "cs50p/week7/um"
+		},
+		{
+			"name": "CS50 - Pyhton - Week7 - watch",
+			"path": "cs50p/week7/watch"
+		},
+		{
+			"name": "CS50 - Pyhton - Week7 - working",
+			"path": "cs50p/week7/working"
+		},
+		{
+			"name": "CS50 - Pyhton - Week8 - jar",
+			"path": "cs50p/week8/jar"
+		},
+		{
+			"name": "CS50 - Pyhton - Week8 - seasons",
+			"path": "cs50p/week8/seasons"
+		},
+		{
+			"name": "CS50 - Pyhton - Week8 - shirtificate",
+			"path": "cs50p/week8/shirtificate"
 		}
 	],
 	"settings": {
