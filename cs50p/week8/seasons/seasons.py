@@ -1,4 +1,4 @@
-import datetime
+from datetime import date, timedelta
 import sys
 
 import inflect
@@ -7,7 +7,7 @@ import inflect
 class TimeCalculator:
 
     def __init__(self, birthdate: str) -> None:
-        self.birthdate = datetime.date.fromisoformat(birthdate)
+        self.birthdate = date.fromisoformat(birthdate)
 
     def humanize(self) -> str:
         p = inflect.engine()
@@ -15,7 +15,7 @@ class TimeCalculator:
                                     andword="")} minutes".capitalize()
 
     def _calculate(self) -> int:
-        delta: datetime.timedelta = datetime.date.today() - self.birthdate
+        delta: timedelta = date.today() - self.birthdate
         minutes = delta.days * 24 * 60
         return minutes
 

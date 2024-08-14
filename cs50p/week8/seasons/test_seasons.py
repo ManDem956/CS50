@@ -1,6 +1,7 @@
 import pytest
-import seasons
 from datetime import date
+
+from seasons import TimeCalculator
 
 
 @pytest.mark.parametrize(
@@ -35,9 +36,10 @@ from datetime import date
 )
 def test_calc(monkeypatch, new_today, input, expected):
     class MyDate(date):
-        def today():
+        @classmethod
+        def today(cls):
             return date.fromisoformat(new_today)
 
-    monkeypatch.setattr(seasons.datetime, "date", MyDate)
-    calc = seasons.TimeCalculator(input)
+    monkeypatch.setattr("seasons.date", MyDate)
+    calc = TimeCalculator(input)
     assert calc.humanize() == expected
