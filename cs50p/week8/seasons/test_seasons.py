@@ -1,6 +1,7 @@
 import pytest
 from datetime import date
 
+# from seasons import Birthday as TimeCalculator
 from seasons import TimeCalculator
 
 
@@ -42,4 +43,4 @@ def test_calc(monkeypatch, new_today, input, expected):
 
     monkeypatch.setattr("seasons.date", MyDate)
     calc = TimeCalculator(input)
-    assert calc.humanize() == expected
+    assert str(calc) == expected
