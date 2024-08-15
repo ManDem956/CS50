@@ -18,30 +18,24 @@ def is_valid(s: str) -> bool:
     if not 2 <= len(s) <= 6:
         return False
 
-    d_idx = get_first_digit_index(s)
+    for idx, char in enumerate(s):
+        if not s.isalnum():
+            return False
+        if char.isdigit():
+            if idx < 2 or char == '0':
+                return False
+            break
+    else:
+        return True
 
-    if d_idx in (0, 1):
+    left = s[idx:]
+
+    try:
+        int(left)
+    except ValueError:
         return False
 
-    if d_idx > 1:
-        if s[d_idx] == "0":
-            return False
-
-        try:
-            int(s[d_idx:])
-        except ValueError:
-            return False
-
-        return s[:d_idx].isalpha()
-
-    return s.isalpha()
-
-
-def get_first_digit_index(s: str) -> int:
-    for idx, char in enumerate(s):
-        if char.isdigit():
-            return idx
-    return -1
+    return left.isalnum()
 
 
 if __name__ == "__main__":
