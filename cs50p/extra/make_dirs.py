@@ -4,7 +4,7 @@ import os
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="python make_dirs.py", description="pyhton implemnetation of mkdir"
+        prog="python "+__file__, description="pyhton implemnetation of mkdir"
     )
     parser.add_argument("path", help="directory structure to create")
     parser.add_argument(
