@@ -10,11 +10,7 @@ def get_user_input(message: str, sep: str = ": ") -> str:
 
 
 def get_emoji(input: str) -> str:
-    for language in ["alias"] + emoji.LANGUAGES:
-        result = emoji.emojize(input, language=language)
-        if result != input:
-            break
-
+    result = emoji.emojize(input, language='alias')
     return result
 
 
