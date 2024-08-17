@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 DROP INDEX IF EXISTS username;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS transaction_type;
