@@ -15,27 +15,25 @@ def main() -> None:
 
 
 def is_valid(s: str) -> bool:
-    if not 2 <= len(s) <= 6:
+    length = len(s)
+    if not 2 <= length <= 6:
         return False
 
+    first_digit = length
     for idx, char in enumerate(s):
-        if not s.isalnum():
-            return False
         if char.isdigit():
-            if idx < 2 or char == '0':
+            if idx < 2:
                 return False
-            break
-    else:
-        return True
+            first_digit = min(idx, first_digit)
+            if idx <= first_digit and char == '0':
+                return False
+        elif char.isalpha():
+            if first_digit < idx:
+                return False
+        else:
+            return False
 
-    left = s[idx:]
-
-    try:
-        int(left)
-    except ValueError:
-        return False
-
-    return left.isalnum()
+    return True
 
 
 if __name__ == "__main__":
