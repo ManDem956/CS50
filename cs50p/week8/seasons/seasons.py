@@ -12,8 +12,9 @@ class TimeCalculator:
     def humanize(self) -> str:
         p = inflect.engine()
         return f"{p.number_to_words(self._calculate(),
+
                                     andword="")} minutes".capitalize()
-    
+
 
     def _calculate(self) -> int:
         delta: datetime.timedelta = datetime.date.today() - self.birthdate
