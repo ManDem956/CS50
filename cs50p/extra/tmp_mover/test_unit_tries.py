@@ -35,7 +35,8 @@ class TestSortByExtension(unittest.TestCase):
         # assert calls to shutil.move in module mover
         for file in return_value[0][2]:
             _, file_extension = os.path.splitext(file)
-            mock_move.assert_any_call(os.path.join(source, file), os.path.join(source, ext_dict.get(file_extension), file))
+            mock_move.assert_any_call(os.path.join(source, file), os.path.join(
+                source, ext_dict.get(file_extension), file))
 
 
 if __name__ == '__main__':
