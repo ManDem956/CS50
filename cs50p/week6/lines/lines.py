@@ -1,43 +1,17 @@
 import sys
-import re
 
 import argparse
 from pathlib import Path
 
 
 def is_empty(line: str):
-    res = len(line.strip()) <= 0
-    return res
-
-
-def is_comment(line: str):
-    res = line.strip()[0] == "#"
+    res = len(line.strip()) <= 0 or (line.strip()[0] == "#")
     return res
 
 
 def count(filename: str) -> int:
-    is_doc = False
-    lines_count = 0
     with open(filename) as file:
-        # lines_count = sum(0 if is_empty(line) else 1 for line in file)
-        for line in file:
-            count_docs = 0
-            if is_empty(line):
-                continue
-
-            if is_comment(line) and not is_doc:
-                continue
-
-            count_docs = len(re.findall('"""|\'\'\'', line))
-            if count_docs > 0:
-                if count_docs % 2 == 1:
-                    is_doc = not is_doc
-                else:
-                    lines_count += 1
-                    continue
-
-            lines_count += 1
-
+        lines_count = sum(0 if is_empty(line) else 1 for line in file)
     return lines_count
 
 

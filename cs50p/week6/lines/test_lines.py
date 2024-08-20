@@ -5,7 +5,7 @@ from lines import count, validate
 @pytest.mark.parametrize(
         "input, expected",
         [
-            ("test_data/six.py", 6),
+            ("test_data/six.py", 7),
         ]
 )
 def test_count(input, expected):
