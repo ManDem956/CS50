@@ -7,6 +7,8 @@ from um import count
     [
         ("Um, thanks, um...", 2),
         ("Um", 1),
+        (" Um ", 1),
+        ("Um?", 1),
         ("Um,ah,um", 2),
         ("Um,ah,UM", 2),
         ("myumka", 0),
