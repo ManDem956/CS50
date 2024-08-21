@@ -5,176 +5,180 @@
 			"path": "cs50p/extra"
 		},
 		{
-			"name": "CS50 - Pyhton - Week0 - einstein",
+			"name": "CS50 - Python - Week0 - einstein",
 			"path": "cs50p/week0/einstein"
 		},
 		{
-			"name": "CS50 - Pyhton - Week0 - faces",
+			"name": "CS50 - Python - Week0 - faces",
 			"path": "cs50p/week0/faces"
 		},
 		{
-			"name": "CS50 - Pyhton - Week0 - indoor",
+			"name": "CS50 - Python - Week0 - indoor",
 			"path": "cs50p/week0/indoor"
 		},
 		{
-			"name": "CS50 - Pyhton - Week0 - playback",
+			"name": "CS50 - Python - Week0 - playback",
 			"path": "cs50p/week0/playback"
 		},
 		{
-			"name": "CS50 - Pyhton - Week0 - tip",
+			"name": "CS50 - Python - Week0 - tip",
 			"path": "cs50p/week0/tip"
 		},
 		{
-			"name": "CS50 - Pyhton - Week1 - bank",
+			"name": "CS50 - Python - Week1 - bank",
 			"path": "cs50p/week1/bank"
 		},
 		{
-			"name": "CS50 - Pyhton - Week1 - deep",
+			"name": "CS50 - Python - Week1 - deep",
 			"path": "cs50p/week1/deep"
 		},
 		{
-			"name": "CS50 - Pyhton - Week1 - extensions",
+			"name": "CS50 - Python - Week1 - extensions",
 			"path": "cs50p/week1/extensions"
 		},
 		{
-			"name": "CS50 - Pyhton - Week1 - interpreter",
+			"name": "CS50 - Python - Week1 - interpreter",
 			"path": "cs50p/week1/interpreter"
 		},
 		{
-			"name": "CS50 - Pyhton - Week1 - meal",
+			"name": "CS50 - Python - Week1 - meal",
 			"path": "cs50p/week1/meal"
 		},
 		{
-			"name": "CS50 - Pyhton - Week2 - camel",
+			"name": "CS50 - Python - Week2 - camel",
 			"path": "cs50p/week2/camel"
 		},
 		{
-			"name": "CS50 - Pyhton - Week2 - coke",
+			"name": "CS50 - Python - Week2 - coke",
 			"path": "cs50p/week2/coke"
 		},
 		{
-			"name": "CS50 - Pyhton - Week2 - nutrition",
+			"name": "CS50 - Python - Week2 - nutrition",
 			"path": "cs50p/week2/nutrition"
 		},
 		{
-			"name": "CS50 - Pyhton - Week2 - plates",
+			"name": "CS50 - Python - Week2 - plates",
 			"path": "cs50p/week2/plates"
 		},
 		{
-			"name": "CS50 - Pyhton - Week2 - twttr",
+			"name": "CS50 - Python - Week2 - twttr",
 			"path": "cs50p/week2/twttr"
 		},
 		{
-			"name": "CS50 - Pyhton - Week3 - fuel",
+			"name": "CS50 - Python - Week3 - fuel",
 			"path": "cs50p/week3/fuel"
 		},
 		{
-			"name": "CS50 - Pyhton - Week3 - grocery",
+			"name": "CS50 - Python - Week3 - grocery",
 			"path": "cs50p/week3/grocery"
 		},
 		{
-			"name": "CS50 - Pyhton - Week3 - outdated",
+			"name": "CS50 - Python - Week3 - outdated",
 			"path": "cs50p/week3/outdated"
 		},
 		{
-			"name": "CS50 - Pyhton - Week3 - taqueria",
+			"name": "CS50 - Python - Week3 - taqueria",
 			"path": "cs50p/week3/taqueria"
 		},
 		{
-			"name": "CS50 - Pyhton - Week4 - adieu",
+			"name": "CS50 - Python - Week4 - adieu",
 			"path": "cs50p/week4/adieu"
 		},
 		{
-			"name": "CS50 - Pyhton - Week4 - bitcoin",
+			"name": "CS50 - Python - Week4 - bitcoin",
 			"path": "cs50p/week4/bitcoin"
 		},
 		{
-			"name": "CS50 - Pyhton - Week4 - emoji",
+			"name": "CS50 - Python - Week4 - emoji",
 			"path": "cs50p/week4/emoji"
 		},
 		{
-			"name": "CS50 - Pyhton - Week4 - emojize",
+			"name": "CS50 - Python - Week4 - emojize",
 			"path": "cs50p/week4/emojize"
 		},
 		{
-			"name": "CS50 - Pyhton - Week4 - figlet",
+			"name": "CS50 - Python - Week4 - figlet",
 			"path": "cs50p/week4/figlet"
 		},
 		{
-			"name": "CS50 - Pyhton - Week4 - game",
+			"name": "CS50 - Python - Week4 - game",
 			"path": "cs50p/week4/game"
 		},
 		{
-			"name": "CS50 - Pyhton - Week4 - Little Professor",
+			"name": "CS50 - Python - Week4 - Little Professor",
 			"path": "cs50p/week4/professor"
 		},
 		{
-			"name": "CS50 - Pyhton - Week5 - test_bank",
+			"name": "CS50 - Python - Week5 - test_bank",
 			"path": "cs50p/week5/test_bank"
 		},
 		{
-			"name": "CS50 - Pyhton - Week5 - test_fuel",
+			"name": "CS50 - Python - Week5 - test_fuel",
 			"path": "cs50p/week5/test_fuel"
 		},
 		{
-			"name": "CS50 - Pyhton - Week5 - test_plates",
+			"name": "CS50 - Python - Week5 - test_plates",
 			"path": "cs50p/week5/test_plates"
 		},
 		{
-			"name": "CS50 - Pyhton - Week5 - test_twttr",
+			"name": "CS50 - Python - Week5 - test_twttr",
 			"path": "cs50p/week5/test_twttr"
 		},
 		{
-			"name": "CS50 - Pyhton - Week6 - lecture",
+			"name": "CS50 - Python - Week6 - lecture",
 			"path": "cs50p/week6/lecture"
 		},
 		{
-			"name": "CS50 - Pyhton - Week6 - lines",
+			"name": "CS50 - Python - Week6 - lines",
 			"path": "cs50p/week6/lines"
 		},
 		{
-			"name": "CS50 - Pyhton - Week6 - pizza",
+			"name": "CS50 - Python - Week6 - pizza",
 			"path": "cs50p/week6/pizza"
 		},
 		{
-			"name": "CS50 - Pyhton - Week6 - scourgify",
+			"name": "CS50 - Python - Week6 - scourgify",
 			"path": "cs50p/week6/scourgify"
 		},
 		{
-			"name": "CS50 - Pyhton - Week6 - shirt",
+			"name": "CS50 - Python - Week6 - shirt",
 			"path": "cs50p/week6/shirt"
 		},
 		{
-			"name": "CS50 - Pyhton - Week7 - numb3rs",
+			"name": "CS50 - Python - Week7 - numb3rs",
 			"path": "cs50p/week7/numb3rs"
 		},
 		{
-			"name": "CS50 - Pyhton - Week7 - response",
+			"name": "CS50 - Python - Week7 - response",
 			"path": "cs50p/week7/response"
 		},
 		{
-			"name": "CS50 - Pyhton - Week7 - um",
+			"name": "CS50 - Python - Week7 - um",
 			"path": "cs50p/week7/um"
 		},
 		{
-			"name": "CS50 - Pyhton - Week7 - watch",
+			"name": "CS50 - Python - Week7 - watch",
 			"path": "cs50p/week7/watch"
 		},
 		{
-			"name": "CS50 - Pyhton - Week7 - working",
+			"name": "CS50 - Python - Week7 - working",
 			"path": "cs50p/week7/working"
 		},
 		{
-			"name": "CS50 - Pyhton - Week8 - jar",
+			"name": "CS50 - Python - Week8 - jar",
 			"path": "cs50p/week8/jar"
 		},
 		{
-			"name": "CS50 - Pyhton - Week8 - seasons",
+			"name": "CS50 - Python - Week8 - seasons",
 			"path": "cs50p/week8/seasons"
 		},
 		{
-			"name": "CS50 - Pyhton - Week8 - shirtificate",
+			"name": "CS50 - Python - Week8 - shirtificate",
 			"path": "cs50p/week8/shirtificate"
+		},
+		{
+			"name": "CS50 - scratch",
+			"path": "cs50p/jupyter"
 		}
 	],
 	"settings": {

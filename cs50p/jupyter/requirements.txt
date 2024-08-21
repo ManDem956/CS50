@@ -1,0 +1,7 @@
+ipykernel
+numpy
+requests
+tabulate
+check50
+pillow
+inflect
