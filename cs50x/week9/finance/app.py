@@ -318,4 +318,4 @@ def do_render(*args, **kwargs):
         user_data = db.execute("select username, cash from users where id=?", session["user_id"])[0]
         return render_template(*args, **kwargs, user_data=user_data)
 
-    return None
+    return render_template(*args, **kwargs)
