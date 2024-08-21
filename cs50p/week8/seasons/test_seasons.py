@@ -33,6 +33,36 @@ from seasons import TimeCalculator
             "2020-06-01",
             "Six million, ninety-two thousand, six hundred forty minutes",
         ),
+        (
+            "2024-02-29",
+            "2020-02-29",
+            "Two million, one hundred three thousand, eight hundred forty minutes",
+        ),
+        (
+            "2024-02-28",
+            "2020-02-28",
+            "Two million, one hundred three thousand, eight hundred forty minutes",
+        ),
+        (
+            "2023-02-28",
+            "2019-02-28",
+            "Two million, one hundred three thousand, eight hundred forty minutes",
+        ),
+        (
+            "2023-02-27",
+            "2019-02-27",
+            "Two million, one hundred three thousand, eight hundred forty minutes",
+        ),
+        (
+            "2023-03-01",
+            "2019-03-01",
+            "Two million, one hundred three thousand, eight hundred forty minutes",
+        ),
+        (
+            "2023-01-01",
+            "2019-01-01",
+            "Two million, one hundred three thousand, eight hundred forty minutes",
+        ),
     ],
 )
 def test_calc(monkeypatch, new_today, input, expected):
