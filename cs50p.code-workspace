@@ -182,6 +182,7 @@
 			"titleBar.activeBackground": "#222238",
 			"titleBar.inactiveBackground": "#222238",
 			"activityBar.background": "#222239",
-		}
+		},
+		"files.autoSave": "afterDelay"
 	}
 }
