@@ -36,13 +36,7 @@ def main() -> None:
                                      description="Count lines in a file")
     parser.add_argument("filename")
     try:
-        if sys.argv[1] == "sicilian.csv":
-            print("test2")
-        elif sys.argv[1] == "regular.csv":
-            print("test1")
         args = parser.parse_args()
-        if args.filename not in ["regular.csv", "sicilian.csv"]:
-            raise ValueError(f"file name: {args.filename}")
         validate(args.filename)
         print(build_grid(args.filename))
     except (ValueError, FileNotFoundError) as e:
