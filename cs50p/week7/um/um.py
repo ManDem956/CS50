@@ -1,6 +1,6 @@
 import re
 
-REGEX_TIME_12 = r"(\bum\b)"
+REGEX_TIME_12 = r"\bum\b"
 
 
 def count(time_delta: str) -> str:
