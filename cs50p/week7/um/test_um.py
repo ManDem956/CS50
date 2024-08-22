@@ -11,6 +11,9 @@ from um import count
         ("Um?", 1),
         ("Um,ah,um", 2),
         ("Um,ah,UM", 2),
+        ("Um... what are regular expressions?", 1),
+        ("Um, thanks, um, regular expressions make sense now.", 2),
+        ("Um? Mum? Is this that album where, um, umm, the clumsy alums play drums?", 2),
         ("myumka", 0),
     ],
 )
