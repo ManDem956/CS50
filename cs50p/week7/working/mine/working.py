@@ -3,7 +3,9 @@ import re
 
 # REGEX_TIME_12 = r"(\b(?:1[0-2]|0?[1-9])(?::(?:[0-5][0-9])?)?\s(?:AM|PM)\b)(\sto\s)(\b(?:1[0-2]|0?[1-9])(?::(?:[0-5][0-9])?)?\s(?:AM|PM)\b)"  # noqa: E501
 # REGEX_TIME_12 = r"\b((?:1[0-2]|0?[1-9])(?::(?:[0-5][0-9])?)?)\s((?:AM|PM))(\sto\s)?"  # noqa: E501
-REGEX_TIME_12 = r"\b(?:(1[0-2]|0?[1-9])(?::([0-5][0-9])?)?)\s((?:AM|PM))(?:\s(to)\s)?"  # noqa: E501
+# REGEX_TIME_12 = r"\b(?:(1[0-2]|0?[1-9])(?::([0-5][0-9])?)?)\s((?:AM|PM))(?:\s(to)\s)?"  # noqa: E501
+REGEX_TIME_12 = r"\b(?:(0?[1-9]|1[0-2]):?([0-5][0-9])?\s(AM|PM))\sto\s(?:(0?[1-9]|1[0-2]):?([0-5][0-9])?\s(AM|PM))\b"  # noqa: E501
+# REGEX_TIME_12 = r"(?:(1[0-2]|0?[1-9]):?([0-5][0-9])?\s(AM|PM)(?:\s(to)\s)?){2}"
 # current   ^(\d{1,2})(?::?(\d{1,2}))? (AM|PM) to (\d{1,2})(?::? (\d{1,2})?) (AM|PM)$
 # fixed     ^(\d{1,2})(?::?(\d{1,2}))? (AM|PM) to (\d{1,2})(?::?(\d{1,2}))? (AM|PM)
 
@@ -26,13 +28,17 @@ def convert_12_to_24(hours, minutes, noon) -> str:
     return f"{hours:>02}:{minutes:>02}"
 
 
-def convert(time_delta: str) -> str:
-    result = re.findall(REGEX_TIME_12, time_delta)
+def chunked(iterable, n):
+    return zip(*([iter(iterable)] * n))
 
-    if len(result) < 2 or "to" not in result[0][3]:
+
+def convert(time_delta: str) -> str:
+    result = re.fullmatch(REGEX_TIME_12, time_delta, re.I)
+
+    if not result:
         raise ValueError(f"Invalid time delta: {time_delta}")
 
-    res = " to ".join(convert_12_to_24(*time[:3]) for time in result)
+    res = " to ".join(convert_12_to_24(*time) for time in chunked(result.groups(), 3))
 
     return res
 
