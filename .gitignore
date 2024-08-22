@@ -29,5 +29,6 @@ vendor/
 !*.txt
 !Makefile
 !*.sh
+!*.ini
 
 # Ignore files larger than 100M
