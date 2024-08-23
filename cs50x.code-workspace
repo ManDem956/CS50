@@ -114,5 +114,7 @@
 			"path": "cs50x/week9/lecture"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"gitdoc.enabled": true
+	}
 }
