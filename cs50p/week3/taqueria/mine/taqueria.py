@@ -13,7 +13,7 @@ CONST_MENU = {
 
 
 def main() -> None:
-    """Reprompt user until user cpesses CRTL+D"""
+    """Reprompt user until user presses CRTL+D"""
     total = 0
     while True:
         try:
