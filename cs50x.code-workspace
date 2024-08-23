@@ -1,0 +1,118 @@
+{
+	"folders": [
+		{
+			"name": "CS50X - Week1 - cash",
+			"path": "cs50x/week1/cash"
+		},
+		{
+			"name": "CS50X - Week1 - credit",
+			"path": "cs50x/week1/credit"
+		},
+		{
+			"name": "CS50X - Week1 - mario",
+			"path": "cs50x/week1/mario"
+		},
+		{
+			"name": "CS50X - Week1 - me",
+			"path": "cs50x/week1/me"
+		},
+		{
+			"name": "CS50X - Week1 - substitution",
+			"path": "cs50x/week1/substitution"
+		},
+		{
+			"name": "CS50X - Week2 - caesar",
+			"path": "cs50x/week2/caesar"
+		},
+		{
+			"name": "CS50X - Week2 - readability",
+			"path": "cs50x/week2/readability"
+		},
+		{
+			"name": "CS50X - Week2 - scrabble",
+			"path": "cs50x/week2/scrabble"
+		},
+		{
+			"name": "CS50X - Week3 - plurality",
+			"path": "cs50x/week3/plurality"
+		},
+		{
+			"name": "CS50X - Week3 - runoff",
+			"path": "cs50x/week3/runoff"
+		},
+		{
+			"name": "CS50X - Week3 - sort",
+			"path": "cs50x/week3/sort"
+		},
+		{
+			"name": "CS50X - Week3 - tideman",
+			"path": "cs50x/week3/tideman"
+		},
+		{
+			"name": "CS50X - Week4 - filter-less",
+			"path": "cs50x/week4/filter-less"
+		},
+		{
+			"name": "CS50X - Week4 - filter-more",
+			"path": "cs50x/week4/filter-more"
+		},
+		{
+			"name": "CS50X - Week4 - lecture",
+			"path": "cs50x/week4/lecture"
+		},
+		{
+			"name": "CS50X - Week4 - recover",
+			"path": "cs50x/week4/recover"
+		},
+		{
+			"name": "CS50X - Week4 - volume",
+			"path": "cs50x/week4/volume"
+		},
+		{
+			"name": "CS50X - Week5 - inheritance",
+			"path": "cs50x/week5/inheritance"
+		},
+		{
+			"name": "CS50X - Week5 - lecture",
+			"path": "cs50x/week5/lecture"
+		},
+		{
+			"name": "CS50X - Week5 - section",
+			"path": "cs50x/week5/section"
+		},
+		{
+			"name": "CS50X - Week5 - speller",
+			"path": "cs50x/week5/speller"
+		},
+		{
+			"name": "CS50X - Week6 - dna",
+			"path": "cs50x/week6/dna"
+		},
+		{
+			"name": "CS50X - Week6 - sentimental-credit",
+			"path": "cs50x/week6/sentimental-credit"
+		},
+		{
+			"name": "CS50X - Week6 - sentimental-hello",
+			"path": "cs50x/week6/sentimental-hello"
+		},
+		{
+			"name": "CS50X - Week6 - sentimental-mario-more",
+			"path": "cs50x/week6/sentimental-mario-more"
+		},
+		{
+			"name": "CS50X - Week6 - sentimental-readability",
+			"path": "cs50x/week6/sentimental-readability"
+		},
+		{"name": "CS50X - Week9 - birthdays",
+			"path": "cs50x/week9/birthdays"
+		},
+		{"name": "CS50X - Week9 - finance",
+			"path": "cs50x/week9/finance"
+		},
+		{"name": "CS50X - Week9 - lecture",
+			"path": "cs50x/week9/lecture"
+		}
+	],
+	"settings": {}
+}
