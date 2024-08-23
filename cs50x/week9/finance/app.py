@@ -25,51 +25,16 @@ app = Flask(__name__)
 
 
 SQL_INSERT_USER = "insert into users (username, hash) values(?,?)"
-SQL_GET_USER_CASH = "select cash from users where id = ?"
+SQL_GET_USER_DATA = "select * from user_data where id = ?"
 
 SQL_INSERT_TRANSACTION = "insert into user_transaction (user_id, transation_type_id, symbol, quantity, price)\
     VALUES(?,\
         (select id from transaction_type where name = ?),\
         ?,?,?)"
 
-SQL_GET_STOCKS = """
-SELECT user_id,
-    symbol,
-    sum(quantity) quantity
-FROM(
-        SELECT ut.user_id,
-            ut.symbol,
-            tt.type,
-            CASE
-                tt.type
-                WHEN 'debit' THEN ut.quantity * -1
-                ELSE ut.quantity
-            END quantity
-        FROM user_transaction ut
-            JOIN transaction_type tt ON tt.id = ut.transation_type_id
-        ORDER BY ut.user_id,
-            tt.type
-    )
-GROUP BY user_id,
-    symbol
-HAVING symbol NOT NULL and sum(quantity) > 0 and user_id = ?"""
+SQL_GET_STOCKS = "select * from user_stocks where user_id = ?"
 
-SQL_USER_HISTORY = """SELECT DATETIME(ut.transation_time, 'localtime') time,
-    tt.name,
-    ut.symbol,
-    ut.quantity,
-    ut.price,
-    ut.amount,
-    CASE
-        tt.type
-        WHEN 'credit' THEN ut.amount * -1
-        ELSE ut.amount
-    END balance_amount
-FROM user_transaction ut
-    JOIN transaction_type tt ON tt.id = ut.transation_type_id
-WHERE ut.user_id = ?
-ORDER BY transation_time ASC
-"""
+SQL_USER_HISTORY = " select * from user_history WHERE user_id = ?"
 
 # Custom filter
 app.jinja_env.filters["usd"] = usd
@@ -98,7 +63,7 @@ def index():
     """Show portfolio of stocks"""
     try:
         result = db.execute(SQL_GET_STOCKS, session["user_id"])
-        cash = db.execute(SQL_GET_USER_CASH, session["user_id"])[0]["cash"]
+        cash = db.execute(SQL_GET_USER_DATA, session["user_id"])[0]["cash"]
     except (RuntimeError, ValueError) as e:
         do_report(str(e))
 
@@ -315,7 +280,7 @@ def do_report(msg: str, category: str, r_302: str = None, status: int = 400):
 def do_render(*args, **kwargs):
     """Generic render function"""
     if session.get("user_id"):
-        user_data = db.execute("select username, cash from users where id=?", session["user_id"])[0]
+        user_data = db.execute(SQL_GET_USER_DATA, session["user_id"])[0]
         return render_template(*args, **kwargs, user_data=user_data)
 
     return render_template(*args, **kwargs)
