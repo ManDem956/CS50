@@ -4,7 +4,7 @@
     <form action="/sell" method="post">
         <div class="mb-3 row">
             <select name="symbol" id="symbol" class="form-select mx-auto w-50">
-                <option disabled selected value="">Symbols</option>
+                <option disabled selected value="">Symbol</option>
                 {% for item in stocks %}
                     <option value="{{ item['symbol'] }}">{{ item["symbol"] }}  ({{ item['quantity'] }})</option>
                 {% endfor %}
@@ -30,11 +30,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for quote in quotes %}
+                {% for symbol in quotes %}
                     <tr>
-                        <td>{{ quote }}</td>
-                        <td>{{ stocks|selectattr('symbol', "equalto",quote)|map(attribute='quantity')|list|join('')|default("-", true)   }}</td>
-                        <td>{{ quotes[quote] | usd }}</td>
+                        <td>{{ symbol }}</td>
+                        <!-- <td>{{ stocks|selectattr('symbol', "equalto",symbol) | join('') | default("-", true) }}</td> -->
+                        <!-- <td>{{ stocks|selectattr('symbol', "equalto",symbol) | first  |default({'quantity':1}) | attr('quantity')  }}  </td> -->
+                        <td>{{ stocks|selectattr('symbol', 'equalto',symbol) |map(attribute='quantity')|first|default('-', true) }}</td>
+                        <td>{{ quotes[symbol] | usd }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

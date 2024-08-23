@@ -8,7 +8,11 @@
                    class="form-control mx-auto w-50"
                    name="symbol"
                    placeholder="Symbol"
-                   type="text">
+                   type="text"
+                   list="symbols">
+            <datalist id="symbols">
+                {% for quote in quotes %}<option value="{{ quote }}">{{ quote }}</option>{% endfor %}
+            </datalist>
             <input autocomplete="off"
                    autofocus
                    class="form-control mx-auto w-50"
