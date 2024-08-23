@@ -1,9 +1,5 @@
 def convert(value: str) -> str:
-    result = ""
-    for character in value:
-        if character.isupper():
-            result += "_"
-        result += character.lower()
+    result = "".join("_" * character.isupper() + character.lower() for character in value)
     return result
 
 
