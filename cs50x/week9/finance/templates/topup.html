@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Log In{% endblock %}
+{% block title %}Topup Account{% endblock %}
 {% block main %}
     <form action="/topup" method="post">
         <div class="mb-3 row">
@@ -11,7 +11,7 @@
                    type="text">
         </div>
         <div class="mb-3 row">
-            <button class="btn btn-primary" type="submit">Quote</button>
+            <button class="btn btn-primary" type="submit">Top-up</button>
         </div>
     </form>
     {% if history %}

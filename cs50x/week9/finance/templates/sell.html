@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
-{% block title %}Log In{% endblock %}
+{% block title %}Sell Stocks{% endblock %}
 {% block main %}
     <form action="/sell" method="post">
         <div class="mb-3 row">
             <select name="symbol" id="symbol" class="form-select mx-auto w-50">
                 <option disabled selected value="">Symbols</option>
-                {% for item in stocks %}<option value="{{ item['symbol'] }}">{{ item["symbol"] }}</option>{% endfor %}
+                {% for item in stocks %}
+                    <option value="{{ item['symbol'] }}">{{ item["symbol"] }}  ({{ item['quantity'] }})</option>
+                {% endfor %}
             </select>
             <input autocomplete="off"
                    autofocus
@@ -23,6 +25,7 @@
             <thead>
                 <tr>
                     <th scope="col">Symbol</th>
+                    <th scope="col">Owned</th>
                     <th scope="col">Price</th>
                 </tr>
             </thead>
@@ -30,6 +33,7 @@
                 {% for quote in quotes %}
                     <tr>
                         <td>{{ quote }}</td>
+                        <td>{{ stocks|selectattr('symbol', "equalto",quote)|map(attribute='quantity')|list|join('')|default("-", true)   }}</td>
                         <td>{{ quotes[quote] | usd }}</td>
                     </tr>
                 {% endfor %}
