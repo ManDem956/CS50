@@ -10,15 +10,13 @@ OUT_HEADERS = ("first", "last", "house")
 
 def convert(in_file_name: str, out_file_name: str) -> None:
     with open(in_file_name) as in_file, open(out_file_name, "w") as out_file:
-        reader = csv.DictReader(in_file)
-        # next(reader, None)
-        writer = csv.DictWriter(out_file, fieldnames=OUT_HEADERS)
-        writer.writeheader()
-        # writer.writerow(OUT_HEADERS)
-        for row in reader:
-            last_name, first_name = (cell.strip() for cell in row['name'].split(","))
-            new_row = dict(zip(OUT_HEADERS, (first_name, last_name, row['house'])))
-            writer.writerow(new_row)
+        reader = csv.reader(in_file)
+        next(reader, None)
+        writer = csv.writer(out_file)
+        writer.writerow(OUT_HEADERS)
+        for name, house in reader:
+            last_name, first_name = (cell.strip() for cell in name.split(","))
+            writer.writerow((first_name, last_name, house))
 
 
 def validate(filename: str) -> NoReturn:
