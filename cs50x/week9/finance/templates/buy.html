@@ -10,9 +10,11 @@
                    placeholder="Symbol"
                    type="text"
                    list="symbols">
-            <datalist id="symbols">
-                {% for quote in quotes %}<option value="{{ quote }}">{{ quote }}</option>{% endfor %}
-            </datalist>
+            {% if quotes %}
+                <datalist id="symbols">
+                    {% for quote in quotes %}<option value="{{ quote }}">{{ quote }}</option>{% endfor %}
+                </datalist>
+            {% endif %}
             <input autocomplete="off"
                    autofocus
                    class="form-control mx-auto w-50"
