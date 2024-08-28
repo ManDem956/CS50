@@ -21,5 +21,7 @@
 			"path": "cs50ai/week0/lecture/maze"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"gitdoc.enabled": true
+	}
 }

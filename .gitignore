@@ -12,7 +12,6 @@ vendor/
 !/.devcontainer.json
 !/.vscode/settings.json
 
-
 # But don't ignore these types of files
 !*.c
 !*.cpp
@@ -29,9 +28,5 @@ vendor/
 !*.ts
 !*.txt
 !Makefile
-!*.sh
-!*.ini
-!*.code-workspace
-
 
 # Ignore files larger than 100M
