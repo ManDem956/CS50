@@ -8,7 +8,8 @@ from coke import main
         ((25, 25), ("Amount Due: 50", "Amount Due: 25", "Change Owed: 0")),
         ((10, 5, 10, 25), ("Amount Due: 50", "Amount Due: 40", "Amount Due: 35", "Amount Due: 25", "Change Owed: 0")),
         ((25, 10, 25), ("Amount Due: 50", "Amount Due: 25", "Amount Due: 15", "Change Owed: 10")),
-        ((10, 49, 5, 10, 25), ("Amount Due: 50", "Amount Due: 40", "Amount Due: 40", "Amount Due: 35", "Amount Due: 25", "Change Owed: 0")),
+        ((10, 49, 5, 10, 25), ("Amount Due: 50", "Amount Due: 40",
+         "Amount Due: 40", "Amount Due: 35", "Amount Due: 25", "Change Owed: 0")),
     ],
 )
 def test_main(input, expected, capfd, monkeypatch):

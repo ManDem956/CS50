@@ -1,1 +1,1 @@
-mine/galactic.py
+mine/scourgify.py
